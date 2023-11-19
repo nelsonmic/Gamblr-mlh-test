@@ -1,0 +1,31 @@
+{
+  "extends": "@tsconfig/react-native/tsconfig.json",
+    "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+			"@/*": ["./src/*"],
+			"@/components": ["./src/components"],
+			"@/components/*": ["./src/components/*"],
+			"@/constants": ["./src/constants"],
+			"@/constants/*": ["./src/constants/*"],
+			"@/handlers": ["./src/handlers"],
+			"@/handlers/*": ["./src/handlers/*"],
+			"@/hooks": ["./src/hooks"],
+			"@/hooks/*": ["./src/hooks/*"],
+			"@/models": ["./src/models"],
+			"@/models/*": ["./src/models/*"],
+			"@/navigations": ["./src/navigations"],
+			"@/navigations/*": ["./src/navigations/*"],
+			"@/providers": ["./src/providers"],
+			"@/providers/*": ["./src/providers/*"],
+			"@/screens": ["./src/screens"],
+			"@/screens/*": ["./src/screens/*"],
+			"@/tailwind": ["./src/tailwind"],
+			"@/utils": ["./src/utils"],
+			"@/utils/*": ["./src/utils/*"]
+    },
+    // Other compiler options...
+  },
+  "include": ["src/**/*.ts", "src/**/*.tsx", "gamblr.d.ts"],
+  "exclude": ["node_modules"]
+}
