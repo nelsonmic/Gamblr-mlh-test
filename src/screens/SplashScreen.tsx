@@ -1,6 +1,6 @@
 import React from 'react';
-import { View } from '../components/atoms';
-import { Logo } from '../components/Icons';
+import { View } from 'components/atoms';
+import { Logo } from 'components/Icons';
 
 function SplashScreen(): React.ReactElement | null {
   return (

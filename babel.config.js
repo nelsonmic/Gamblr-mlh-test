@@ -19,7 +19,6 @@ module.exports = function (api) {
     }],
     [
       require.resolve("babel-plugin-module-resolver"),
-      "module-resolver",
       {
         alias: getAliasesFromTsConfig(),
         extensions: [".ios.js", ".android.js", ".js", ".ts", ".tsx", ".json"],

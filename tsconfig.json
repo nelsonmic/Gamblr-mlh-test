@@ -23,8 +23,7 @@
 			"@/tailwind": ["./src/tailwind"],
 			"@/utils": ["./src/utils"],
 			"@/utils/*": ["./src/utils/*"]
-    },
-    // Other compiler options...
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx", "gamblr.d.ts"],
   "exclude": ["node_modules"]

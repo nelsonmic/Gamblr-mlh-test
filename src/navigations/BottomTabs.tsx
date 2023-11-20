@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import { BottomTabBar, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import clsx from 'clsx';
 import React, { type FC } from 'react';
@@ -8,14 +7,15 @@ import { Platform } from 'react-native';
 // 	transactionsBottomTabBarPreset,
 // 	walletAssetListBottomTabBarPreset
 // } from "./animations";
-import { Text } from '../components/atoms';
+import { Text } from 'components/atoms';
 import {
   Home, Profile, Chat, Market,
-} from '../components/Icons';
-import HomeNavigator from '../screens/Home/HomeNavigator';
-import { ProfileScreen } from '../screens/Profile';
-import { WagerScreen } from '../screens/Wager';
-import { LobbyScreen } from '../screens/Lobby';
+} from 'components/Icons';
+import HomeNavigator from 'screens/Home/HomeNavigator';
+import { ProfileScreen } from 'screens/Profile';
+import { WagerScreen } from 'screens/Wager';
+import { LobbyScreen } from 'screens/Lobby';
+import { IS_ANDROID } from '../constants';
 import { Screens } from './Screens';
 
 const BottomTabs = createBottomTabNavigator();
@@ -28,11 +28,11 @@ function BottomTabsNavigation() {
         tabBarStyle: {
           borderTopWidth: 0,
           elevation: 0,
-          height: Platform.OS === 'android' ? 60 : 80,
-          paddingBottom: Platform.OS === 'android' ? 16 : 8,
+          height: IS_ANDROID ? 60 : 80,
+          paddingBottom: IS_ANDROID ? 16 : 8,
         },
         tabBarItemStyle: {
-          marginBottom: Platform.OS === 'android' ? 0 : 16,
+          marginBottom: IS_ANDROID ? 0 : 16,
         },
       }}
       tabBar={(props) => <BottomTabBar {...props} />}
@@ -42,7 +42,7 @@ function BottomTabsNavigation() {
         name={Screens.HomeNavigator}
         options={{
           // ...bottomTabPreset,
-          tabBarIcon: () => <Home className="bg-red-500" height={22} width={22} />,
+          tabBarIcon: () => <Home height={22} width={22} />,
           tabBarLabel: ({ color, focused }) => Boolean(focused) && <Label label="Home" />,
         }}
       />
@@ -69,7 +69,7 @@ function BottomTabsNavigation() {
         name={Screens.Profile}
         options={{
           // ...transactionsBottomTabBarPreset,
-          tabBarIcon: ({ focused }) => <Profile fill="#555" height={21} width={21} />,
+          tabBarIcon: ({ focused }) => <Profile height={21} width={21} />,
           tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Profile" />,
         }}
       />

@@ -4,7 +4,7 @@ module.exports = {
         es2021: true,
         node: true,
         'react-native/react-native': true,
-        jest: true,
+        jest: true
     },
     settings: {
         react: {
@@ -12,7 +12,7 @@ module.exports = {
         },
         'import/resolver': {
             typescript: {},
-        },
+        }
     },
 
 
@@ -24,13 +24,13 @@ module.exports = {
         'prettier',
         'airbnb',
         'airbnb-typescript',
-        'airbnb/hooks',
+        'airbnb/hooks'
     ],
     overrides: [{
         files: ['**/*.ts', '**/*.tsx'],
         parserOptions: {
             project: './tsconfig.json',
-        },
+        }
     }, ],
     parserOptions: {
         ecmafeatures: {
@@ -38,7 +38,7 @@ module.exports = {
         },
         ecmaVersion: 'latest',
         project: ['./tsconfig.json', './packages/*/tsconfig.json'],
-        sourceType: 'module',
+        sourceType: 'module'
     },
     plugins: ['react', '@typescript-eslint', 'react-native'],
     rules: {
@@ -114,6 +114,6 @@ module.exports = {
 		        }
 		    ],
 		    "react-hooks/exhaustive-deps": "error",
-		    "security/detect-object-injection": "off",
-    },
+		    "security/detect-object-injection": "off"
+    }
 };
