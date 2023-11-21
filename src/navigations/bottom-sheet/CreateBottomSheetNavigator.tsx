@@ -1,4 +1,8 @@
+/* eslint-disable no-spaced-func */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
+/* eslint-disable import/prefer-default-export */
+/* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-tabs */
 import {
   createNavigatorFactory,
   type DefaultNavigatorOptions,
@@ -37,7 +41,7 @@ function BottomSheetNavigator({
   const { descriptors, navigation, state } = useNavigationBuilder<
   StackNavigationState<RootStackParamList>,
   StackRouterOptions,
-  Record<string,() => void>,
+  Record<string, () => void>,
   BottomSheetNavigationOptions,
   BottomSheetNavigationEventMap
   >(router, {
@@ -46,9 +50,8 @@ function BottomSheetNavigator({
     });
 
   React.useEffect(
-    () =>
-    // @ts-expect-error we're missing this event handler in our custom
-    {
+    () => {
+      // @ts-expect-error no types for this yet
       navigation.addListener?.('tabPress', (e) => {
         const isFocused = navigation.isFocused();
 

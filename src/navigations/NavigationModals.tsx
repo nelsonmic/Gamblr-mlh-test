@@ -1,3 +1,5 @@
+/* eslint-disable no-tabs */
+/* eslint-disable @typescript-eslint/explicit-function-return-type */
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import SplashScreen from 'screens/SplashScreen';
