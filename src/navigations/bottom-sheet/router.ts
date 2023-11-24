@@ -1,37 +1,37 @@
 import {
-  type CommonNavigationAction,
-  type Router,
-  type StackActionType,
-  type StackNavigationState,
-  StackRouter,
-  type StackRouterOptions,
-} from '@react-navigation/native';
-import { type RootStackParamList } from '../types';
-import { actions } from './actions';
+	CommonNavigationAction,
+	Router,
+	StackActionType,
+	StackNavigationState,
+	StackRouter,
+	StackRouterOptions
+} from "@react-navigation/native";
+import { RootStackParamList } from "../types";
+import { actions } from "./actions";
 
 export const router = (
-  routerOptions: StackRouterOptions,
+	routerOptions: StackRouterOptions
 ): Router<
-StackNavigationState<RootStackParamList>,
-CommonNavigationAction | StackActionType
+	StackNavigationState<RootStackParamList>,
+	CommonNavigationAction | StackActionType
 > => {
-  const stackRouter = StackRouter(routerOptions);
+	const stackRouter = StackRouter(routerOptions);
 
-  return {
-    ...stackRouter,
+	return {
+		...stackRouter,
 
-    actionCreators: {
-      ...stackRouter.actionCreators,
-      ...actions,
-    },
+		actionCreators: {
+			...stackRouter.actionCreators,
+			...actions
+		},
 
-    // @ts-expect-error doesn't like the typing of RootStackParamList
-    getStateForAction(state, action, options) {
-      switch (action.type) {
-        // TODO
-        default:
-          return stackRouter.getStateForAction(state, action, options);
-      }
-    },
-  };
+		// @ts-expect-error doesn't like the typing of RootStackParamList
+		getStateForAction(state, action, options) {
+			switch (action.type) {
+				// TODO
+				default:
+					return stackRouter.getStateForAction(state, action, options);
+			}
+		}
+	};
 };

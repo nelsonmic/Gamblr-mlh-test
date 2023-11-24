@@ -21,6 +21,19 @@ module.exports = {
         interRegular: ["Inter-Regular"],
         interSemiBold: ["Inter-SemiBold"],
         interThin: ["Inter-Thin"],
+      },
+      colors: {
+        black:{
+          100: "#131313"
+        },
+        background:{
+          light: "#ffffff",
+          dark: "#131313",
+          blue: "#001B33"
+        },
+        gray:{
+          100: "#cccccc"
+        }
       }
     }
   },
