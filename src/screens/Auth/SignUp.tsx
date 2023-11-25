@@ -53,7 +53,7 @@ export const SignUpScreen = () => {
                               </View>
                         </View>
                         <View className="space-y-2 items-center">
-                              <Button size="lg" className="w-full" onPress={() => goTo(Screens.CreatePinScreen)}>Sign Up</Button>
+                              <Button size="lg" className="w-full" onPress={() => goTo(Screens.VerifyScreen)}>Sign Up</Button>
                               <Link to={{ screen: "Sign In"}}>
                                     <Text className="font-interMedium text-xs">Already have an account? </Text>
                                     {" "}

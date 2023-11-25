@@ -111,7 +111,7 @@ const NativeStackRoot: React.FC = () => {
     };
   }, []);
 
-  if (showSplashScreen) {
+  if (showSplashScreen) { // for splash screen
     screens = (
       <NativeStack.Screen
         component={SplashScreen}
@@ -121,7 +121,7 @@ const NativeStackRoot: React.FC = () => {
         }}
       />
     );
-  } else if (false) {
+  } else if (false) { // for onboarding screen
 		screens = (
 			<NativeStack.Screen component={OnboardingScreen}
 				name={Screens.Onboarding}
@@ -151,11 +151,6 @@ const NativeStackRoot: React.FC = () => {
           options={{ headerShown: false }}
         />
         <NativeStack.Screen
-          component={WelcomeBackScreen}
-          name={Screens.WelcomeBackScreen}
-          options={{ headerShown: false }}
-        />
-        <NativeStack.Screen
           component={ConfirmPinScreen}
           name={Screens.ConfirmPin}
           options={{ headerShown: false }}
@@ -177,7 +172,15 @@ const NativeStackRoot: React.FC = () => {
         />
       </>
 		);
-	} else {
+	} else if (false){ // for welcome screen
+    screens = (
+        <NativeStack.Screen
+          component={WelcomeBackScreen}
+          name={Screens.WelcomeBackScreen}
+          options={{ headerShown: false }}
+        />
+    )
+  }else { // main app screens
 		screens = (
 			<>
 				<NativeStack.Screen
@@ -196,6 +199,7 @@ const NativeStackRoot: React.FC = () => {
 	return <NativeStack.Navigator>{screens}</NativeStack.Navigator>;
 };
 
+// full app router + modal bottom sheets
 const NavigationRoot: React.FC = () => (
 	<RootStack.Navigator>
 		<RootStack.Screen
