@@ -12,15 +12,13 @@ export type TextInputProps = RNTextInputProps & {
 const StyledTextInput = styled(RNTextInput, {});
 
 const TextInput = forwardRef<RNTextInput, TextInputProps>(({ className, ...rest }, ref) => {
-  const baseClass = 'h-16 p-4 text-white text-2xl justify-between items-center inline-flex';
-
   return (
     <StyledTextInput
       ref={ref}
-      className={clsx(className, baseClass)}
+      className={clsx(className)}
       maxFontSizeMultiplier={1}
       placeholderTextColor="#B7B7B7"
-      selectionColor="#ffffff"
+      selectionColor="#000000"
       {...rest}
     />
   );

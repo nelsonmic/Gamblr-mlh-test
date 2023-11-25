@@ -21,6 +21,9 @@ import { CreatePinScreen } from 'screens/Auth/CreatePin';
 import { VerifyScreen } from 'screens/Auth/Verify';
 import { WelcomeBackScreen } from 'screens/Auth/WelcomeBack';
 import { ConfirmPinScreen } from 'screens/Auth/ConfirmPin';
+import { EnterOtpScreen } from 'screens/Auth/EnterOtp';
+import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
+import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -155,6 +158,21 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={ConfirmPinScreen}
           name={Screens.ConfirmPin}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={EnterOtpScreen}
+          name={Screens.EnterOtp}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={ForgotPasswordScreen}
+          name={Screens.ForgotPassword}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={ResetPasswordScreen}
+          name={Screens.ResetPassword}
           options={{ headerShown: false }}
         />
       </>

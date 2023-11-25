@@ -12,5 +12,8 @@ export enum Screens {
   SignUpScreen = "Sign Up",
   VerifyScreen = "Verify",
   WelcomeBackScreen = "Welcome Back",
-  ConfirmPin = "Confirm Pin"
+  ConfirmPin = "Confirm Pin",
+  EnterOtp = "Enter Otp",
+  ForgotPassword = "Forgot Password",
+  ResetPassword = "Reset Password"
 }

@@ -23,6 +23,10 @@ module.exports = {
         interThin: ["Inter-Thin"],
       },
       colors: {
+        white:{
+          100: "#ffffff",
+          200: "#F1F5F9"
+        },
         black:{
           100: "#131313"
         },
@@ -32,7 +36,9 @@ module.exports = {
           blue: "#001B33"
         },
         gray:{
-          100: "#cccccc"
+          100: "#cccccc",
+          200: "#515C6C",
+          300: "#808080"
         },
         red:{
           100: "#FF3922"
