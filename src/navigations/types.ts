@@ -10,7 +10,10 @@ string | undefined
 export interface RootStackParamList {
   [key: string]: undefined;
   [Screens.Home]: undefined;
-  [Screens.Market]: undefined;
-  [Screens.Chat]: undefined;
+  [Screens.Wager]: undefined;
+  [Screens.Lobby]: undefined;
   [Screens.Profile]: undefined;
+  [Screens.NativeStackRoot]: undefined;
+  [Screens.BottomTabs]: undefined;
+  [Screens.Onboarding]: undefined;
 }
