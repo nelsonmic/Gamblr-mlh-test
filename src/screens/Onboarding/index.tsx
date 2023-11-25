@@ -8,14 +8,14 @@ import { Screens } from "navigations/Screens";
 import { useCallback } from "react";
 
 const OnboardingScreen = () => {
-      	const { navigate } =
-		useNavigation<NavigationProp<RootStackParamList, Screens.Onboarding>>();
+      const { navigate } = useNavigation<NavigationProp<RootStackParamList, Screens.Onboarding>>();
 	const gotoLogin = useCallback(() => {
 		// hapticFeedback();
 		requestAnimationFrame(() => {
 			navigate(Screens.Profile);
 		});
 	}, [navigate]);
+	
 	return (
 		<Layout
 			className="px-0 h-full w-full justify-between bg-background-blue"

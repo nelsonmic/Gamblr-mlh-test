@@ -16,4 +16,10 @@ export interface RootStackParamList {
   [Screens.NativeStackRoot]: undefined;
   [Screens.BottomTabs]: undefined;
   [Screens.Onboarding]: undefined;
+  [Screens.CreatePinScreen]: undefined;
+  [Screens.SignInScreen]: undefined;
+  [Screens.SignUpScreen]: undefined;
+  [Screens.VerifyScreen]: undefined;
+  [Screens.WelcomeBackScreen]: undefined;
+  [Screens.ConfirmPin]: undefined;
 }

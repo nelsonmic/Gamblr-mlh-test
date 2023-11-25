@@ -15,6 +15,12 @@ import SvgProfile from 'components/Icons/Profile';
 import { HomeScreen } from 'screens/Home';
 import OnboardingScreen from 'screens/Onboarding';
 import SplashScreen from 'screens/SplashScreen';
+import { SignInScreen } from 'screens/Auth/SignIn';
+import { SignUpScreen } from 'screens/Auth/SignUp';
+import { CreatePinScreen } from 'screens/Auth/CreatePin';
+import { VerifyScreen } from 'screens/Auth/Verify';
+import { WelcomeBackScreen } from 'screens/Auth/WelcomeBack';
+import { ConfirmPinScreen } from 'screens/Auth/ConfirmPin';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -112,19 +118,46 @@ const NativeStackRoot: React.FC = () => {
         }}
       />
     );
-  } else if (false) { //for auth screens
-		screens = (
-			<NativeStack.Screen
-				component={<></>}
-				name={""}
-				options={{ headerShown: false }}
-			/>
-		);
-	} else if (true) {
+  } else if (false) {
 		screens = (
 			<NativeStack.Screen component={OnboardingScreen}
 				name={Screens.Onboarding}
 				options={{ headerShown: false }}/>
+		);
+	} else if (true) { //for auth screens
+		screens = (
+      <>
+        <NativeStack.Screen
+          component={SignInScreen}
+          name={Screens.SignInScreen}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={SignUpScreen}
+          name={Screens.SignUpScreen}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={CreatePinScreen}
+          name={Screens.CreatePinScreen}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={VerifyScreen}
+          name={Screens.VerifyScreen}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={WelcomeBackScreen}
+          name={Screens.WelcomeBackScreen}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={ConfirmPinScreen}
+          name={Screens.ConfirmPin}
+          options={{ headerShown: false }}
+        />
+      </>
 		);
 	} else {
 		screens = (
