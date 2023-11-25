@@ -1,20 +1,12 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Layout } from "components/Layouts";
-import { Button, View } from "components/atoms";
+import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
+import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
-import { RootStackParamList } from "navigations/types";
-import { useCallback } from "react";
+import { Link } from '@react-navigation/native';
 
 export const SignInScreen = () => {
-      const { navigate } = useNavigation<NavigationProp<RootStackParamList, Screens.SignInScreen>>();
-	const gotoHome = useCallback(() => {
-		// hapticFeedback();
-		requestAnimationFrame(() => {
-			navigate(Screens.SignUpScreen);
-		});
-	}, [navigate]);
-
+      const goTo = useNavigateTo()
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -27,7 +19,13 @@ export const SignInScreen = () => {
                                     description="Log into your account"
                               />
                         </View>
-                        <Button size="lg" onPress={gotoHome}>Sign In</Button>
+                        <View className="space-y-2 items-center">
+                              <Button size="lg" className="w-full" onPress={() => goTo(Screens.SignUpScreen)}>Sign In</Button>
+                              <Link to={{ screen: "Sign Up"}}>
+                                    <Text className="font-interMedium text-xs">Don't have an account?</Text>
+                                    <Text className="text-red-100 font-interMedium text-xs">Sign Up</Text>
+                              </Link>
+                        </View>
                   </View>
 		</Layout>
 	);

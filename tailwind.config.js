@@ -33,6 +33,9 @@ module.exports = {
         },
         gray:{
           100: "#cccccc"
+        },
+        red:{
+          100: "#FF3922"
         }
       }
     }
