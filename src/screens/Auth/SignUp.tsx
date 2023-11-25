@@ -1,7 +1,9 @@
 import { Link } from "@react-navigation/native";
+import { AtSign, Email, EyeClosed, GreenCheck, Lock, Profile } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
+import { FormInput } from "components/molecules/FormInputs";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 
@@ -19,11 +21,42 @@ export const SignUpScreen = () => {
                                     title= "Sign up now!"
                                     description="Create an account now, challenge, play, and win yourself some cash."
                               />
+                              <View className="mt-8">
+                                    <FormInput 
+                                          leftIcon={<Profile width={18} height={18}/>}
+                                          placeholder="Full name"
+                                    />
+                                    <FormInput 
+                                          leftIcon={<Email width={20} height={20}/>}
+                                          placeholder="Email"
+                                          inputMode="email"
+                                    />
+                                    <FormInput 
+                                          leftIcon={<AtSign width={18} height={20}/>}
+                                          rightIcon={<GreenCheck width={18} height={18}/>}
+                                          placeholder="__jackjack"
+                                          inputMode="email"
+                                    />
+                                    <FormInput
+                                          leftIcon={<Lock height={18} width={18} />}
+                                          rightIcon={<EyeClosed height={18} width={18} />}
+                                          placeholder="Password"
+                                          secureTextEntry
+                                    />
+                                    <View>
+                                           <Link to={{ screen: "Sign In"}}>
+                                                <Text className="font-interMedium text-xs">I accept the</Text>
+                                                {" "}
+                                                <Text className="text-red-100 font-interMedium text-xs">Terms and Conditions</Text>
+                                           </Link>  
+                                    </View>
+                              </View>
                         </View>
                         <View className="space-y-2 items-center">
                               <Button size="lg" className="w-full" onPress={() => goTo(Screens.CreatePinScreen)}>Sign Up</Button>
                               <Link to={{ screen: "Sign In"}}>
                                     <Text className="font-interMedium text-xs">Already have an account? </Text>
+                                    {" "}
                                     <Text className="text-red-100 font-interMedium text-xs">Log In</Text>
                               </Link>
                         </View>

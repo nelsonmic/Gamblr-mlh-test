@@ -14,7 +14,6 @@ export const FormInput: React.FC<FormInputProps> = ({
       leftIcon, 
       rightIcon, 
       placeholder, 
-      placeholderTextColor, 
       secureTextEntry,
       selectionColor,
       styleContainer,
@@ -35,7 +34,7 @@ export const FormInput: React.FC<FormInputProps> = ({
                   styleInput 
             )}
             placeholder={placeholder}
-            placeholderTextColor={placeholderTextColor} 
+            placeholderTextColor={"#515C6C"} 
             selectionColor={selectionColor}
             secureTextEntry={secureTextEntry}
       />

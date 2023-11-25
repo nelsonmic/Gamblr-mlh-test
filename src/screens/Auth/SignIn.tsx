@@ -24,13 +24,11 @@ export const SignInScreen = () => {
                                     <FormInput
                                           leftIcon={<Profile height={18} width={18} />}
                                           placeholder="Email / tag"
-                                          placeholderTextColor={"#515C6C"}
                                     />
                                     <FormInput
                                           leftIcon={<Lock height={18} width={18} />}
                                           rightIcon={<EyeClosed height={18} width={18} />}
                                           placeholder="Password"
-                                          placeholderTextColor={"#515C6C"}
                                           secureTextEntry
                                     />
                                     <Link to={{ screen: "Forgot Password"}}>
@@ -44,6 +42,7 @@ export const SignInScreen = () => {
                               <Button size="lg" className="w-full" onPress={() => goTo(Screens.SignUpScreen)}>Sign In</Button>
                               <Link to={{ screen: "Sign Up"}}>
                                     <Text className="font-interMedium text-xs">Don't have an account?</Text>
+                                    {" "}
                                     <Text className="text-red-100 font-interMedium text-xs">Sign Up</Text>
                               </Link>
                         </View>
