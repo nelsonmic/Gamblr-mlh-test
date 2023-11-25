@@ -1,4 +1,5 @@
 export { default as Logo } from './Logo';
+export { default as Scan } from './Scan';
 export { default as Chat } from './Chat';
 export { default as EyeClosed } from './EyeClosed';
 export { default as Home } from './Home';
