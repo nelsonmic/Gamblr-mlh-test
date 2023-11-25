@@ -35,6 +35,7 @@ export const SignInScreen = () => {
                                     />
                                     <Link to={{ screen: "Forgot Password"}}>
                                           <Text className="font-interMedium text-xs">Forgot password?</Text>
+                                          {" "}
                                           <Text className="text-red-100 font-interMedium text-xs">Reset</Text>
                                     </Link>
                               </View>
