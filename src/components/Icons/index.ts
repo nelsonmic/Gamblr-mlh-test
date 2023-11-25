@@ -1,3 +1,4 @@
+export { default as Caret } from './Caret';
 export { default as Email } from './Email';
 export { default as Logo } from './Logo';
 export { default as Scan } from './Scan';

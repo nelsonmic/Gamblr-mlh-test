@@ -4,7 +4,6 @@ import { generateInitials } from "handlers/helpers/generateInitials";
 import { FC } from "react";
 import { Image } from "react-native";
 
-//TODO Remove color pallete library
 interface AvatarProps{
       size: "sm" | "lg"
       labelPosition: "right" | "bottom"
