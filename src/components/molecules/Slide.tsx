@@ -39,10 +39,10 @@ export const Slide: FC<Props> = ({ item }) => (
                   </View>
             </View>
             <View className={clsx("w-full absolute bottom-0 px-4 pb-4")}>
-                  <Text className="text-white text-3xl leading-8 font-cabinetGroteskBold">
+                  <Text className="text-white-100 text-3xl leading-8 font-cabinetGroteskBold">
                         {item.title}
                   </Text>
-                  <Text className="text-white text-sm mt-2 text-gray-100 leading-5 tracking-[0.28px] font-interRegular">
+                  <Text className="text-white-100 text-sm mt-2 text-gray-100 leading-5 tracking-[0.28px] font-interRegular">
                         {item.description}
                    </Text>
              </View>

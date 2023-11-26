@@ -8,7 +8,7 @@ import { ViewProps } from "components/atoms/View";
 type Props = PropsWithChildren<ViewProps> & SafeAreaViewProps;
 
 export const Layout: FC<Props> = ({ children, ...rest }) => (
-	<SafeAreaView className="bg-white px-4" {...rest}>
+	<SafeAreaView className="bg-white-100 px-4" {...rest}>
 		{children}
 	</SafeAreaView>
 );

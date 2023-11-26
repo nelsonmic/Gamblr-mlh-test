@@ -6,5 +6,16 @@ export enum Screens {
   SplashScreen = 'SplashScreen',
   NativeStackRoot = "NativeStackRoot",
   BottomTabs = "BottomTabs",
-  Onboarding = "Onboarding"
+  Onboarding = "Onboarding",
+  CreatePinScreen = "Create Pin",
+  SignInScreen = "Sign In",
+  SignUpScreen = "Sign Up",
+  VerifyScreen = "Verify",
+  WelcomeBackScreen = "Welcome Back",
+  ConfirmPin = "Confirm Pin",
+  EnterOtp = "Enter Otp",
+  ForgotPassword = "Forgot Password",
+  ResetPassword = "Reset Password",
+  Settings = "Settings",
+  Congratulations = "Congratulations"
 }

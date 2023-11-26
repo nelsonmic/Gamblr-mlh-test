@@ -36,8 +36,8 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 
 		const buttonVariantMap = {
 			contained: {
-				primary: `bg-black-100 text-white ${loading ? "opacity-50" : ""}`,
-				secondary: `bg-white text-black-100 ${loading ? "opacity-50" : ""}`,
+				primary: `bg-black-100 text-white-100 ${loading ? "opacity-50" : ""}`,
+				secondary: `bg-white-100 text-black-100 ${loading ? "opacity-50" : ""}`,
 				tertiary: `bg-neutral-600 text-neutral-50 ${
 					loading ? "opacity-50" : ""
 				}`
@@ -48,17 +48,17 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 				tertiary: `${loading ? "opacity-50" : ""}`
 			},
 			text: {
-				primary: `bg-transparent text-white`,
-				secondary: `bg-transparent text-white`,
-				tertiary: `bg-transparent text-white`
+				primary: `bg-transparent text-white-100`,
+				secondary: `bg-transparent text-white-100`,
+				tertiary: `bg-transparent text-white-100`
 			}
 		};
 
 		const buttonTextVariantMap = {
 			contained: {
-				primary: "text-white",
+				primary: "text-white-100",
 				secondary: "text-black-100",
-				tertiary: "text-white"
+				tertiary: "text-white-100"
 			},
 			outlined: {
 				primary: "text-black-100",
