@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
 import clsx from 'clsx';
 import { Platform } from 'react-native';
-import { Chat, Home, Market } from 'components/Icons';
+import { Chat, Home, Market, Settings } from 'components/Icons';
 import { Text } from 'components/atoms';
 import { ProfileScreen } from 'screens/Profile';
 import { createBottomSheetNavigator } from './bottom-sheet';
@@ -24,6 +24,7 @@ import { ConfirmPinScreen } from 'screens/Auth/ConfirmPin';
 import { EnterOtpScreen } from 'screens/Auth/EnterOtp';
 import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
 import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
+import { SettingsScreen } from 'screens/Settings';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -87,12 +88,12 @@ const BottomTabsRoot: React.FC = () => (
       }}
     />
     <BottomTabStack.Screen
-      component={ProfileScreen}
+      component={SettingsScreen}
       name={Screens.Profile}
       options={{
         // ...transactionsBottomTabBarPreset,
-        tabBarIcon: () => <SvgProfile height={21} width={21} />,
-        tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Profile" />,
+        tabBarIcon: () => <Settings height={22} width={22} />,
+        tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Settings" />,
       }}
     />
   </BottomTabStack.Navigator>
@@ -127,7 +128,7 @@ const NativeStackRoot: React.FC = () => {
 				name={Screens.Onboarding}
 				options={{ headerShown: false }}/>
 		);
-	} else if (true) { //for auth screens
+	} else if (false) { //for auth screens
 		screens = (
       <>
         <NativeStack.Screen

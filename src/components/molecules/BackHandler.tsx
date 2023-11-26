@@ -28,7 +28,7 @@ export const BackHandler: FC<Props> = ({ ...rest }) => {
 			}}
 		>
 			<Pressable onPress={returnToPreviousScreen} className="w-[40] h-[30] -ml-[12] mb-6">
-                        <View className="border-gray-500 border rounded-lg bg-white p-4 items-center justify-center">
+                        <View className="border-gray-500 border rounded-lg bg-white-100 p-4 items-center justify-center">
 				      <Caret width={16} height={16}/>
                         </View>
 			</Pressable>
