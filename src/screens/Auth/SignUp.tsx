@@ -1,5 +1,5 @@
 import { Link } from "@react-navigation/native";
-import { AtSign, Email, EyeClosed, GreenCheck, Lock, Profile } from "components/Icons";
+import { AtSign, Email, EyeClosed, GreenCheck, Lock, NgFlag, Profile } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
@@ -32,10 +32,14 @@ export const SignUpScreen = () => {
                                           inputMode="email"
                                     />
                                     <FormInput 
+                                          leftIcon={<NgFlag width={20} height={20}/>}
+                                          placeholder="Phone number"
+                                          styleInput="border-l border-gray-300"
+                                    />
+                                    <FormInput 
                                           leftIcon={<AtSign width={18} height={20}/>}
                                           rightIcon={<GreenCheck width={18} height={18}/>}
-                                          placeholder="__jackjack"
-                                          inputMode="email"
+                                          placeholder="User tag"
                                     />
                                     <FormInput
                                           leftIcon={<Lock height={18} width={18} />}

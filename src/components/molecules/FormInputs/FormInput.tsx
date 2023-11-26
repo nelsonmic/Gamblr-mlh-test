@@ -23,14 +23,14 @@ export const FormInput: React.FC<FormInputProps> = ({
   return (
     <View 
       className={clsx(
-            'border-gray-300 border bg-white-200 flex-row justify-between p-4 py-5 mb-4 rounded-2xl',
+            'border-gray-300 border space-x-3 bg-white-200 flex-row items-center justify-between p-4 py-3 mb-4 rounded-2xl',
             styleContainer
       )}>
       {leftIcon}
       <TextInput 
             {...props} 
             className={clsx(
-                  'flex-1 w-full px-4 font-interRegular',
+                  'flex-1 w-full font-interRegular py-2 px-2',
                   styleInput 
             )}
             placeholder={placeholder}
