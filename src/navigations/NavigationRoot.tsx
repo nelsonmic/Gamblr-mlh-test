@@ -25,6 +25,7 @@ import { EnterOtpScreen } from 'screens/Auth/EnterOtp';
 import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
 import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 import { SettingsScreen } from 'screens/Settings';
+import { CongratulationsScreen } from 'screens/Auth/Congratulations';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -149,6 +150,11 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={VerifyScreen}
           name={Screens.VerifyScreen}
+          options={{ headerShown: false }}
+        />
+        <NativeStack.Screen
+          component={CongratulationsScreen}
+          name={Screens.Congratulations}
           options={{ headerShown: false }}
         />
         <NativeStack.Screen

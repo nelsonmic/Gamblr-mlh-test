@@ -16,5 +16,6 @@ export enum Screens {
   EnterOtp = "Enter Otp",
   ForgotPassword = "Forgot Password",
   ResetPassword = "Reset Password",
-  Settings = "Settings"
+  Settings = "Settings",
+  Congratulations = "Congratulations"
 }

@@ -23,4 +23,5 @@ export interface RootStackParamList {
   [Screens.WelcomeBackScreen]: undefined;
   [Screens.ConfirmPin]: undefined;
   [Screens.Settings]: undefined;
+  [Screens.Congratulations]:undefined;
 }

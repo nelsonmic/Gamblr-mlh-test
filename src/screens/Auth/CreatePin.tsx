@@ -1,7 +1,8 @@
 import { Layout } from "components/Layouts";
-import { Button, Pressable, Text, View } from "components/atoms";
+import { Button, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { BackHandler } from "components/molecules/BackHandler";
+import { PinInput } from "components/molecules/FormInputs";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 
@@ -19,6 +20,12 @@ export const CreatePinScreen = () => {
                                     title= "Create Pin"
                                     description="Create a Pin for your transaction authorizations "
                               />
+                              <View>
+                                    <PinInput 
+                                          codeLength={4}
+
+                                    />
+                              </View>
                         </View>
                         <Button size="lg" onPress={() => goTo(Screens.ConfirmPin)}>Create Pin</Button>
                   </View>

@@ -3,9 +3,13 @@ import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { BackHandler } from "components/molecules/BackHandler";
+import { PinInput } from "components/molecules/FormInputs";
 import useCountDown from "hooks/useCountdown";
+import { useNavigateTo } from "hooks/useNavigateTo";
+import { Screens } from "navigations/Screens";
 
 export const VerifyScreen = () => {
+      const goTo = useNavigateTo();
       const { hms, restart, ended } = useCountDown({
             autoStart: true,
             delay: 10000,
@@ -22,8 +26,11 @@ export const VerifyScreen = () => {
                                     title= "Verify your account"
                                     description="We sent a 6-digit OTP to your email. Enter the code below"
                               />
-                              <View className="mt-6">
-                                    <View className="flex-row space-x-[4]">
+                              <View className="mt-2 space-y-24">
+                                    <PinInput 
+                                          codeLength={6}
+                                    />
+                                    <View className="flex-row space-x-[4] ml-2 w-[120]">
                                           <Pressable
                                           onPress={()=> {
                                                 if(ended) restart()
@@ -41,7 +48,7 @@ export const VerifyScreen = () => {
                                     </View>
                               </View>
                         </View>
-                        <Button size="lg" >Verify</Button>
+                        <Button size="lg" onPress={()=> goTo(Screens.Congratulations)} >Verify</Button>
                   </View>
 		</Layout>
 	);
