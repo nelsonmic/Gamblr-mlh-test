@@ -23,7 +23,7 @@ export const BackHandler: FC<Props> = ({ ...rest }) => {
 		<View
 			{...rest}
 			style={{
-				paddingLeft: inset.left + 10,
+				paddingLeft: inset.left + 25,
 				paddingTop: Platform.OS === "android" ? inset.top + 10 : 0
 			}}
 		>

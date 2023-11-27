@@ -26,6 +26,7 @@ import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
 import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 import { SettingsScreen } from 'screens/Settings';
 import { CongratulationsScreen } from 'screens/Auth/Congratulations';
+import { naviteStackWithHeaderConfig } from './config/NativeStackWithHeaderConfig';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -145,12 +146,12 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={CreatePinScreen}
           name={Screens.CreatePinScreen}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={VerifyScreen}
           name={Screens.VerifyScreen}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={CongratulationsScreen}
@@ -160,7 +161,7 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={ConfirmPinScreen}
           name={Screens.ConfirmPin}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={EnterOtpScreen}
@@ -170,12 +171,12 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={ForgotPasswordScreen}
           name={Screens.ForgotPassword}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={ResetPasswordScreen}
           name={Screens.ResetPassword}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
       </>
 		);

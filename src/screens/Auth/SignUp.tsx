@@ -12,7 +12,7 @@ export const SignUpScreen = () => {
 
 	return (
 		<Layout
-			className="h-full space-y-2 px-4 pt-8"
+			className="h-full space-y-2 px-4 pt-14"
 			edges={["left", "right", "top", "bottom"]}
 		>
                   <View className="flex-1 justify-between space-y-4">
