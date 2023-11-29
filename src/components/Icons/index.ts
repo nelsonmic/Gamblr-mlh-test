@@ -1,6 +1,7 @@
 export { default as Caret } from './Caret';
 export { default as DarkLogo } from './DarkLogo';
 export { default as Email } from './Email';
+export { default as FullLogo } from './FullLogo';
 export { default as Logo } from './Logo';
 export { default as NgFlag } from './NgFlag';
 export { default as Scan } from './Scan';

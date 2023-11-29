@@ -26,6 +26,7 @@ import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
 import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 import { SettingsScreen } from 'screens/Settings';
 import { CongratulationsScreen } from 'screens/Auth/Congratulations';
+import { naviteStackWithHeaderConfig } from './config/NativeStackWithHeaderConfig';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -33,13 +34,15 @@ const NativeStack = createStackNavigator<RootStackParamList>();
 
 interface LabelProps {
   label: string;
+  focused?: boolean
 }
 
-const Label: FC<LabelProps> = ({ label }) => (
+const Label: FC<LabelProps> = ({ label, focused = false }) => (
   <Text
-    className={clsx('font-interSemiBold text-center text-xs leading-3 font-[#010101]', {
+    className={clsx('font-interSemiBold text-center text-xs leading-3 text-gray-100', {
       'font-interBold': Platform.OS === 'android',
       'mt-2': Platform.OS === 'android',
+      'text-black-100': focused
     })}
   >
     {label}
@@ -67,7 +70,7 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...bottomTabPreset,
         tabBarIcon: () => <Home height={20} width={20} />,
-        tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Home" />,
+        tabBarLabel: ({focused}) => <Label label="Home" focused={focused} />,
       }}
     />
     <BottomTabStack.Screen
@@ -76,7 +79,7 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...walletAssetListBottomTabBarPreset,
         tabBarIcon: () => <Market height={24} width={24} />,
-        tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Wager" />,
+        tabBarLabel: ({focused}) => <Label label="Wager" focused={focused} />,
       }}
     />
     <BottomTabStack.Screen
@@ -85,7 +88,7 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...transactionsBottomTabBarPreset,
         tabBarIcon: () => <Chat fill="#555" height={22} width={22} />,
-        tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Lobby" />,
+        tabBarLabel: ({focused}) => <Label label="Lobby" focused={focused} />,
       }}
     />
     <BottomTabStack.Screen
@@ -94,7 +97,7 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...transactionsBottomTabBarPreset,
         tabBarIcon: () => <Settings height={22} width={22} />,
-        tabBarLabel: ({ focused }) => Boolean(focused) && <Label label="Settings" />,
+        tabBarLabel: ({focused}) => <Label label="Settings" focused={focused}/>,
       }}
     />
   </BottomTabStack.Navigator>
@@ -107,7 +110,7 @@ const NativeStackRoot: React.FC = () => {
   React.useEffect(() => {
     const time = setTimeout(() => {
       setShowSplashScreen(false);
-    }, 3000);
+    }, 3500);
     return () => {
       clearTimeout(time);
     };
@@ -145,12 +148,12 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={CreatePinScreen}
           name={Screens.CreatePinScreen}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={VerifyScreen}
           name={Screens.VerifyScreen}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={CongratulationsScreen}
@@ -160,7 +163,7 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={ConfirmPinScreen}
           name={Screens.ConfirmPin}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={EnterOtpScreen}
@@ -170,12 +173,12 @@ const NativeStackRoot: React.FC = () => {
         <NativeStack.Screen
           component={ForgotPasswordScreen}
           name={Screens.ForgotPassword}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
         <NativeStack.Screen
           component={ResetPasswordScreen}
           name={Screens.ResetPassword}
-          options={{ headerShown: false }}
+          options={{ ...naviteStackWithHeaderConfig }}
         />
       </>
 		);

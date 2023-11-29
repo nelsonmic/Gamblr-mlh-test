@@ -39,7 +39,7 @@ export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "ri
                   ): <Text className="font-cabinetGroteskBold text-3xl">{generateInitials(name)}</Text>}
                   </View>
                   <View>
-                        <Text className={clsx("text-center font-interRegular text-sm",
+                        <Text className={clsx("text-center font-interMedium text-sm",
                               {
                                     "font-interBold" : labelPosition === "right"
                               }
