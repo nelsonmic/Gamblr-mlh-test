@@ -18,7 +18,7 @@ const NavigationContainer: FC<NavigationContainerProps> = ({ children }) => {
 		...DefaultTheme,
 		colors: {
 			...DefaultTheme.colors,
-			background: "#272727"
+			background: "#ffffff"
 		}
 	};
 

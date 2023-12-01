@@ -2,6 +2,7 @@ import { PropsWithChildren, Ref, forwardRef } from "react";
 import clsx from "clsx";
 import { Pressable, PressableProps, View } from "react-native";
 import Text from "./Text";
+import { useAppearanceContext } from "providers/Appearance.provider";
 
 export type ButtonProps = PressableProps &
 	PropsWithChildren & {
@@ -24,6 +25,8 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 		},
 		ref
 	) => {
+		const { isDarkMode } = useAppearanceContext();
+		
 		const baseButtonClass =
 			"font-inter rounded-3xl flex-row items-center justify-center";
 
@@ -36,14 +39,14 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 
 		const buttonVariantMap = {
 			contained: {
-				primary: `bg-black-100 text-white-100 ${loading ? "opacity-50" : ""}`,
-				secondary: `bg-white-100 text-black-100 ${loading ? "opacity-50" : ""}`,
+				primary: `${isDarkMode ? "bg-white-100" :"bg-black-100"} ${loading ? "opacity-50" : ""}`,
+				secondary: `bg-white-100 ${loading ? "opacity-50" : ""}`,
 				tertiary: `bg-neutral-600 text-neutral-50 ${
 					loading ? "opacity-50" : ""
 				}`
 			},
 			outlined: {
-				primary: `${loading ? "opacity-50" : "border border-black-100"}`,
+				primary: `${loading ? "opacity-50" : "border"} ${isDarkMode? "border-white-100" : "border-black-100"}`,
 				secondary: `${loading ? "opacity-50" : ""}`,
 				tertiary: `${loading ? "opacity-50" : ""}`
 			},
@@ -56,19 +59,19 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 
 		const buttonTextVariantMap = {
 			contained: {
-				primary: "text-white-100",
+				primary: isDarkMode? "text-black-100" : "text-white-100",
 				secondary: "text-black-100",
 				tertiary: "text-white-100"
 			},
 			outlined: {
-				primary: "text-black-100",
-				secondary: "text-black-100",
-				tertiary: "text-black-100"
+				primary: isDarkMode? "text-white-100" : "text-black-100",
+				secondary: isDarkMode? "text-white-100" : "text-black-100",
+				tertiary: isDarkMode? "text-white-100" : "text-black-100"
 			},
 			text: {
-				primary: "text-black-100",
-				secondary: "text-black-100",
-				tertiary: "text-black-100"
+				primary: isDarkMode? "text-white-100" : "text-black-100",
+				secondary: isDarkMode? "text-white-100" : "text-black-100",
+				tertiary:isDarkMode? "text-white-100" : "text-black-100"
 			}
 		};
 

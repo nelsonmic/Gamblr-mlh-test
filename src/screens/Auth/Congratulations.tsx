@@ -3,8 +3,11 @@ import { Button, Text, View } from "components/atoms";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import LottieView from "lottie-react-native"
+import clsx from "clsx";
+import { useAppearanceContext } from "providers/Appearance.provider";
 
 export const CongratulationsScreen = () => {
+      const { isDarkMode } = useAppearanceContext();
       const goTo = useNavigateTo()
 	return (
 		<Layout
@@ -23,8 +26,12 @@ export const CongratulationsScreen = () => {
                                     loop
                               />
                               <View>
-                                    <Text className="text-black-100 font-[700] text-3xl text-center font-cabinetGrotesk">Congratulations!</Text>
-                                    <Text className="font-interRegular text-gray-200 text-sm">Your account has been created successfully.</Text>
+                                    <Text className={clsx("text-black-100 font-[700] text-3xl text-center font-cabinetGrotesk", {
+                                          "text-white-100" : isDarkMode
+                                    })}>Congratulations!</Text>
+                                    <Text className={clsx("font-interRegular text-gray-200 text-sm", {
+                                          "text-white-100" : isDarkMode
+                                    })}>Your account has been created successfully.</Text>
                               </View>
                         </View>
                         <Button size="lg" onPress={()=> goTo(Screens.CreatePinScreen)}>Continue</Button>

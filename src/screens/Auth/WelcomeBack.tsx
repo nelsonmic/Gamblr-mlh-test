@@ -1,13 +1,15 @@
 import { Link } from "@react-navigation/native";
+import clsx from "clsx";
 import { EyeClosed, Lock, Scan } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { Avatar } from "components/molecules/Avatar";
 import { FormInput } from "components/molecules/FormInputs";
+import { useAppearanceContext } from "providers/Appearance.provider";
 
 export const WelcomeBackScreen = () => {
-
+      const { isDarkMode } = useAppearanceContext();
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -37,15 +39,17 @@ export const WelcomeBackScreen = () => {
                                                 secureTextEntry
                                           />
                                           <Link to={{ screen: "Forgot Password"}}>
-                                                <Text className="font-interMedium text-xs">Forgot password?</Text>
-                                                {" "}
-                                                <Text className="text-red-100 font-interMedium text-xs">Reset</Text>
+                                                <Text className={clsx("font-interMedium text-xs", {
+                                                      "text-white-100" : isDarkMode
+                                                })}>Forgot password? Reset</Text>
                                           </Link>
                                     </View>
                               </View>
                               <View className="items-center ">
                                     <Scan width={55} height={55}/>
-                                    <Text className="text-center text-gray-200 font-interRegular mt-2">Use biometrics</Text>
+                                    <Text className={clsx("text-center text-gray-200 font-interRegular mt-2", {
+                                          "text-white-100" : isDarkMode
+                                    })}>Use biometrics</Text>
                               </View>
                         </View>
                         <Button size="lg">Login</Button>
