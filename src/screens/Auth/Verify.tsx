@@ -6,10 +6,11 @@ import { PinInput } from "components/molecules/FormInputs";
 import useCountDown from "hooks/useCountdown";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
-import { useEffect } from "react";
+import { useAppearanceContext } from "providers/Appearance.provider";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 export const VerifyScreen = () => {
+      const { isDarkMode } = useAppearanceContext();
       const goTo = useNavigateTo();
       const { hms, restart, ended } = useCountDown({
             autoStart: true,
@@ -24,7 +25,8 @@ export const VerifyScreen = () => {
       }))
 
       const runAnimation = () => {
-            color.value = withTiming("#131313", 
+            const colorTheme = isDarkMode? "#ffffff" : "#131313"
+            color.value = withTiming(colorTheme, 
             {
                   duration: 600,
                   easing: Easing.linear
@@ -75,7 +77,7 @@ export const VerifyScreen = () => {
                                                 }}
                                           >
                                                 <Animated.Text 
-                                                      className={"font-interMedium text-xs"}
+                                                      className={clsx("font-interMedium text-xs text-black-100")}
                                                       style={animatedStyle}
                                                 >
                                                       Resend
@@ -87,7 +89,7 @@ export const VerifyScreen = () => {
                                     </View>
                               </View>
                         </View>
-                        <Button size="lg" onPress={()=> goTo(Screens.Congratulations)} >Verify</Button>
+                        <Button size="lg" onPress={() => goTo(Screens.Congratulations)} >Verify</Button>
                   </View>
 		</Layout>
 	);

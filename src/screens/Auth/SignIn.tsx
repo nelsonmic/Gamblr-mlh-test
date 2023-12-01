@@ -6,8 +6,11 @@ import { Screens } from "navigations/Screens";
 import { Link } from '@react-navigation/native';
 import { FormInput } from "components/molecules/FormInputs";
 import { EyeClosed, Lock, Profile } from "components/Icons";
+import clsx from "clsx";
+import { useAppearanceContext } from "providers/Appearance.provider";
 
 export const SignInScreen = () => {
+      const { isDarkMode } = useAppearanceContext(); 
       const goTo = useNavigateTo()
 	return (
 		<Layout
@@ -32,18 +35,18 @@ export const SignInScreen = () => {
                                           secureTextEntry
                                     />
                                     <Link to={{ screen: "Forgot Password"}}>
-                                          <Text className="font-interMedium text-xs">Forgot password?</Text>
-                                          {" "}
-                                          <Text className="text-red-100 font-interMedium text-xs">Reset</Text>
+                                          <Text className={clsx("font-interMedium text-xs", {
+                                                "text-white-100" : isDarkMode
+                                          })}>Forgot password? Reset</Text>
                                     </Link>
                               </View>
                         </View>
                         <View className="space-y-2 items-center">
                               <Button size="lg" className="w-full" onPress={() => goTo(Screens.SignUpScreen)}>Sign In</Button>
                               <Link to={{ screen: "Sign Up"}}>
-                                    <Text className="font-interMedium text-xs">Don't have an account?</Text>
-                                    {" "}
-                                    <Text className="text-red-100 font-interMedium text-xs">Sign Up</Text>
+                                    <Text className={clsx("font-interMedium text-black-100 text-xs", {
+                                          "text-white-100" : isDarkMode
+                                    })}>Don't have an account? Sign Up</Text>
                               </Link>
                         </View>
                   </View>

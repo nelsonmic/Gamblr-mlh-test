@@ -4,6 +4,7 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import NavigationContainer from 'navigations/NavigationContainer';
 import NavigationRoot from 'navigations/NavigationRoot';
+import { AppearanceProvider } from 'providers/Appearance.provider';
 
 function App(): JSX.Element {
   return (
@@ -11,7 +12,9 @@ function App(): JSX.Element {
       <StatusBar animated barStyle="default" />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <NavigationContainer>
-          <NavigationRoot />
+          <AppearanceProvider>
+            <NavigationRoot />
+          </AppearanceProvider>
         </NavigationContainer>
       </GestureHandlerRootView>
     </SafeAreaProvider>

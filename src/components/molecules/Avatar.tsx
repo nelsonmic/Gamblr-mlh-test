@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { Text, View } from "components/atoms";
 import { generateInitials } from "handlers/helpers/generateInitials";
+import { useAppearanceContext } from "providers/Appearance.provider";
 import { FC } from "react";
 import { Image } from "react-native";
 
@@ -13,6 +14,7 @@ interface AvatarProps{
 }
 
 export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "right", name="Arinze Akoji", tag="__jackjack"}) => {
+      const { isDarkMode } = useAppearanceContext();
       return (
             <View className={clsx("mb-6 items-center space-y-2",
                   {
@@ -39,22 +41,24 @@ export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "ri
                   ): <Text className="font-cabinetGroteskBold text-3xl">{generateInitials(name)}</Text>}
                   </View>
                   <View>
-                        <Text className={clsx("text-center font-interMedium text-sm",
-                              {
-                                    "font-interBold" : labelPosition === "right"
-                              }
-                        )}>{name}</Text>
                         {
                               labelPosition !== "bottom" ? (
-                                    <Text className={clsx("text-center font-inter",
-                                    {
-                                          "text-gray-400 font-interSemiBold" : labelPosition === "right"
-                                    }
-                                    )}>
-                                          @{tag}
-                                    </Text>
+                                    <Text className={clsx("text-center font-interMedium text-sm text-black-100",
+                                          {
+                                                "font-interBold" : labelPosition === "right",
+                                                "text-white-100" : isDarkMode
+                                          }
+                                    )}>{name}</Text>
                               ) : null
                         }
+                              <Text className={clsx("text-center font-interSemiBold",
+                                    {
+                                          "text-gray-400" : labelPosition === "right",
+                                          "text-white-100" : isDarkMode
+                                    }
+                              )}>
+                                    @{tag}
+                              </Text>
                   </View>
             </View>
       )

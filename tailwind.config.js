@@ -45,6 +45,9 @@ module.exports = {
         red:{
           100: "#FF3922",
           'tint': "#AC3A301A"
+        },
+        darkMode: {
+          'input-bg': "#29292A"
         }
       }
     }

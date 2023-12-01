@@ -1,4 +1,5 @@
 import { Link } from "@react-navigation/native";
+import clsx from "clsx";
 import { AtSign, Email, EyeClosed, GreenCheck, Lock, NgFlag, Profile } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
@@ -6,8 +7,10 @@ import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { FormInput } from "components/molecules/FormInputs";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
+import { useAppearanceContext } from "providers/Appearance.provider";
 
 export const SignUpScreen = () => {
+      const { isDarkMode } = useAppearanceContext();
       const goTo = useNavigateTo()
 
 	return (
@@ -49,9 +52,9 @@ export const SignUpScreen = () => {
                                     />
                                     <View>
                                            <Link to={{ screen: "Sign In"}}>
-                                                <Text className="font-interMedium text-xs">I accept the</Text>
-                                                {" "}
-                                                <Text className="text-red-100 font-interMedium text-xs">Terms and Conditions</Text>
+                                                <Text className={clsx("font-interMedium text-black-100 text-xs", {
+                                                      "text-white-100" : isDarkMode
+                                                })}>I accept the Terms and Conditions</Text>
                                            </Link>  
                                     </View>
                               </View>
@@ -59,9 +62,9 @@ export const SignUpScreen = () => {
                         <View className="space-y-2 items-center">
                               <Button size="lg" className="w-full" onPress={() => goTo(Screens.VerifyScreen)}>Sign Up</Button>
                               <Link to={{ screen: "Sign In"}}>
-                                    <Text className="font-interMedium text-xs">Already have an account? </Text>
-                                    {" "}
-                                    <Text className="text-red-100 font-interMedium text-xs">Log In</Text>
+                                    <Text className={clsx("font-interMedium text-xs", {
+                                          "text-white-100" : isDarkMode
+                                    })}>Already have an account? Log in</Text>
                               </Link>
                         </View>
                   </View>

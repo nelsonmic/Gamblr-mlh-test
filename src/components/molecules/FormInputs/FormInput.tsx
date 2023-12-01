@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 import { TextInput, View } from 'components/atoms';
 import type { TextInputProps as RNTextInputProps } from 'react-native';
 import clsx from 'clsx';
+import { useAppearanceContext } from 'providers/Appearance.provider';
 
 type FormInputProps = RNTextInputProps & {
       leftIcon?: ReactNode,
@@ -20,11 +21,16 @@ export const FormInput: React.FC<FormInputProps> = ({
       styleInput
       }, 
       ...props) => {
+            const { isDarkMode } = useAppearanceContext();
   return (
     <View 
       className={clsx(
-            'border-gray-300 border space-x-3 bg-white-200 flex-row items-center justify-between p-4 py-3 mb-4 rounded-2xl',
-            styleContainer
+            'border space-x-3 bg-white-200 flex-row items-center justify-between p-4 py-3 mb-4 rounded-2xl',
+            styleContainer,
+            {
+                  "bg-darkMode-input-bg border-darkMode-input-bg" : isDarkMode,
+                  "border-gray-300" : !isDarkMode
+            }
       )}>
       {leftIcon}
       <TextInput 
@@ -34,7 +40,7 @@ export const FormInput: React.FC<FormInputProps> = ({
                   styleInput 
             )}
             placeholder={placeholder}
-            placeholderTextColor={"#515C6C"} 
+            placeholderTextColor={isDarkMode? "#808080" :"#515C6C"} 
             selectionColor={selectionColor}
             secureTextEntry={secureTextEntry}
       />

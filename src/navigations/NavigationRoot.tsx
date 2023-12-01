@@ -5,13 +5,11 @@ import clsx from 'clsx';
 import { Platform } from 'react-native';
 import { Chat, Home, Market, Settings } from 'components/Icons';
 import { Text } from 'components/atoms';
-import { ProfileScreen } from 'screens/Profile';
 import { createBottomSheetNavigator } from './bottom-sheet';
 import { Screens } from './Screens';
 import { type RootStackParamList } from './types';
 import { WagerScreen } from 'screens/Wager';
 import { LobbyScreen } from 'screens/Lobby';
-import SvgProfile from 'components/Icons/Profile';
 import { HomeScreen } from 'screens/Home';
 import OnboardingScreen from 'screens/Onboarding';
 import SplashScreen from 'screens/SplashScreen';
@@ -116,96 +114,96 @@ const NativeStackRoot: React.FC = () => {
     };
   }, []);
 
-  if (showSplashScreen) { // for splash screen
-    screens = (
-      <NativeStack.Screen
-        component={SplashScreen}
-        name={Screens.SplashScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
-    );
-  } else if (false) { // for onboarding screen
-		screens = (
-			<NativeStack.Screen component={OnboardingScreen}
-				name={Screens.Onboarding}
-				options={{ headerShown: false }}/>
-		);
-	} else if (true) { //for auth screens
-		screens = (
-      <>
+    if (showSplashScreen) { // for splash screen
+      screens = (
         <NativeStack.Screen
-          component={SignInScreen}
-          name={Screens.SignInScreen}
-          options={{ headerShown: false }}
+          component={SplashScreen}
+          name={Screens.SplashScreen}
+          options={{
+            headerShown: false,
+          }}
         />
-        <NativeStack.Screen
-          component={SignUpScreen}
-          name={Screens.SignUpScreen}
-          options={{ headerShown: false }}
-        />
-        <NativeStack.Screen
-          component={CreatePinScreen}
-          name={Screens.CreatePinScreen}
-          options={{ ...naviteStackWithHeaderConfig }}
-        />
-        <NativeStack.Screen
-          component={VerifyScreen}
-          name={Screens.VerifyScreen}
-          options={{ ...naviteStackWithHeaderConfig }}
-        />
-        <NativeStack.Screen
-          component={CongratulationsScreen}
-          name={Screens.Congratulations}
-          options={{ headerShown: false }}
-        />
-        <NativeStack.Screen
-          component={ConfirmPinScreen}
-          name={Screens.ConfirmPin}
-          options={{ ...naviteStackWithHeaderConfig }}
-        />
-        <NativeStack.Screen
-          component={EnterOtpScreen}
-          name={Screens.EnterOtp}
-          options={{ headerShown: false }}
-        />
-        <NativeStack.Screen
-          component={ForgotPasswordScreen}
-          name={Screens.ForgotPassword}
-          options={{ ...naviteStackWithHeaderConfig }}
-        />
-        <NativeStack.Screen
-          component={ResetPasswordScreen}
-          name={Screens.ResetPassword}
-          options={{ ...naviteStackWithHeaderConfig }}
-        />
-      </>
-		);
-	} else if (false){ // for welcome screen
-    screens = (
-        <NativeStack.Screen
-          component={WelcomeBackScreen}
-          name={Screens.WelcomeBackScreen}
-          options={{ headerShown: false }}
-        />
-    )
-  }else { // main app screens
-		screens = (
-			<>
-				<NativeStack.Screen
-					component={BottomTabsRoot}
-					name={Screens.BottomTabs}
-					options={{ headerShown: false }}
-				/>
-				{/* <NativeStack.Screen
-					component={SavingsDetailScreen}
-					name={Screens.SavingsDetails}
-					options={{ ...naviteStackWithHeaderConfig }}
-				/> */}
-			</>
-		);
-	}
+      );
+    } else if (false) { // for onboarding screen
+      screens = (
+        <NativeStack.Screen component={OnboardingScreen}
+          name={Screens.Onboarding}
+          options={{ headerShown: false }}/>
+      );
+    } else if (false) { //for auth screens
+      screens = (
+        <>
+          <NativeStack.Screen
+            component={SignInScreen}
+            name={Screens.SignInScreen}
+            options={{ headerShown: false }}
+          />
+          <NativeStack.Screen
+            component={SignUpScreen}
+            name={Screens.SignUpScreen}
+            options={{ headerShown: false }}
+          />
+          <NativeStack.Screen
+            component={CreatePinScreen}
+            name={Screens.CreatePinScreen}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={VerifyScreen}
+            name={Screens.VerifyScreen}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={CongratulationsScreen}
+            name={Screens.Congratulations}
+            options={{ headerShown: false }}
+          />
+          <NativeStack.Screen
+            component={ConfirmPinScreen}
+            name={Screens.ConfirmPin}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={EnterOtpScreen}
+            name={Screens.EnterOtp}
+            options={{ headerShown: false }}
+          />
+          <NativeStack.Screen
+            component={ForgotPasswordScreen}
+            name={Screens.ForgotPassword}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={ResetPasswordScreen}
+            name={Screens.ResetPassword}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+        </>
+      );
+    } else if (true){ // for welcome screen
+      screens = (
+          <NativeStack.Screen
+            component={WelcomeBackScreen}
+            name={Screens.WelcomeBackScreen}
+            options={{ headerShown: false }}
+          />
+      )
+    }else { // main app screens
+      screens = (
+        <>
+          <NativeStack.Screen
+            component={BottomTabsRoot}
+            name={Screens.BottomTabs}
+            options={{ headerShown: false }}
+          />
+          {/* <NativeStack.Screen
+            component={SavingsDetailScreen}
+            name={Screens.SavingsDetails}
+            options={{ ...naviteStackWithHeaderConfig }}
+          /> */}
+        </>
+      );
+    }
 	return <NativeStack.Navigator>{screens}</NativeStack.Navigator>;
 };
 

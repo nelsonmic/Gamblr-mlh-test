@@ -6,5 +6,8 @@ export const naviteStackWithHeaderConfig = {
 	headerRight: () => null,
 	headerShadowVisible: false,
 	headerTitle: () => null,
-	title: ""
+	title: "",
+	headerStyle:{
+		backgroundColor: "#131313"
+	}
 };
