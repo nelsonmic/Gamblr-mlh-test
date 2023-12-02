@@ -40,11 +40,11 @@ module.exports = {
           200: "#515C6C",
           300: "#808080",
           400: "#555555",
-          500: "#EDEDED"
+          500: "#EDEDED",
+          600: "#E9E9E9"
         },
         red:{
           100: "#FF3922",
-          'tint': "#AC3A301A"
         },
         darkMode: {
           'input-bg': "#29292A"

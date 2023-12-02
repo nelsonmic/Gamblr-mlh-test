@@ -3,6 +3,7 @@ import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { PinInput } from "components/molecules/FormInputs";
+import { PinCode } from "components/organisms/PinCode";
 import useCountDown from "hooks/useCountdown";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
@@ -89,7 +90,10 @@ export const VerifyScreen = () => {
                                     </View>
                               </View>
                         </View>
-                        <Button size="lg" onPress={() => goTo(Screens.Congratulations)} >Verify</Button>
+                        <View>
+                              <PinCode />
+                              <Button size="lg" onPress={() => goTo(Screens.Congratulations)} >Verify</Button>
+                        </View>
                   </View>
 		</Layout>
 	);

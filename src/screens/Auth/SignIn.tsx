@@ -1,8 +1,6 @@
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { useNavigateTo } from "hooks/useNavigateTo";
-import { Screens } from "navigations/Screens";
 import { Link } from '@react-navigation/native';
 import { FormInput } from "components/molecules/FormInputs";
 import { EyeClosed, Lock, Profile } from "components/Icons";
@@ -11,7 +9,6 @@ import { useAppearanceContext } from "providers/Appearance.provider";
 
 export const SignInScreen = () => {
       const { isDarkMode } = useAppearanceContext(); 
-      const goTo = useNavigateTo()
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-14"
@@ -42,7 +39,7 @@ export const SignInScreen = () => {
                               </View>
                         </View>
                         <View className="space-y-2 items-center">
-                              <Button size="lg" className="w-full" onPress={() => goTo(Screens.SignUpScreen)}>Sign In</Button>
+                              <Button size="lg" className="w-full">Sign In</Button>
                               <Link to={{ screen: "Sign Up"}}>
                                     <Text className={clsx("font-interMedium text-black-100 text-xs", {
                                           "text-white-100" : isDarkMode
