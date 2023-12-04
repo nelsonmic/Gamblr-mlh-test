@@ -4,13 +4,16 @@ import { AtSign, Email, EyeClosed, GreenCheck, Lock, NgFlag, Profile } from "com
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
+import { Checkbox } from "components/molecules/Checkbox";
 import { FormInput } from "components/molecules/FormInputs";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useState } from "react";
 
 export const SignUpScreen = () => {
       const { isDarkMode } = useAppearanceContext();
+      const [isChecked, setIsChecked] = useState<boolean>(false);
       const goTo = useNavigateTo()
 
 	return (
@@ -50,7 +53,8 @@ export const SignUpScreen = () => {
                                           placeholder="Password"
                                           secureTextEntry
                                     />
-                                    <View>
+                                    <View className="flex-row items-center space-x-2">
+                                          <Checkbox isChecked={isChecked} onCheck={()=> setIsChecked(!isChecked)} />
                                            <Link to={{ screen: "Sign In"}}>
                                                 <Text className={clsx("font-interMedium text-black-100 text-xs", {
                                                       "text-white-100" : isDarkMode

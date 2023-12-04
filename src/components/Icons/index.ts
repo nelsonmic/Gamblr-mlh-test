@@ -1,5 +1,6 @@
 export { default as CancelPinCode } from './CancelPinCode';
 export { default as Caret } from './Caret';
+export { default as CurvedCheckmark } from './CurvedCheckmark';
 export { default as DarkLogo } from './DarkLogo';
 export { default as Email } from './Email';
 export { default as FullLogo } from './FullLogo';
