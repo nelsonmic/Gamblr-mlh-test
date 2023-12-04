@@ -3,6 +3,7 @@ import { Layout } from "components/Layouts";
 import { Button, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { PinInput } from "components/molecules/FormInputs";
+import { PinCodeKeypad } from "components/organisms/PinCodeKeypad";
 import { Screens } from "navigations/Screens";
 import { RootStackParamList } from "navigations/types";
 import { useCallback } from "react";
@@ -34,7 +35,10 @@ export const ConfirmPinScreen = () => {
                                     />
                               </View>
                         </View>
-                        <Button size="lg" onPress={gotoHome}>Confirm</Button>
+				<View>
+					<PinCodeKeypad />
+                        	<Button size="lg" onPress={gotoHome}>Confirm</Button>
+				</View>
                   </View>
 		</Layout>
 	);

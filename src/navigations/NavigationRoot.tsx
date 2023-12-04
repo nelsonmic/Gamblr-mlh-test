@@ -130,7 +130,7 @@ const NativeStackRoot: React.FC = () => {
           name={Screens.Onboarding}
           options={{ headerShown: false }}/>
       );
-    } else if (false) { //for auth screens
+    } else if (true) { //for auth screens
       screens = (
         <>
           <NativeStack.Screen
@@ -180,7 +180,7 @@ const NativeStackRoot: React.FC = () => {
           />
         </>
       );
-    } else if (true){ // for welcome screen
+    } else if (false){ // for welcome screen
       screens = (
           <NativeStack.Screen
             component={WelcomeBackScreen}

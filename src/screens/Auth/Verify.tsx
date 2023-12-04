@@ -3,6 +3,7 @@ import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { PinInput } from "components/molecules/FormInputs";
+import { PinCodeKeypad } from "components/organisms/PinCodeKeypad";
 import useCountDown from "hooks/useCountdown";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
@@ -10,7 +11,7 @@ import { useAppearanceContext } from "providers/Appearance.provider";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 export const VerifyScreen = () => {
-      const { isDarkMode } = useAppearanceContext();
+      const { isDarkMode, toggleColorScheme } = useAppearanceContext();
       const goTo = useNavigateTo();
       const { hms, restart, ended } = useCountDown({
             autoStart: true,
@@ -89,7 +90,10 @@ export const VerifyScreen = () => {
                                     </View>
                               </View>
                         </View>
-                        <Button size="lg" onPress={() => goTo(Screens.Congratulations)} >Verify</Button>
+                        <View>
+                              <PinCodeKeypad />
+                              <Button size="lg" >Verify</Button>
+                        </View>
                   </View>
 		</Layout>
 	);

@@ -2,8 +2,11 @@ import React from 'react';
 import { View } from 'components/atoms';
 import { FullLogo, Logo } from 'components/Icons';
 import Animated, { useAnimatedStyle, useSharedValue, withDelay, withSequence, withTiming } from 'react-native-reanimated';
+import { useAppearanceContext } from 'providers/Appearance.provider';
+import clsx from 'clsx';
 
 function SplashScreen(): React.ReactElement | null {
+  const { isDarkMode } = useAppearanceContext();
   const logoOpacity = useSharedValue(1);
   const logoScale = useSharedValue(1);
    const fullLogoOpacity = useSharedValue(0);
@@ -36,7 +39,9 @@ function SplashScreen(): React.ReactElement | null {
 
   runAnimation();
   return (
-    <View className="relative flex-1 items-center justify-center bg-[#131313]">
+    <View className={clsx("relative flex-1 items-center justify-center bg-white-100", {
+      "bg-black-100" : isDarkMode
+    })}>
       <Animated.View 
         className="absolute"
         style={logoStyle}
