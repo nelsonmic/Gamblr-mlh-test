@@ -26,7 +26,7 @@ export const PinCodeKey: FC<Props> = ({ value, showBiometrics }) => {
       const runAnimation = () => {
             opacity.value = withTiming(1, 
                   {duration: duration, easing : Easing.linear},
-                  ()=>{
+                  () => {
                         opacity.value = withTiming(0, {duration: duration, easing: Easing.linear})
                   }
             )
@@ -56,8 +56,9 @@ export const PinCodeKey: FC<Props> = ({ value, showBiometrics }) => {
             <View className="relative w-[110] h-[70]">
                   <Animated.View 
                         className={clsx("absolute rounded-xl w-full h-full", {
-                              "bg-darkMode-input-bg": isDarkMode,
-                              "bg-gray-100": !isDarkMode,
+                              "bg-darkMode-input-bg": isDarkMode && typeof value === "number",
+                              "bg-gray-100": !isDarkMode && typeof value === "number",
+                              "bg-red-500": value.name === "cancel"
                         })}
                         style={animatedStyle}
                   ></Animated.View>

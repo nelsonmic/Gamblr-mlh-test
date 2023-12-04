@@ -2,6 +2,7 @@ import { Layout } from "components/Layouts";
 import { Button, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { PinInput } from "components/molecules/FormInputs";
+import { PinCodeKeypad } from "components/organisms/PinCodeKeypad";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 
@@ -25,7 +26,10 @@ export const CreatePinScreen = () => {
                                     />
                               </View>
                         </View>
-                        <Button size="lg" onPress={() => goTo(Screens.ConfirmPin)}>Create Pin</Button>
+                        <View>
+                              <PinCodeKeypad />
+                              <Button size="lg" onPress={() => goTo(Screens.ConfirmPin)}>Create Pin</Button>
+                        </View>
                   </View>
 		</Layout>
 	);

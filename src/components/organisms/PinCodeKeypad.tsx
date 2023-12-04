@@ -5,7 +5,7 @@ import { FlatList } from "react-native"
 
 const _data = [1, 2, 3, 4, 5, 6, 7, 8, 9, { name: "biometrics", icon: <Scan /> }, 0, { name: "cancel", icon: <CancelPinCode /> }]
 
-export const PinCode = () => {
+export const PinCodeKeypad = () => {
       return(
             <View className="mb-6">
                   <FlatList 
