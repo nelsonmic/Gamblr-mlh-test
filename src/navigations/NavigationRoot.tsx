@@ -25,6 +25,16 @@ import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 import { SettingsScreen } from 'screens/Settings';
 import { CongratulationsScreen } from 'screens/Auth/Congratulations';
 import { naviteStackWithHeaderConfig } from './config/NativeStackWithHeaderConfig';
+import { useAppearanceContext } from 'providers/Appearance.provider';
+import { ProfileScreen } from 'screens/Settings/Profile';
+import { WalletScreen } from 'screens/Settings/Wallet';
+import { ReferralsScreen } from 'screens/Settings/Referrals';
+import { ChangePinScreen } from 'screens/Settings/ChangePin';
+import { ChangePasswordScreen } from 'screens/Settings/ChangePassword';
+import { TwoFaScreen } from 'screens/Settings/TwoFa';
+import { PrivacyPolicyScreen } from 'screens/Settings/PrivacyPolicy';
+import { TermsScreen } from 'screens/Settings/Terms';
+import { SupportScreen } from 'screens/Settings/Support';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -32,22 +42,26 @@ const NativeStack = createStackNavigator<RootStackParamList>();
 
 interface LabelProps {
   label: string;
-  focused?: boolean
 }
 
-const Label: FC<LabelProps> = ({ label, focused = false }) => (
+const Label: FC<LabelProps> = ({ label }) => {
+  const { isDarkMode } = useAppearanceContext();
+return (
   <Text
     className={clsx('font-interSemiBold text-center text-xs leading-3 text-gray-100', {
       'font-interBold': Platform.OS === 'android',
       'mt-2': Platform.OS === 'android',
-      'text-black-100': focused
+      'text-white-100': isDarkMode,
+      'text-black-100' : !isDarkMode
     })}
   >
     {label}
   </Text>
-);
+)};
 
-const BottomTabsRoot: React.FC = () => (
+const BottomTabsRoot: React.FC = () => {
+  const { isDarkMode, colors } = useAppearanceContext();
+return (
   <BottomTabStack.Navigator
     screenOptions={{
       headerShown: false,
@@ -56,6 +70,7 @@ const BottomTabsRoot: React.FC = () => (
         elevation: 0,
         height: Platform.OS === "android" ? 60 : 80,
         paddingBottom: Platform.OS === "android" ? 16 : 8,
+        backgroundColor: isDarkMode? colors.dark : colors.light
       },
       tabBarItemStyle: {
         marginBottom: Platform.OS === "android" ? 0 : 16,
@@ -68,7 +83,7 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...bottomTabPreset,
         tabBarIcon: () => <Home height={20} width={20} />,
-        tabBarLabel: ({focused}) => <Label label="Home" focused={focused} />,
+        tabBarLabel: ({focused}) => <Label label="Home" />,
       }}
     />
     <BottomTabStack.Screen
@@ -77,7 +92,7 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...walletAssetListBottomTabBarPreset,
         tabBarIcon: () => <Market height={24} width={24} />,
-        tabBarLabel: ({focused}) => <Label label="Wager" focused={focused} />,
+        tabBarLabel: ({focused}) => <Label label="Wager" />,
       }}
     />
     <BottomTabStack.Screen
@@ -86,20 +101,20 @@ const BottomTabsRoot: React.FC = () => (
       options={{
         // ...transactionsBottomTabBarPreset,
         tabBarIcon: () => <Chat fill="#555" height={22} width={22} />,
-        tabBarLabel: ({focused}) => <Label label="Lobby" focused={focused} />,
+        tabBarLabel: ({focused}) => <Label label="Lobby" />,
       }}
     />
     <BottomTabStack.Screen
       component={SettingsScreen}
-      name={Screens.Profile}
+      name={Screens.Settings}
       options={{
         // ...transactionsBottomTabBarPreset,
         tabBarIcon: () => <Settings height={22} width={22} />,
-        tabBarLabel: ({focused}) => <Label label="Settings" focused={focused}/>,
+        tabBarLabel: ({focused}) => <Label label="Settings"/>,
       }}
     />
   </BottomTabStack.Navigator>
-);
+)};
 
 const NativeStackRoot: React.FC = () => {
   const [showSplashScreen, setShowSplashScreen] = React.useState<boolean>(true);
@@ -130,7 +145,7 @@ const NativeStackRoot: React.FC = () => {
           name={Screens.Onboarding}
           options={{ headerShown: false }}/>
       );
-    } else if (true) { //for auth screens
+    } else if (false) { //for auth screens
       screens = (
         <>
           <NativeStack.Screen
@@ -196,11 +211,51 @@ const NativeStackRoot: React.FC = () => {
             name={Screens.BottomTabs}
             options={{ headerShown: false }}
           />
-          {/* <NativeStack.Screen
-            component={SavingsDetailScreen}
-            name={Screens.SavingsDetails}
+          <NativeStack.Screen
+            component={ProfileScreen}
+            name={Screens.Profile}
             options={{ ...naviteStackWithHeaderConfig }}
-          /> */}
+          />
+          <NativeStack.Screen
+            component={WalletScreen}
+            name={Screens.Wallet}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={ReferralsScreen}
+            name={Screens.Referrals}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={ChangePasswordScreen}
+            name={Screens.ChangePassword}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={ChangePinScreen}
+            name={Screens.ChangePin}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={TwoFaScreen}
+            name={Screens.TwoFa}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={PrivacyPolicyScreen}
+            name={Screens.PrivacyPolicy}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={TermsScreen}
+            name={Screens.Terms}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
+          <NativeStack.Screen
+            component={SupportScreen}
+            name={Screens.Support}
+            options={{ ...naviteStackWithHeaderConfig }}
+          />
         </>
       );
     }

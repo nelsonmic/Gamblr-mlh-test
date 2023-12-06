@@ -17,5 +17,13 @@ export enum Screens {
   ForgotPassword = "Forgot Password",
   ResetPassword = "Reset Password",
   Settings = "Settings",
-  Congratulations = "Congratulations"
+  Congratulations = "Congratulations",
+  Wallet = "Wallet",
+  Referrals = "Referrals",
+  ChangePassword = "Change Password",
+  ChangePin = "Change Pin",
+  TwoFa = "TwoFa",
+  PrivacyPolicy = "Privacy Policy",
+  Terms = "Terms",
+  Support = "Support"
 }

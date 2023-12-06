@@ -6,6 +6,7 @@ import { useCallback } from "react";
 
 export const useNavigateTo = () => {
       const { navigate } = useNavigation<NavigationProp<RootStackParamList, Screens>>();
+	// TODO: Fix TS typing here
 	const goTo = useCallback((location: Screens) => {
 		hapticFeedback();
 		requestAnimationFrame(() => {
