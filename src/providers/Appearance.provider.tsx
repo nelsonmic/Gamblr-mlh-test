@@ -7,7 +7,9 @@ type AppearanceContextType = {
       colors: {
             light: string,
             dark: string,
-            bg: string
+            bg: string,
+            lightGray: string,
+            darkGray: string
       }
 }
 const AppearanceContext = createContext<AppearanceContextType>({
@@ -16,7 +18,9 @@ const AppearanceContext = createContext<AppearanceContextType>({
       colors: {
             light: "",
             dark: "",
-            bg: ""
+            bg: "",
+            lightGray: "",
+            darkGray: ""
       }
 })
 
@@ -26,7 +30,9 @@ type AppearanceProviderProps = {
 const colors = {
       light: "#ffffff",
       dark: "#131313",
-      bg: "#29292A"
+      bg: "#29292A", 
+      lightGray: "#f2f2f2",
+      darkGray: "#808080"
 }
 export const AppearanceProvider = ({ children }: AppearanceProviderProps) => {
        const { colorScheme, toggleColorScheme } = useColorScheme();

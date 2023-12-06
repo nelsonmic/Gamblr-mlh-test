@@ -23,5 +23,13 @@ export interface RootStackParamList {
   [Screens.WelcomeBackScreen]: undefined;
   [Screens.ConfirmPin]: undefined;
   [Screens.Settings]: undefined;
-  [Screens.Congratulations]:undefined;
+  [Screens.Congratulations]: undefined;
+  [Screens.Wallet]: undefined;
+  [Screens.Referrals]: undefined;
+  [Screens.ChangePassword]: undefined;
+  [Screens.ChangePin]: undefined;
+  [Screens.TwoFa]: undefined;
+  [Screens.PrivacyPolicy]: undefined;
+  [Screens.Terms]: undefined;
+  [Screens.Support]: undefined;
 }

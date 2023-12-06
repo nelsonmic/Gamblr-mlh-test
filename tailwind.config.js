@@ -25,7 +25,8 @@ module.exports = {
       colors: {
         white:{
           100: "#ffffff",
-          200: "#F1F5F9"
+          200: "#F1F5F9",
+          300: "#F2F2F2"
         },
         black:{
           100: "#131313"
@@ -45,6 +46,7 @@ module.exports = {
         },
         red:{
           100: "#FF3922",
+          'tint': "#AC222208"
         },
         darkMode: {
           'input-bg': "#29292A"
