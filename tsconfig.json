@@ -6,6 +6,8 @@
 			"@/*": ["./src/*"],
 			"@/components": ["./src/components"],
 			"@/components/*": ["./src/components/*"],
+			"@/configs": ["./src/configs"],
+			"@/configs/*": ["./src/configs/*"],
 			"@/constants": ["./src/constants"],
 			"@/constants/*": ["./src/constants/*"],
 			"@/handlers": ["./src/handlers"],

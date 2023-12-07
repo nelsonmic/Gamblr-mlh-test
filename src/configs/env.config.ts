@@ -1,7 +1,7 @@
 import { EnvModes } from "constants/enums";
 
 
-const appConfig = (): EnvValues => {
+export const appConfig = (): EnvValues => {
   switch (process.env.NODE_ENV) {
     case EnvModes.DEV:
       return {
@@ -28,4 +28,4 @@ type EnvValues = {
   BASE_URL: string;
 };
 
-export default appConfig();
+// export default appConfig();
