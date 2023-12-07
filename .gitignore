@@ -2,6 +2,8 @@
 .vscode
 .vs
 
+.env
+
 # OSX
 .DS_Store
 
