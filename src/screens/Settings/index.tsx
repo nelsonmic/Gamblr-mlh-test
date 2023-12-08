@@ -3,11 +3,26 @@ import { Layout } from "components/Layouts";
 import { Text, View, Button } from "components/atoms";
 import { SectionListItem } from "components/molecules/SectionListItem";
 import { PageHeader } from "components/organisms/PageHeader";
+import { logger } from "handlers/helpers/logger";
+import { useSignUp } from "hooks/auth/useSignUp";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
+import { useEffect } from "react";
 import { ScrollView } from "react-native";
 
 export const SettingsScreen = () => {
+	const {signUp, signUpMutation} = useSignUp()
+	useEffect(()=>{
+signUp({
+    "first_name": "Tijani",
+    "last_name": "Yusuf",
+    "username": "tayyysd",
+    "phone": "07063242670",
+    "email": "ytjsjdksj@gmail.com",
+    "password": "123456"
+})
+logger();
+	}, [])
 	const goTo = useNavigateTo()
 	const sizes = {
 		width : 24,

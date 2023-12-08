@@ -5,8 +5,19 @@ import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import NavigationContainer from 'navigations/NavigationContainer';
 import NavigationRoot from 'navigations/NavigationRoot';
 import { AppearanceProvider } from 'providers/Appearance.provider';
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from 'react-redux';
 import store from 'store';
+
+	const queryClient = new QueryClient({
+		defaultOptions: {
+			queries: {
+				staleTime: 1000 * 60 * 60 * 24 * 7,
+				refetchOnWindowFocus: false,
+				retry: 1
+			}
+		}
+	});
 
 function App(): JSX.Element {
   return (
@@ -14,11 +25,13 @@ function App(): JSX.Element {
       <StatusBar animated barStyle="default" />
       <GestureHandlerRootView style={{ flex: 1 }}>
         <Provider store={store}>
-          <NavigationContainer>
-            <AppearanceProvider>
-              <NavigationRoot />
-            </AppearanceProvider>
-          </NavigationContainer>
+          <QueryClientProvider client={queryClient}>
+            <NavigationContainer>
+              <AppearanceProvider>
+                <NavigationRoot />
+              </AppearanceProvider>
+            </NavigationContainer>
+          </QueryClientProvider>
         </Provider>
       </GestureHandlerRootView>
     </SafeAreaProvider>
