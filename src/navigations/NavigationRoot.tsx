@@ -62,7 +62,14 @@ return (
       name={Screens.Home}
       options={{
         // ...bottomTabPreset,
-        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Home width={22} height={22} />} label="Home" isFocused={focused} routeName={Screens.Home} />,
+        tabBarIcon: ({ focused }) => 
+        ( 
+          <BottomTabButton 
+            icon={<Home width={22} height={22} />} 
+            label="Home" isFocused={focused} 
+            routeName={Screens.Home} 
+          />
+        ),
         tabBarLabel: () => null,
       }}
     />
@@ -71,7 +78,15 @@ return (
       name={Screens.Wager}
       options={{
         // ...walletAssetListBottomTabBarPreset,
-        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Market height={24} width={24} />} label="Wager" isFocused={focused} routeName={Screens.Wager} />,
+        tabBarIcon: ({ focused }) => 
+        (
+          <BottomTabButton 
+            icon={<Market height={24} width={24} />} 
+            label="Wager" 
+            isFocused={focused} 
+            routeName={Screens.Wager} 
+          />
+        ),
         tabBarLabel: () => null,
       }}
     />
@@ -80,7 +95,15 @@ return (
       name={Screens.Lobby}
       options={{
         // ...transactionsBottomTabBarPreset,
-        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Chat height={22} width={22} />} label="Lobby" isFocused={focused} routeName={Screens.Lobby} />,
+        tabBarIcon: ({ focused }) => 
+        (
+          <BottomTabButton 
+            icon={<Chat height={22} width={22} />} 
+            label="Lobby" 
+            isFocused={focused} 
+            routeName={Screens.Lobby} 
+          />
+        ),
         tabBarLabel: () => null,
       }}
     />
@@ -89,7 +112,15 @@ return (
       name={Screens.Settings}
       options={{
         // ...transactionsBottomTabBarPreset,
-        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Settings height={22} width={22} />} label="Settings" isFocused={focused} routeName={Screens.Settings} />,
+        tabBarIcon: ({ focused }) => 
+        (
+          <BottomTabButton 
+            icon={<Settings height={22} width={22} />} 
+            label="Settings" 
+            isFocused={focused} 
+            routeName={Screens.Settings} 
+          />
+        ),
         tabBarLabel: () => null,
       }}
     />
@@ -125,7 +156,7 @@ const NativeStackRoot: React.FC = () => {
           name={Screens.Onboarding}
           options={{ headerShown: false }}/>
       );
-    } else if (false) { //for auth screens
+    } else if (true) { //for auth screens
       screens = (
         <>
           <NativeStack.Screen

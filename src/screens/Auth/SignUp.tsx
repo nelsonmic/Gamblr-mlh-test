@@ -10,6 +10,7 @@ import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { useState } from "react";
+import { ScrollView } from "react-native";
 
 export const SignUpScreen = () => {
       const { isDarkMode } = useAppearanceContext();
@@ -22,46 +23,48 @@ export const SignUpScreen = () => {
 			edges={["left", "right", "top", "bottom"]}
 		>
                   <View className="flex-1 justify-between space-y-4">
-                        <View className="flex-1">
+                        <View className="flex-1 space-y-8">
                               <AuthScreenHeader 
                                     title= "Sign up now!"
                                     description="Create an account now, challenge, play, and win yourself some cash."
                               />
-                              <View className="mt-8">
-                                    <FormInput 
-                                          leftIcon={<Profile width={18} height={18}/>}
-                                          placeholder="Full name"
-                                    />
-                                    <FormInput 
-                                          leftIcon={<Email width={20} height={20}/>}
-                                          placeholder="Email"
-                                          inputMode="email"
-                                    />
-                                    <FormInput 
-                                          leftIcon={<NgFlag width={20} height={20}/>}
-                                          placeholder="Phone number"
-                                          styleInput="border-l border-gray-300"
-                                    />
-                                    <FormInput 
-                                          leftIcon={<AtSign width={18} height={20}/>}
-                                          rightIcon={<GreenCheck width={18} height={18}/>}
-                                          placeholder="User tag"
-                                    />
-                                    <FormInput
-                                          leftIcon={<Lock height={18} width={18} />}
-                                          rightIcon={<EyeClosed height={18} width={18} />}
-                                          placeholder="Password"
-                                          secureTextEntry
-                                    />
-                                    <View className="flex-row items-center space-x-2">
-                                          <Checkbox isChecked={isChecked} onCheck={()=> setIsChecked(!isChecked)} />
-                                           <Link to={{ screen: "Sign In"}}>
-                                                <Text className={clsx("font-interMedium text-black-100 text-xs", {
-                                                      "text-white-100" : isDarkMode
-                                                })}>I accept the Terms and Conditions</Text>
-                                           </Link>  
+                              <ScrollView>
+                                    <View className="pt-6">
+                                          <FormInput 
+                                                leftIcon={<Profile width={18} height={18}/>}
+                                                placeholder="Full name"
+                                          />
+                                          <FormInput 
+                                                leftIcon={<Email width={20} height={20}/>}
+                                                placeholder="Email"
+                                                inputMode="email"
+                                          />
+                                          <FormInput 
+                                                leftIcon={<NgFlag width={20} height={20}/>}
+                                                placeholder="Phone number"
+                                                styleInput="border-l border-gray-300"
+                                          />
+                                          <FormInput 
+                                                leftIcon={<AtSign width={18} height={20}/>}
+                                                rightIcon={<GreenCheck width={18} height={18}/>}
+                                                placeholder="User tag"
+                                          />
+                                          <FormInput
+                                                leftIcon={<Lock height={18} width={18} />}
+                                                rightIcon={<EyeClosed height={18} width={18} />}
+                                                placeholder="Password"
+                                                secureTextEntry
+                                          />
+                                          <View className="flex-row items-center space-x-2">
+                                                <Checkbox isChecked={isChecked} onCheck={()=> setIsChecked(!isChecked)} />
+                                                <Link to={{ screen: "Sign In"}}>
+                                                      <Text className={clsx("font-interMedium text-black-100 text-xs", {
+                                                            "text-white-100" : isDarkMode
+                                                      })}>I accept the Terms and Conditions</Text>
+                                                </Link>  
+                                          </View>
                                     </View>
-                              </View>
+                              </ScrollView>
                         </View>
                         <View className="space-y-2 items-center">
                               <Button size="lg" className="w-full" onPress={() => goTo(Screens.VerifyScreen)}>Sign Up</Button>

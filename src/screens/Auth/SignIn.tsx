@@ -15,7 +15,7 @@ export const SignInScreen = () => {
 			edges={["left", "right", "top", "bottom"]}
 		>
                   <View className="flex-1 justify-between space-y-4">
-                        <View className="flex-1 space-y-8">
+                        <View className="flex-1 space-y-14">
                               <AuthScreenHeader 
                                     title= "Sign In"
                                     description="Log into your account"
