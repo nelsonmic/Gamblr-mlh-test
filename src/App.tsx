@@ -8,6 +8,7 @@ import { AppearanceProvider } from 'providers/Appearance.provider';
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from 'react-redux';
 import store from 'store';
+import { ToastProvider } from 'react-native-toast-notifications'
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -21,20 +22,24 @@ import store from 'store';
 
 function App(): JSX.Element {
   return (
-    <SafeAreaProvider>
-      <StatusBar animated barStyle="default" />
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <Provider store={store}>
-          <QueryClientProvider client={queryClient}>
-            <NavigationContainer>
+      <SafeAreaProvider>
+        <StatusBar animated barStyle="default" />
+        <GestureHandlerRootView style={{ flex: 1 }}>
+          <Provider store={store}>
+            <QueryClientProvider client={queryClient}>
               <AppearanceProvider>
-                <NavigationRoot />
+                <ToastProvider
+                  placement='bottom'
+                >
+                  <NavigationContainer>
+                      <NavigationRoot />
+                  </NavigationContainer>
+                </ToastProvider>
               </AppearanceProvider>
-            </NavigationContainer>
-          </QueryClientProvider>
-        </Provider>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+            </QueryClientProvider>
+          </Provider>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
   );
 }
 

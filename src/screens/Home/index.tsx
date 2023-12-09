@@ -1,5 +1,6 @@
 import { Layout } from "components/Layouts";
 import { View } from "components/atoms";
+import { AnimatedLogo } from "components/molecules/AnimatedLogo";
 
 export const HomeScreen = () => {
 
@@ -10,6 +11,7 @@ export const HomeScreen = () => {
 		>
 			<View>
 			</View>
+			<AnimatedLogo width={30} height={30}/>
 		</Layout>
 	);
 };
