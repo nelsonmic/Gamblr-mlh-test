@@ -1,10 +1,8 @@
-import React, { type FC } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import clsx from 'clsx';
-import { Platform, TouchableOpacity } from 'react-native';
+import { Platform } from 'react-native';
 import { Chat, Home, Market, Settings } from 'components/Icons';
-import { Text, View } from 'components/atoms';
 import { createBottomSheetNavigator } from './bottom-sheet';
 import { Screens } from './Screens';
 import { type RootStackParamList } from './types';
