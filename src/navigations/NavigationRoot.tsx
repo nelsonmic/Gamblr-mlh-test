@@ -1,10 +1,8 @@
-import React, { type FC } from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
-import clsx from 'clsx';
 import { Platform } from 'react-native';
 import { Chat, Home, Market, Settings } from 'components/Icons';
-import { Text } from 'components/atoms';
 import { createBottomSheetNavigator } from './bottom-sheet';
 import { Screens } from './Screens';
 import { type RootStackParamList } from './types';
@@ -35,29 +33,11 @@ import { TwoFaScreen } from 'screens/Settings/TwoFa';
 import { PrivacyPolicyScreen } from 'screens/Settings/PrivacyPolicy';
 import { TermsScreen } from 'screens/Settings/Terms';
 import { SupportScreen } from 'screens/Settings/Support';
+import { BottomTabButton } from 'components/molecules/BottomTabButton';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
 const NativeStack = createStackNavigator<RootStackParamList>();
-
-interface LabelProps {
-  label: string;
-}
-
-const Label: FC<LabelProps> = ({ label }) => {
-  const { isDarkMode } = useAppearanceContext();
-return (
-  <Text
-    className={clsx('font-interSemiBold text-center text-xs leading-3 text-gray-100', {
-      'font-interBold': Platform.OS === 'android',
-      'mt-2': Platform.OS === 'android',
-      'text-white-100': isDarkMode,
-      'text-black-100' : !isDarkMode
-    })}
-  >
-    {label}
-  </Text>
-)};
 
 const BottomTabsRoot: React.FC = () => {
   const { isDarkMode, colors } = useAppearanceContext();
@@ -72,9 +52,9 @@ return (
         paddingBottom: Platform.OS === "android" ? 16 : 8,
         backgroundColor: isDarkMode? colors.dark : colors.light
       },
-      tabBarItemStyle: {
-        marginBottom: Platform.OS === "android" ? 0 : 16,
-      },
+      // tabBarItemStyle: {
+      //   marginBottom: Platform.OS === "android" ? 0 : 16,
+      // },
     }}
   >
     <BottomTabStack.Screen
@@ -82,8 +62,8 @@ return (
       name={Screens.Home}
       options={{
         // ...bottomTabPreset,
-        tabBarIcon: () => <Home height={20} width={20} />,
-        tabBarLabel: ({focused}) => <Label label="Home" />,
+        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Home width={22} height={22} />} label="Home" isFocused={focused} routeName={Screens.Home} />,
+        tabBarLabel: () => null,
       }}
     />
     <BottomTabStack.Screen
@@ -91,8 +71,8 @@ return (
       name={Screens.Wager}
       options={{
         // ...walletAssetListBottomTabBarPreset,
-        tabBarIcon: () => <Market height={24} width={24} />,
-        tabBarLabel: ({focused}) => <Label label="Wager" />,
+        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Market height={24} width={24} />} label="Wager" isFocused={focused} routeName={Screens.Wager} />,
+        tabBarLabel: () => null,
       }}
     />
     <BottomTabStack.Screen
@@ -100,8 +80,8 @@ return (
       name={Screens.Lobby}
       options={{
         // ...transactionsBottomTabBarPreset,
-        tabBarIcon: () => <Chat fill="#555" height={22} width={22} />,
-        tabBarLabel: ({focused}) => <Label label="Lobby" />,
+        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Chat height={22} width={22} />} label="Lobby" isFocused={focused} routeName={Screens.Lobby} />,
+        tabBarLabel: () => null,
       }}
     />
     <BottomTabStack.Screen
@@ -109,8 +89,8 @@ return (
       name={Screens.Settings}
       options={{
         // ...transactionsBottomTabBarPreset,
-        tabBarIcon: () => <Settings height={22} width={22} />,
-        tabBarLabel: ({focused}) => <Label label="Settings"/>,
+        tabBarIcon: ({ focused }) => <BottomTabButton icon={<Settings height={22} width={22} />} label="Settings" isFocused={focused} routeName={Screens.Settings} />,
+        tabBarLabel: () => null,
       }}
     />
   </BottomTabStack.Navigator>
