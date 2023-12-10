@@ -126,11 +126,8 @@ export const FormInput: React.FC<FormInputProps> = ({
                               />
                               <Animated.Text 
                                     style={animatedStyle}
-                                    className={clsx('absolute font-interRegular ml-2', {
-                                          "text-white-100" : isDarkMode,
-                                          "text-black-100" : !isDarkMode
-                                    }
-                              )}>{placeholder}</Animated.Text>
+                                    className={clsx('absolute font-interRegular text-xs ml-2 text-gray-300')
+                              }>{placeholder}</Animated.Text>
                         </TouchableOpacity>
                         {rightIcon}
                   </View>

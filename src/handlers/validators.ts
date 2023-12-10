@@ -16,6 +16,7 @@ export const signUpFormSchema = yup.object().shape({
       //   .matches(/^(?=.*[!@#$%^&*])/, "Missing special character")
     .required("Password is equired"),
   phone: phoneSchema.required("Phone number is required"),
+   acceptTerms: yup.boolean().oneOf([true], 'You must accept the terms and conditions')
 });
 
 export type SignUpFormType = yup.InferType<typeof signUpFormSchema>;

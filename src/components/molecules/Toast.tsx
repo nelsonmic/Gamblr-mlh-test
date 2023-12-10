@@ -25,21 +25,16 @@ export const Toast : FC<Props> = ({options}) => {
                         {dangerColor, warningColor, successColor}
                   )
       return (
-            <View className={clsx("border-2 shadow p-2 py-4 flex-row items-center space-x-4 w-screen max-w-[90%] shadow-2xl rounded-2xl mb-2", {
-                  "bg-white-100" : !isDarkMode,
-                  "bg-darkMode-input-bg" : isDarkMode
+            <View className={clsx("shadow p-4 flex-row items-center space-x-4 w-screen max-w-[90%] shadow-2xl rounded-2xl mb-2", {
             })}
                   style={{
-                        borderColor: color
+                        backgroundColor: color
                   }}
             >
                   {icon}
                   <View className="flex-1 pr-2">
-                        <Text className={clsx("font-interMedium text-sm", {
-                              "text-white-100" : isDarkMode,
-                              "text-black-100" : !isDarkMode
-                        })}> {data} </Text>
-                        <Text className="text-gray-100 text-xs font-interRegular ml-[4]">{message}</Text>
+                        <Text className={clsx("font-interMedium text-sm text-white-100")}> {data} </Text>
+                        <Text className="text-white-100 text-xs font-interRegular ml-[4]">{message}</Text>
                   </View>
             </View>
       )
@@ -57,21 +52,16 @@ export const CustomToastType: FC<CustomToastTypeProps> = ({ borderColor, leftIco
       const { data, message } = options
 
       return (
-            <View className={clsx("border-2 shadow p-2 py-4 flex-row items-center space-x-4 w-screen max-w-[90%] shadow-2xl rounded-2xl mb-2", {
-                        "bg-white-100" : !isDarkMode,
-                        "bg-darkMode-input-bg" : isDarkMode
-                  })}
+            <View className={clsx("shadow p-4 flex-row items-center space-x-4 w-screen max-w-[90%] shadow-2xl rounded-2xl mb-2", {
+            })}
                   style={{
-                        borderColor: borderColor
+                        backgroundColor: borderColor
                   }}
             >
                   {leftIcon}
                   <View className="flex-1 pr-2">
-                        <Text className={clsx("font-interMedium text-sm", {
-                              "text-white-100" : isDarkMode,
-                              "text-black-100" : !isDarkMode
-                        })}> {data} </Text>
-                        <Text className="text-gray-300 text-xs font-interRegular ml-[4]">{message}</Text>
+                        <Text className={clsx("font-interMedium text-sm text-white-100")}> {data} </Text>
+                        <Text className="text-white-100 text-xs font-interRegular ml-[4]">{message}</Text>
                   </View>
                   {endAdornment}
             </View>

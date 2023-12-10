@@ -1,6 +1,6 @@
 import { Link } from "@react-navigation/native";
 import clsx from "clsx";
-import { AtSign, Email, EyeClosed, GreenCheck, Lock, NgFlag, Profile } from "components/Icons";
+import { AtSign, Email, GreenCheck, NgFlag, Profile } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
@@ -33,13 +33,15 @@ export const SignUpScreen = () => {
                   username: "",
                   phone: "",
                   email: "",
-                  password: ""
+                  password: "",
+                  acceptTerms: isChecked,
 		},
 		mode: "all",
 		resolver: yupResolver(signUpFormSchema)
 	});
 
       const onSubmit = (payload: SignUpFormType) => {
+            console.log(payload);
             const names = splitWords(payload.fullname)
             signUp({
                   first_name: names[0] || "",
@@ -146,7 +148,18 @@ export const SignUpScreen = () => {
                                           />
                                     
                                           <View className="flex-row items-center space-x-2">
-                                                <Checkbox isChecked={isChecked} onCheck={()=> setIsChecked(!isChecked)} />
+                                                <Controller 
+                                                      control={control}
+                                                      name="acceptTerms"
+                                                      render={({field: {onChange}}) => (
+                                                            <Checkbox isChecked={isChecked} 
+                                                                  onCheck={() => {
+                                                                        setIsChecked(!isChecked);
+                                                                        onChange(!isChecked);
+                                                                  }}
+                                                            />
+                                                      )}
+                                                />
                                                 <Link to={{ screen: "Sign In"}}>
                                                       <Text className={clsx("font-interMedium text-black-100 text-xs", {
                                                             "text-white-100" : isDarkMode

@@ -35,11 +35,11 @@ function App(): JSX.Element {
             <QueryClientProvider client={queryClient}>
               <AppearanceProvider>
                 <ToastProvider
-                  duration={50000}
+                  duration={5000}
                   placement='top'
-                  dangerColor='#AC2222'
+                  dangerColor='#B94545'
                   warningColor='#DA8420'
-                  successColor='#009618'
+                  successColor='#3E863E'
                   dangerIcon={<ToastError {...iconSizes} />}
                   warningIcon={<ToastWarning {...iconSizes} />}
                   successIcon={<ToastSuccess {...iconSizes} />}
