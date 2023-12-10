@@ -100,7 +100,10 @@ export const SettingsScreen = () => {
 		>
 			<View className="flex-1 justify-between space-y-4">
 				<PageHeader />
-				<ScrollView>
+				<ScrollView
+				      showsVerticalScrollIndicator={false}
+                              showsHorizontalScrollIndicator={false}
+				>
 					{sections.map((item, index) => (
 						<SectionListItem key={index} data={item} />
 					))}

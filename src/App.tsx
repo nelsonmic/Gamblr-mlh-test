@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -9,6 +9,9 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Provider } from 'react-redux';
 import store from 'store';
 import { ToastProvider } from 'react-native-toast-notifications'
+import { CustomToastType, Toast } from 'components/molecules/Toast';
+import { Text } from 'components/atoms';
+import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from 'components/Icons';
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -19,7 +22,10 @@ import { ToastProvider } from 'react-native-toast-notifications'
 			}
 		}
 	});
-
+const iconSizes = {
+  width: 20,
+  height: 20,
+}
 function App(): JSX.Element {
   return (
       <SafeAreaProvider>
@@ -29,7 +35,18 @@ function App(): JSX.Element {
             <QueryClientProvider client={queryClient}>
               <AppearanceProvider>
                 <ToastProvider
-                  placement='bottom'
+                  duration={50000}
+                  placement='top'
+                  dangerColor='#AC2222'
+                  warningColor='#DA8420'
+                  successColor='#009618'
+                  dangerIcon={<ToastError {...iconSizes} />}
+                  warningIcon={<ToastWarning {...iconSizes} />}
+                  successIcon={<ToastSuccess {...iconSizes} />}
+                  renderToast={(options) => <Toast options={options}/>}
+                  renderType={{
+                    info: (toast) => <CustomToastType options={toast} borderColor='#0853C2' leftIcon={<ToastInfo {...iconSizes} />}/>
+                  }}
                 >
                   <NavigationContainer>
                       <NavigationRoot />

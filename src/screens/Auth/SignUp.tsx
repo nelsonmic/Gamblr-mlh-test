@@ -5,17 +5,51 @@ import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { Checkbox } from "components/molecules/Checkbox";
-import { FormInput } from "components/molecules/FormInputs";
+import { FormInput, PasswordInput } from "components/molecules/FormInputs";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { useState } from "react";
 import { ScrollView } from "react-native";
+import { useForm, Controller } from "react-hook-form";
+import { SignUpFormType, signUpFormSchema } from "handlers/validators";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useSignUp } from "hooks/auth/useSignUp";
+import { splitWords } from "handlers/helpers/splitWords";
 
 export const SignUpScreen = () => {
       const { isDarkMode } = useAppearanceContext();
+     
+      const {signUp, isPending} = useSignUp();
       const [isChecked, setIsChecked] = useState<boolean>(false);
-      const goTo = useNavigateTo()
+      // const goTo = useNavigateTo()
+
+      const { control, 
+            formState:{errors}, 
+            handleSubmit, 
+      } = useForm<SignUpFormType>({
+		defaultValues: {
+			fullname: "",
+                  username: "",
+                  phone: "",
+                  email: "",
+                  password: ""
+		},
+		mode: "all",
+		resolver: yupResolver(signUpFormSchema)
+	});
+
+      const onSubmit = (payload: SignUpFormType) => {
+            const names = splitWords(payload.fullname)
+            signUp({
+                  first_name: names[0] || "",
+                  last_name: names[1] || "",
+                  email: payload.email,
+                  username: payload.username,
+                  phone: payload.phone,
+                  password: payload.password
+             })
+      }
 
 	return (
 		<Layout
@@ -28,33 +62,89 @@ export const SignUpScreen = () => {
                                     title= "Sign up now!"
                                     description="Create an account now, challenge, play, and win yourself some cash."
                               />
-                              <ScrollView>
+                              <ScrollView
+                                    showsVerticalScrollIndicator={false}
+                                    showsHorizontalScrollIndicator={false}
+                              >
                                     <View className="pt-6">
-                                          <FormInput 
-                                                leftIcon={<Profile width={18} height={18}/>}
-                                                placeholder="Full name"
+                                          <Controller
+                                                control={control}
+                                                name="fullname"
+                                                render={({ field: { onBlur, onChange, value } }) => (
+                                                      <FormInput 
+                                                            leftIcon={<Profile width={18} height={18}/>}
+                                                            value={value}
+                                                            onBlur={onBlur}
+                                                            onChangeText={(text) => onChange(text)}
+                                                            placeholder="Full name"
+                                                            isError={Boolean(errors.fullname)}
+                                                            error={errors.fullname?.message}
+                                                      />
+                                                )}
                                           />
-                                          <FormInput 
-                                                leftIcon={<Email width={20} height={20}/>}
-                                                placeholder="Email"
-                                                inputMode="email"
+                                          <Controller 
+                                                control={control}
+                                                name="email"
+                                                render={({field: {onBlur, onChange, value } }) => (
+                                                      <FormInput 
+                                                            leftIcon={<Email width={20} height={20}/>}
+                                                            placeholder="Email"
+                                                            inputMode="email"
+                                                            onBlur={onBlur}
+                                                            value={value}
+                                                            onChangeText={(text) => onChange(text)}
+                                                            isError={Boolean(errors.email)}
+                                                            error={errors.email?.message}
+                                                      />
+                                                )}
                                           />
-                                          <FormInput 
-                                                leftIcon={<NgFlag width={20} height={20}/>}
-                                                placeholder="Phone number"
-                                                styleInput="border-l border-gray-300"
+                                          <Controller 
+                                                control={control}
+                                                name="phone"
+                                                render={({field: {onBlur, onChange, value } }) => (
+                                                      <FormInput 
+                                                            leftIcon={<NgFlag width={20} height={20}/>}
+                                                            placeholder="Phone number"
+                                                            styleInput="border-l border-gray-300"
+                                                            onBlur={onBlur}
+                                                            value={value}
+                                                            onChangeText={(text) => onChange(text)}
+                                                            isError={Boolean(errors.phone)}
+                                                            error={errors.phone?.message}
+                                                      />
+                                                )}
                                           />
-                                          <FormInput 
-                                                leftIcon={<AtSign width={18} height={20}/>}
-                                                rightIcon={<GreenCheck width={18} height={18}/>}
-                                                placeholder="User tag"
+                                          <Controller 
+                                                control={control}
+                                                name="username"
+                                                render={({field: {onBlur, onChange, value } }) => (
+                                                      <FormInput 
+                                                            leftIcon={<AtSign width={18} height={20}/>}
+                                                            rightIcon={<GreenCheck width={18} height={18}/>}
+                                                            placeholder="User tag"
+                                                            onBlur={onBlur}
+                                                            value={value}
+                                                            onChangeText={(text) => onChange(text)}
+                                                            isError={Boolean(errors.username)}
+                                                            error={errors.username?.message}
+                                                      />
+                                                )}
                                           />
-                                          <FormInput
-                                                leftIcon={<Lock height={18} width={18} />}
-                                                rightIcon={<EyeClosed height={18} width={18} />}
-                                                placeholder="Password"
-                                                secureTextEntry
+                                          <Controller 
+                                                control={control}
+                                                name="password"
+                                                render={({field: {onBlur, onChange, value } }) => (
+                                                      <PasswordInput
+                                                            placeholder="Password"
+                                                            onBlur={onBlur}
+                                                            value={value}
+                                                            onChangeText={(text) => onChange(text)}
+                                                            isError={Boolean(errors.password)}
+                                                            error={errors.password?.message}
+                                                      />
+                                                )}
                                           />
+                                    
                                           <View className="flex-row items-center space-x-2">
                                                 <Checkbox isChecked={isChecked} onCheck={()=> setIsChecked(!isChecked)} />
                                                 <Link to={{ screen: "Sign In"}}>
@@ -67,7 +157,12 @@ export const SignUpScreen = () => {
                               </ScrollView>
                         </View>
                         <View className="space-y-2 items-center">
-                              <Button size="lg" className="w-full" onPress={() => goTo(Screens.VerifyScreen)}>Sign Up</Button>
+                              <Button 
+                                    size="lg" 
+                                    className="w-full" 
+                                    onPress={handleSubmit(onSubmit)}
+                                    isLoading={isPending}
+                              >Sign Up</Button>
                               <Link to={{ screen: "Sign In"}}>
                                     <Text className={clsx("font-interMedium text-xs", {
                                           "text-white-100" : isDarkMode

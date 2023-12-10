@@ -3,11 +3,12 @@ import clsx from "clsx";
 import { Pressable, PressableProps, View } from "react-native";
 import Text from "./Text";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { ActivityIndicator } from "react-native";
 
 export type ButtonProps = PressableProps &
 	PropsWithChildren & {
 		color?: "primary" | "secondary" | "tertiary";
-		loading?: boolean;
+		isLoading?: boolean;
 		size?: "sm" | "md" | "lg" | "xl";
 		variant?: "contained" | "outlined" | "text";
 	};
@@ -18,17 +19,17 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 			children,
 			className,
 			color = "primary",
-			loading,
+			isLoading,
 			size = "md",
 			variant = "contained",
 			...rest
 		},
 		ref
 	) => {
-		const { isDarkMode } = useAppearanceContext();
+		const { isDarkMode, colors } = useAppearanceContext();
 		
 		const baseButtonClass =
-			"font-inter rounded-3xl flex-row items-center justify-center";
+			"font-inter rounded-3xl flex-row items-center justify-center space-x-4";
 
 		const mapButtonSize = {
 			lg: "px-5 py-5",
@@ -39,16 +40,16 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 
 		const buttonVariantMap = {
 			contained: {
-				primary: `${isDarkMode ? "bg-white-100" :"bg-black-100"} ${loading ? "opacity-50" : ""}`,
-				secondary: `bg-white-100 ${loading ? "opacity-50" : ""}`,
+				primary: `${isDarkMode ? "bg-white-100" :"bg-black-100"} ${isLoading ? "opacity-50" : ""}`,
+				secondary: `bg-white-100 ${isLoading ? "opacity-50" : ""}`,
 				tertiary: `bg-neutral-600 text-neutral-50 ${
-					loading ? "opacity-50" : ""
+					isLoading ? "opacity-50" : ""
 				}`
 			},
 			outlined: {
-				primary: `${loading ? "opacity-50" : "border"} ${isDarkMode? "border-white-100" : "border-black-100"}`,
-				secondary: `${loading ? "opacity-50" : ""}`,
-				tertiary: `${loading ? "opacity-50" : ""}`
+				primary: `${isLoading ? "opacity-50" : "border"} ${isDarkMode? "border-white-100" : "border-black-100"}`,
+				secondary: `${isLoading ? "opacity-50" : ""}`,
+				tertiary: `${isLoading ? "opacity-50" : ""}`
 			},
 			text: {
 				primary: `bg-transparent text-white-100`,
@@ -95,10 +96,15 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 					mapButtonSize[size],
 					className
 				)}
-				disabled={loading}
+				disabled={isLoading}
 				{...rest}
 			>
 				{renderTextContent()}
+				{isLoading ? (
+					<ActivityIndicator 
+						color={isDarkMode? colors.dark : colors.light}
+					/>
+				): null}
 			</Pressable>
 		);
 	}

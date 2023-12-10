@@ -49,7 +49,8 @@ export type ApiResponse<T> = {
 
 export type FailedApiResponse = Omit<ApiResponse<any>, 'data'> & {
       code: number,
-      error: string
+      error: string,
+      message: string
 }
 
 export type SignUpResponse = ApiResponse<User>;
