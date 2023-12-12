@@ -111,14 +111,6 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
                         >
                               <TextInput 
                                     {...props}
-                                    // ref={(el) => {
-                                    //             inputRef.current = el;
-                                    //             if (typeof forwardedRef === 'function') {
-                                    //             forwardedRef(el);
-                                    //       } else if (forwardedRef) {
-                                    //             forwardedRef.current = el;
-                                    //       }
-                                    // }} 
                                     ref={inputRef}
                                     className={clsx(
                                           ' font-interRegular h-full w-full px-2',
