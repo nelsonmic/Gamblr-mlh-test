@@ -9,5 +9,5 @@ export const handleApiError = (
   showToast: (message: string, options?: ToastOptions ) => void,
   options: ToastOptions,
 ) => {
-  showToast(capitalizeFirstLetter(error?.message || "An error occurred"), {...options, type: "danger"});
+  showToast(capitalizeFirstLetter(error?.message), {...options, type: "danger"});
 };

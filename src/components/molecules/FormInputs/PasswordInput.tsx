@@ -1,15 +1,16 @@
-import React from "react";
+import React, { Ref, forwardRef } from "react";
 import { FC, useState } from "react";
-import { FormInput, FormInputProps } from "./FormInput";
-import { EyeClosed, Eyeopen, Lock, Scan } from "components/Icons";
+import { FormInput, FormInputProps, FormInputRef } from "./FormInput";
+import { EyeClosed, Eyeopen, Lock } from "components/Icons";
 import Animated, { Easing, useAnimatedStyle, withTiming } from "react-native-reanimated";
 import { TouchableOpacity } from "react-native";
 
 type PasswordInputProps = FormInputProps & {
   hideToggle?: boolean;
+  passwordRef: Ref<FormInputRef>;
 };
 
-export const PasswordInput: FC<PasswordInputProps> = ({ hideToggle = false, ...props }) => {
+export const PasswordInput: FC<PasswordInputProps> = ({ hideToggle = false, passwordRef, ...props }) => {
   const [secureEntry, setSecureEntry] = useState<boolean>(true);
 
   const eyeClosedOpacity = useAnimatedStyle(() => ({
@@ -23,6 +24,7 @@ export const PasswordInput: FC<PasswordInputProps> = ({ hideToggle = false, ...p
   return (
     <FormInput
       {...props}
+      ref={passwordRef}
       leftIcon={<Lock height={18} width={18} />}
       rightIcon={
         hideToggle ? null : (

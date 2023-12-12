@@ -1,4 +1,4 @@
-import React, { ReactNode, useRef, useState } from 'react';
+import React, { ReactNode, forwardRef, useImperativeHandle, useRef, useState } from 'react';
 import { Text, TextInput, View } from 'components/atoms';
 import { TextInputProps as RNTextInputProps, TouchableOpacity } from 'react-native';
 import clsx from 'clsx';
@@ -18,7 +18,11 @@ export type FormInputProps = RNTextInputProps & {
       error?: string;
 };
 
-export const FormInput: React.FC<FormInputProps> = ({
+export type FormInputRef = {
+  handleInputFocus: () => void;
+};
+
+export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
       leftIcon, 
       rightIcon, 
       placeholder, 
@@ -31,12 +35,12 @@ export const FormInput: React.FC<FormInputProps> = ({
       isError,
       error,
       ...props
-      } 
+      }, 
+      forwardedRef 
       ) => {
 
       const { isDarkMode } = useAppearanceContext();
       const inputRef = useRef(null);
-      const [inputValue, setInputValue] = useState(value);
 
       const translateX = useSharedValue(0);
       const translateY = useSharedValue(0);
@@ -78,10 +82,17 @@ export const FormInput: React.FC<FormInputProps> = ({
       };
 
       const handleInputBlur = () => {
-            if(!inputValue){
+            if(!value){
                   reverseAnimation();
             }
       };
+
+      useImperativeHandle(forwardedRef, () => ({
+            handleInputFocus: () => {
+                  handleInputFocus();
+            },
+      }));
+
       return (
             <View className='mb-8'>
                   <View 
@@ -100,7 +111,15 @@ export const FormInput: React.FC<FormInputProps> = ({
                         >
                               <TextInput 
                                     {...props}
-                                    ref={inputRef} 
+                                    // ref={(el) => {
+                                    //             inputRef.current = el;
+                                    //             if (typeof forwardedRef === 'function') {
+                                    //             forwardedRef(el);
+                                    //       } else if (forwardedRef) {
+                                    //             forwardedRef.current = el;
+                                    //       }
+                                    // }} 
+                                    ref={inputRef}
                                     className={clsx(
                                           ' font-interRegular h-full w-full px-2',
                                           {
@@ -114,15 +133,11 @@ export const FormInput: React.FC<FormInputProps> = ({
                                           handleInputFocus();
                                           onFocus && onFocus();
                                     }}
-                                    value={value}
                                     onBlur={() => {
                                           handleInputBlur();
                                           onBlur && onBlur();
                                     }}
-                                    onChangeText={(text)=> {
-                                          setInputValue(text)
-                                          onChangeText && onChangeText(text)
-                                    }}
+                                    onChangeText={onChangeText}
                               />
                               <Animated.Text 
                                     style={animatedStyle}
@@ -136,4 +151,4 @@ export const FormInput: React.FC<FormInputProps> = ({
                   ): null}
             </View>
       );
-};
+});

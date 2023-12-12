@@ -41,6 +41,13 @@ export interface SignUpUser {
   password: string;
 }
 
+export type SignUpResponse = ApiResponse<User>;
+
+export type CheckUsername = {
+      exists: boolean
+}
+export type CheckUsernameResponse = ApiResponse<CheckUsername>
+
 export type ApiResponse<T> = {
   status: boolean;
   message?: string;
@@ -52,5 +59,3 @@ export type FailedApiResponse = Omit<ApiResponse<any>, 'data'> & {
       error: string,
       message: string
 }
-
-export type SignUpResponse = ApiResponse<User>;
