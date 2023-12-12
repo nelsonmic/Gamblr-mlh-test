@@ -3,15 +3,19 @@ import { appConfig } from "../../configs/env.config"
 
 const defaultConfig = {
   levels: {
-    error: 1,
+    debugger: 1,
     info: 0,
   },
   severity: "debug",
   transport: consoleTransport,
   transportOptions: {
     colors: {
-      info: "blueBright",
-      error: "redBright",
+      info: "greenBright",
+      debugger: "red",
+    },
+    extensionColors: {
+      'LETTING-YOU-KNOW': "magenta",
+      'ERROR-DETECTED': "redBright",
     },
   },
   async: true,
@@ -24,12 +28,15 @@ const defaultConfig = {
 export const debug = (type : "info" | "debug", ...args: any[]) => {
       const config = appConfig();
       let log = logger.createLogger(defaultConfig);
+      let infoLog = log.extend("LETTING-YOU-KNOW");
+      let debuggerLog = log.extend("ERROR-DETECTED")
 
       if(config.env !== "DEV") return;
 
       if(type === "info"){
-          log.info(...args)
-      }else{
-        log.error(...args)
+          infoLog.info(...args)
+      }
+      if(type === "debug"){
+        debuggerLog.debugger(...args)
       }
 }

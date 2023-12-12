@@ -3,11 +3,13 @@ import { Layout } from "components/Layouts";
 import { Text, View, Button } from "components/atoms";
 import { SectionListItem } from "components/molecules/SectionListItem";
 import { PageHeader } from "components/organisms/PageHeader";
+import { useSignUp } from "hooks/auth/useSignUp";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { ScrollView } from "react-native";
 
 export const SettingsScreen = () => {
+	const {mutate: signUp} = useSignUp()
 	const goTo = useNavigateTo()
 	const sizes = {
 		width : 24,
@@ -98,7 +100,10 @@ export const SettingsScreen = () => {
 		>
 			<View className="flex-1 justify-between space-y-4">
 				<PageHeader />
-				<ScrollView>
+				<ScrollView
+				      showsVerticalScrollIndicator={false}
+                              showsHorizontalScrollIndicator={false}
+				>
 					{sections.map((item, index) => (
 						<SectionListItem key={index} data={item} />
 					))}

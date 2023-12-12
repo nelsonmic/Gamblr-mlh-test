@@ -30,7 +30,7 @@ export const WelcomeBackScreen = () => {
                                                 description="Log into your account"
                                           />
                                     </View>
-                                    <View className="mt-6">
+                                    <View className="mt-12">
                                           <FormInput
                                                 leftIcon={<Lock height={18} width={18} />}
                                                 rightIcon={<EyeClosed height={18} width={18} />}

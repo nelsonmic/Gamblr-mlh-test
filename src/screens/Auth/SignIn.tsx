@@ -2,7 +2,7 @@ import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { Link } from '@react-navigation/native';
-import { FormInput } from "components/molecules/FormInputs";
+import { FormInput, PasswordInput } from "components/molecules/FormInputs";
 import { EyeClosed, Lock, Profile } from "components/Icons";
 import clsx from "clsx";
 import { useAppearanceContext } from "providers/Appearance.provider";
@@ -15,7 +15,7 @@ export const SignInScreen = () => {
 			edges={["left", "right", "top", "bottom"]}
 		>
                   <View className="flex-1 justify-between space-y-4">
-                        <View className="flex-1 space-y-8">
+                        <View className="flex-1 space-y-14">
                               <AuthScreenHeader 
                                     title= "Sign In"
                                     description="Log into your account"
@@ -25,11 +25,8 @@ export const SignInScreen = () => {
                                           leftIcon={<Profile height={18} width={18} />}
                                           placeholder="Email / tag"
                                     />
-                                    <FormInput
-                                          leftIcon={<Lock height={18} width={18} />}
-                                          rightIcon={<EyeClosed height={18} width={18} />}
+                                    <PasswordInput 
                                           placeholder="Password"
-                                          secureTextEntry
                                     />
                                     <Link to={{ screen: "Forgot Password"}}>
                                           <Text className={clsx("font-interMedium text-xs", {
