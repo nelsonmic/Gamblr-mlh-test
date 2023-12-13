@@ -4,7 +4,6 @@ import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
-import { RootStackParamList } from "navigations/types";
 
 export const ConfirmPinScreen = () => {
 	const {value, PinInput, PinKeypad} = usePinCodeEntry({

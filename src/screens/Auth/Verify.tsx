@@ -3,21 +3,19 @@ import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { debug } from "handlers/helpers/debugger";
+import { useVerifyUserEmail } from "hooks/auth/useVerifyUserEmail";
 import useCountDown from "hooks/useCountdown";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { useEffect } from "react";
-import { Keyboard } from "react-native";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 export const VerifyScreen = () => {
       const { isDarkMode } = useAppearanceContext();
+      const {isPending, verifyUserEmail} = useVerifyUserEmail()
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
             showBiometrics : false,
             pinLength: 6
       })
-
-      useEffect(()=> debug("debug", value), [value])
      
       const { hms, restart, ended } = useCountDown({
             autoStart: true,
@@ -60,9 +58,14 @@ export const VerifyScreen = () => {
             runAnimation()
       }
 
-      useEffect(() => {
-            Keyboard.dismiss()
-      }, [])
+      const onSubmit = () => {
+            if(value.length === 6){
+                  verifyUserEmail({
+                        email: "",
+                        otp: `${value}`
+                  })
+            }
+      }
 
 	return (
 		<Layout
@@ -101,7 +104,11 @@ export const VerifyScreen = () => {
                         </View>
                         <View>
                               <PinKeypad />
-                              <Button size="lg" >Verify</Button>
+                              <Button 
+                                    size="lg" 
+                                    onPress={onSubmit} 
+                                    isLoading={isPending}
+                              >Verify</Button>
                         </View>
                   </View>
 		</Layout>
