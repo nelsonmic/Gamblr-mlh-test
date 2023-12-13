@@ -1,21 +1,17 @@
-import { NavigationProp, useNavigation } from "@react-navigation/native";
 import { Layout } from "components/Layouts";
 import { Button, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { PinInput } from "components/molecules/FormInputs";
-import { PinCodeKeypad } from "components/organisms/PinCodeKeypad";
+import { useNavigateTo } from "hooks/useNavigateTo";
+import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
 import { RootStackParamList } from "navigations/types";
-import { useCallback } from "react";
 
 export const ConfirmPinScreen = () => {
-      const { navigate } = useNavigation<NavigationProp<RootStackParamList, Screens.ConfirmPin>>();
-	const gotoHome = useCallback(() => {
-		// hapticFeedback();
-		requestAnimationFrame(() => {
-			navigate(Screens.SignInScreen);
-		});
-	}, [navigate]);
+	const {value, PinInput, PinKeypad} = usePinCodeEntry({
+		pinLength: 4,
+		showBiometrics: false
+	});
+	const goTo = useNavigateTo()
 
 	return (
 		<Layout
@@ -29,15 +25,12 @@ export const ConfirmPinScreen = () => {
                                     description="Enter the 4-digit PIN again"
                               />
 					<View>
-                                    <PinInput 
-                                          codeLength={4}
-							secureTextEntry
-                                    />
+                                    <PinInput />
                               </View>
                         </View>
 				<View>
-					<PinCodeKeypad />
-                        	<Button size="lg" onPress={gotoHome}>Confirm</Button>
+					<PinKeypad />
+                        	<Button size="lg" onPress={() => goTo(Screens.SignInScreen)}>Confirm</Button>
 				</View>
                   </View>
 		</Layout>

@@ -2,17 +2,23 @@ import clsx from "clsx";
 import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { PinInput } from "components/molecules/FormInputs";
-import { PinCodeKeypad } from "components/organisms/PinCodeKeypad";
+import { debug } from "handlers/helpers/debugger";
 import useCountDown from "hooks/useCountdown";
-import { useNavigateTo } from "hooks/useNavigateTo";
-import { Screens } from "navigations/Screens";
+import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useEffect } from "react";
+import { Keyboard } from "react-native";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 export const VerifyScreen = () => {
-      const { isDarkMode, toggleColorScheme } = useAppearanceContext();
-      const goTo = useNavigateTo();
+      const { isDarkMode } = useAppearanceContext();
+      const {value, PinInput, PinKeypad} = usePinCodeEntry({
+            showBiometrics : false,
+            pinLength: 6
+      })
+
+      useEffect(()=> debug("debug", value), [value])
+     
       const { hms, restart, ended } = useCountDown({
             autoStart: true,
             delay: 5000,
@@ -20,6 +26,7 @@ export const VerifyScreen = () => {
 
       const color = useSharedValue("#CCCCCC");
       const scale = useSharedValue(1)
+
       const animatedStyle = useAnimatedStyle(() => ({
             color: color.value,
             transform: [{ scale: scale.value }]
@@ -53,6 +60,10 @@ export const VerifyScreen = () => {
             runAnimation()
       }
 
+      useEffect(() => {
+            Keyboard.dismiss()
+      }, [])
+
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-2"
@@ -64,10 +75,8 @@ export const VerifyScreen = () => {
                                     title= "Verify your account"
                                     description="We sent a 6-digit OTP to your email. Enter the code below"
                               />
-                              <View className="mt-2 space-y-24">
-                                    <PinInput 
-                                          codeLength={6}
-                                    />
+                              <View className="mt-8 space-y-4">
+                                    <PinInput />
                                     <View className="flex-row space-x-[4] ml-2 w-[120]">
                                           <Pressable
                                                 onPress={()=> {
@@ -91,7 +100,7 @@ export const VerifyScreen = () => {
                               </View>
                         </View>
                         <View>
-                              <PinCodeKeypad />
+                              <PinKeypad />
                               <Button size="lg" >Verify</Button>
                         </View>
                   </View>
