@@ -80,7 +80,8 @@ export const usePinCodeEntry = ({
                   className={clsx("flex-1 items-center justify-center rounded-2xl flex-row space-x-[3]", {
                     "border-gray-300 border" : index === code.length && isDarkMode,
                     "bg-darkMode-input-bg" : isDarkMode,
-                    "border border-black-100 ": !isDarkMode
+                    "border border-black-100 ": !isDarkMode,
+                    "max-w-[60]" : pinLength <= 4
                   }, 
                     styleInput
                   )}

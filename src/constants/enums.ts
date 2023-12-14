@@ -8,5 +8,6 @@ export enum StorageKeys {
 }
 
 export enum ToastNotificationTitles {
-  SomethingWentWrong = "Something went wrong!"
+  SomethingWentWrong = "Something went wrong!",
+  RequestSuccess = "Request Successful"
 }

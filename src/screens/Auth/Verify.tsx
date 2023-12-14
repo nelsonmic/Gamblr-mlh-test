@@ -2,24 +2,30 @@ import clsx from "clsx";
 import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { debug } from "handlers/helpers/debugger";
+import { useResendVerificationOtp } from "hooks/auth/useResendVerificationOtp";
 import { useVerifyUserEmail } from "hooks/auth/useVerifyUserEmail";
 import useCountDown from "hooks/useCountdown";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useEffect } from "react";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
-export const VerifyScreen = () => {
+interface ProfileScreenProps {
+  route: any;
+}
+
+export const VerifyScreen: React.FC<ProfileScreenProps> = ({ route }) => {
       const { isDarkMode } = useAppearanceContext();
       const {isPending, verifyUserEmail} = useVerifyUserEmail()
+      const {resendVerificationOtp, isError, isSuccess} = useResendVerificationOtp()
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
             showBiometrics : false,
             pinLength: 6
       })
      
-      const { hms, restart, ended } = useCountDown({
+      const { hms, restart, ended, stop } = useCountDown({
             autoStart: true,
-            delay: 5000,
+            delay: 60000,
       });
 
       const color = useSharedValue("#CCCCCC");
@@ -61,11 +67,29 @@ export const VerifyScreen = () => {
       const onSubmit = () => {
             if(value.length === 6){
                   verifyUserEmail({
-                        email: "",
+                        email: route?.params?.email,
                         otp: `${value}`
                   })
             }
       }
+
+      const onResend = () => {
+            if(ended){
+                  reverseAnimation()
+                  restart()
+                  resendVerificationOtp({
+                        email: route?.params?.email,
+                        type: "email.verification"
+                  })
+
+                  
+            } 
+      }
+
+      useEffect(() =>{
+            isSuccess && stop()
+            isError && stop()
+      }, [isError])
 
 	return (
 		<Layout
@@ -81,14 +105,7 @@ export const VerifyScreen = () => {
                               <View className="mt-8 space-y-4">
                                     <PinInput />
                                     <View className="flex-row space-x-[4] ml-2 w-[120]">
-                                          <Pressable
-                                                onPress={()=> {
-                                                      if(ended){
-                                                            reverseAnimation()
-                                                            restart()
-                                                      } 
-                                                }}
-                                          >
+                                          <Pressable onPress={onResend}>
                                                 <Animated.Text 
                                                       className={clsx("font-interMedium text-xs text-black-100")}
                                                       style={animatedStyle}

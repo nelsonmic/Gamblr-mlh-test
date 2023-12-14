@@ -9,16 +9,24 @@ import { VerifyUserEmailPayload, VerifyUserEmailResponse } from "types/structs";
 
 export const useVerifyUserEmail = () => {
       const toast = useToast();
-      const gotTo = useNavigateTo();
+      const {goTo, dispatch, CommonActions} = useNavigateTo();
       const methods = useMutation<VerifyUserEmailResponse, Error, VerifyUserEmailPayload>({
             mutationFn: (props) => verifyUserEmail(props) 
       })
 
       const _verifyUserEmail = (payload: VerifyUserEmailPayload) => {
             return methods.mutateAsync(payload)
-            .then(() => gotTo(Screens.Congratulations))
+            .then(() =>{
+                  dispatch({
+                        ...CommonActions.reset({
+                        index: 0,
+                        routes: [{ name: 'SignUp' }],
+                        }),
+                  });
+                  goTo(Screens.Congratulations)
+            })
             .catch((err) => {
-                  handleApiError(err.response.data, toast.show, { data: ToastNotificationTitles.SomethingWentWrong});
+                  handleApiError(err, toast.show, { data: ToastNotificationTitles.SomethingWentWrong});
             })
       }
 

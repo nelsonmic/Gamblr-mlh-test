@@ -1,14 +1,21 @@
-export type ApiResponse<T> = {
-  status: boolean;
-  message?: string;
-  data: T;
-};
+import { AxiosResponse } from "axios";
 
-export type FailedApiResponse = Omit<ApiResponse<any>, 'data'> & {
+type BlankResponse<T> = {
+      status: boolean;
+      message?: string;
+      data: T;   
+}
+
+export type ApiResponse<K> = AxiosResponse<BlankResponse<K>>;
+
+export type FailedApiResponse = Omit<BlankResponse<any>, 'data'> & {
       code: number,
       error: string,
-      message: string
+      message?: string
+      response: any
 }
+
+export type PlainApiResponse = AxiosResponse<Omit<BlankResponse<any>, "data">>
 
 export interface User {
       first_name: string;
@@ -54,7 +61,11 @@ export type SignUpResponse = ApiResponse<User>;
 
 
 export type CheckUsername = {
-      exists: boolean
+      data: {
+            data:{
+                  exists: boolean;
+            }
+      }
 }
 export type CheckUsernameResponse = ApiResponse<CheckUsername>
 
@@ -81,3 +92,7 @@ interface VerifyUserEmail {
 }
 
 export type VerifyUserEmailResponse = ApiResponse<VerifyUserEmail>
+
+export type ResendVerificationOtpPayload  = Pick<VerifyUserEmailPayload, "email">&{
+      type: string,
+}

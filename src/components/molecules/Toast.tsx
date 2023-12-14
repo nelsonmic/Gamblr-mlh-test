@@ -1,6 +1,5 @@
 import clsx from "clsx"
 import { Text, View } from "components/atoms"
-import { useAppearanceContext } from "providers/Appearance.provider"
 import { FC, ReactElement } from "react"
 import { ToastProps } from "react-native-toast-notifications/lib/typescript/toast"
 
@@ -9,7 +8,6 @@ type Props = {
 }
 
 export const Toast : FC<Props> = ({options}) => {
-      const { isDarkMode } = useAppearanceContext();
       const {dangerIcon, 
             warningIcon, 
             successIcon, 
@@ -48,7 +46,6 @@ type CustomToastTypeProps = {
 }
 
 export const CustomToastType: FC<CustomToastTypeProps> = ({ borderColor, leftIcon, endAdornment, options }) => {
-      const { isDarkMode } = useAppearanceContext();
       const { data, message } = options
 
       return (

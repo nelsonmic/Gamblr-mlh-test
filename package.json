@@ -24,7 +24,6 @@
     "clsx": "^2.0.0",
     "eslint": "^8.54.0",
     "lodash": "^4.17.21",
-    "lottie-react-native": "^6.4.1",
     "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-hook-form": "^7.48.2",

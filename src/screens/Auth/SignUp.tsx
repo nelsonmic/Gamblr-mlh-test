@@ -276,7 +276,7 @@ export const SignUpScreen = () => {
                                                             onPress={handleSubmit(onSubmit)}
                                                             isLoading={isPending}
                                                       >Sign Up</Button>
-                                                      <Link to={{ screen: "Verify"}}>
+                                                      <Link to={{ screen: "Sign In"}}>
                                                             <Text className={clsx("font-interMedium text-xs", {
                                                                   "text-white-100" : isDarkMode
                                                             })}>Already have an account? Log in</Text>
