@@ -13,9 +13,21 @@ export const signUpFormSchema = yup.object().shape({
   username: yup.string().min(3, "Enter a user tag").required(),
   email: emailSchema.required("Email address is required"),
   password: yup
-    .string()
-    .min(6, "Too short")
-    .required("Password is equired"),
+  .string()
+  .min(8, "Password must be at least 8 characters")
+  .matches(
+    /[A-Za-z]/,
+    "Password must include at least one letter"
+  )
+  .matches(
+    /\d/,
+    "Password must include at least one number"
+  )
+  .matches(
+    /[@$!%*?&]/,
+    "Password must include at least one special character"
+  )
+  .required("Password is required"),
   phone: phoneSchema.required("Phone number is required"),
   acceptTerms: yup.boolean().oneOf([true], 'Accept the terms and conditions'),
   isValidUsertag: yup.boolean().oneOf([true], 'Failed user tag check')

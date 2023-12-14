@@ -2,24 +2,35 @@ import clsx from "clsx";
 import { Layout } from "components/Layouts";
 import { Button, Pressable, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { PinInput } from "components/molecules/FormInputs";
-import { PinCodeKeypad } from "components/organisms/PinCodeKeypad";
+import { useResendVerificationOtp } from "hooks/auth/useResendVerificationOtp";
+import { useVerifyUserEmail } from "hooks/auth/useVerifyUserEmail";
 import useCountDown from "hooks/useCountdown";
-import { useNavigateTo } from "hooks/useNavigateTo";
-import { Screens } from "navigations/Screens";
+import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useEffect } from "react";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
-export const VerifyScreen = () => {
-      const { isDarkMode, toggleColorScheme } = useAppearanceContext();
-      const goTo = useNavigateTo();
-      const { hms, restart, ended } = useCountDown({
+interface ProfileScreenProps {
+  route: any;
+}
+
+export const VerifyScreen: React.FC<ProfileScreenProps> = ({ route }) => {
+      const { isDarkMode } = useAppearanceContext();
+      const {isPending, verifyUserEmail} = useVerifyUserEmail()
+      const {resendVerificationOtp, isError, isSuccess} = useResendVerificationOtp()
+      const {value, PinInput, PinKeypad} = usePinCodeEntry({
+            showBiometrics : false,
+            pinLength: 6
+      })
+     
+      const { hms, restart, ended, stop } = useCountDown({
             autoStart: true,
-            delay: 5000,
+            delay: 60000,
       });
 
       const color = useSharedValue("#CCCCCC");
       const scale = useSharedValue(1)
+
       const animatedStyle = useAnimatedStyle(() => ({
             color: color.value,
             transform: [{ scale: scale.value }]
@@ -53,6 +64,33 @@ export const VerifyScreen = () => {
             runAnimation()
       }
 
+      const onSubmit = () => {
+            if(value.length === 6){
+                  verifyUserEmail({
+                        email: route?.params?.email,
+                        otp: `${value}`
+                  })
+            }
+      }
+
+      const onResend = () => {
+            if(ended){
+                  reverseAnimation()
+                  restart()
+                  resendVerificationOtp({
+                        email: route?.params?.email,
+                        type: "email.verification"
+                  })
+
+                  
+            } 
+      }
+
+      useEffect(() =>{
+            isSuccess && stop()
+            isError && stop()
+      }, [isError])
+
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-2"
@@ -64,19 +102,10 @@ export const VerifyScreen = () => {
                                     title= "Verify your account"
                                     description="We sent a 6-digit OTP to your email. Enter the code below"
                               />
-                              <View className="mt-2 space-y-24">
-                                    <PinInput 
-                                          codeLength={6}
-                                    />
+                              <View className="mt-8 space-y-4">
+                                    <PinInput />
                                     <View className="flex-row space-x-[4] ml-2 w-[120]">
-                                          <Pressable
-                                                onPress={()=> {
-                                                      if(ended){
-                                                            reverseAnimation()
-                                                            restart()
-                                                      } 
-                                                }}
-                                          >
+                                          <Pressable onPress={onResend}>
                                                 <Animated.Text 
                                                       className={clsx("font-interMedium text-xs text-black-100")}
                                                       style={animatedStyle}
@@ -91,8 +120,12 @@ export const VerifyScreen = () => {
                               </View>
                         </View>
                         <View>
-                              <PinCodeKeypad />
-                              <Button size="lg" >Verify</Button>
+                              <PinKeypad />
+                              <Button 
+                                    size="lg" 
+                                    onPress={onSubmit} 
+                                    isLoading={isPending}
+                              >Verify</Button>
                         </View>
                   </View>
 		</Layout>

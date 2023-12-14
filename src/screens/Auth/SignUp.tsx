@@ -18,6 +18,7 @@ import { useCheckUsername } from "hooks/user/useCheckUsername";
 import { debounce } from "lodash";
 import { useToast } from "react-native-toast-notifications";
 import { handleApiError } from "handlers/helpers/handleApiError";
+import { ToastNotificationTitles } from "constants/enums";
 
 export const SignUpScreen = () => {
       const { isDarkMode, colors } = useAppearanceContext();
@@ -97,7 +98,7 @@ export const SignUpScreen = () => {
             
             if (isError){
                   setIsValidUsertag(false);
-                  handleApiError(error, toast.show, { data: "Something went wrong!"});
+                  handleApiError(error, toast.show, { data: ToastNotificationTitles.SomethingWentWrong});
                   setUsernameIcons(<ToastError fill="#B94545" width={18} height={18} />);
             }
 
