@@ -6,7 +6,7 @@ import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
 
 export const EnterOtpScreen = () => {
-      const goTo = useNavigateTo()
+      const {goTo} = useNavigateTo()
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
             pinLength: 6,
             showBiometrics: false

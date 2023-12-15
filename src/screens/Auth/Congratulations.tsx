@@ -26,7 +26,7 @@ export const CongratulationsScreen = () => {
                                     })}>Your account has been created successfully.</Text>
                               </View>
                         </View>
-                        <Button size="lg" onPress={()=> goTo(Screens.CreatePinScreen)}>Continue</Button>
+                        <Button size="lg" onPress={()=> goTo(Screens.SignInScreen)}>Continue</Button>
                   </View>
 		</Layout>
 	);

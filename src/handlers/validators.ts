@@ -34,3 +34,10 @@ export const signUpFormSchema = yup.object().shape({
 });
 
 export type SignUpFormType = yup.InferType<typeof signUpFormSchema>;
+
+export const signInFormSchema = yup.object().shape({
+  email: yup.string().required("Email/tag is required"),
+  password: yup.string().required("Password is required")
+})
+
+export type SignInFormType = yup.InferType<typeof signInFormSchema>;

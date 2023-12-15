@@ -5,7 +5,7 @@ const config = appConfig();
 // key_ signifies url need params
 export const EndPoints = {
    signUp: `${config.BASE_URL}/auth/signup`,
-   login: `${config.BASE_URL}/auth/login`,
+   signIn: `${config.BASE_URL}/auth/login`,
    verifyUserEmail: `${config.BASE_URL}/auth/signup/verify/email`,
    resendVerificationOtp: `${config.BASE_URL}/auth/resend-verification`,
    checkUsername_: `${config.BASE_URL}/auth/check-username?username=`,

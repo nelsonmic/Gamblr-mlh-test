@@ -1,4 +1,4 @@
-import React, { Ref, forwardRef } from "react";
+import React, { Ref } from "react";
 import { FC, useState } from "react";
 import { FormInput, FormInputProps, FormInputRef } from "./FormInput";
 import { EyeClosed, Eyeopen, Lock } from "components/Icons";

@@ -4,7 +4,9 @@ export enum EnvModes {
 }
 
 export enum StorageKeys {
-  CatToken = "cat_token"
+  CatToken = "cat_token",
+  WelcomeUser = "welcome_user",
+  something = "something"
 }
 
 export enum ToastNotificationTitles {
