@@ -1,16 +1,14 @@
-import { ChangePin, Privacy, Profile, Referral, Scan, SettingsProfile, Support, Terms, TwoFa, Wallet } from "components/Icons";
+import { ChangePin, Privacy, Referral, Scan, SettingsProfile, Support, Terms, TwoFa, Wallet } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Text, View, Button } from "components/atoms";
 import { SectionListItem } from "components/molecules/SectionListItem";
 import { PageHeader } from "components/organisms/PageHeader";
-import { useSignUp } from "hooks/auth/useSignUp";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { ScrollView } from "react-native";
 
 export const SettingsScreen = () => {
-	const {mutate: signUp} = useSignUp()
-	const goTo = useNavigateTo()
+	const { goTo } = useNavigateTo()
 	const sizes = {
 		width : 24,
 		height: 24

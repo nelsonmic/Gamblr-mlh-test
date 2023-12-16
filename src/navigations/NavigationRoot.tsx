@@ -22,7 +22,6 @@ import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
 import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 import { SettingsScreen } from 'screens/Settings';
 import { CongratulationsScreen } from 'screens/Auth/Congratulations';
-import { naviteStackWithHeaderConfig } from './config/NativeStackWithHeaderConfig';
 import { useAppearanceContext } from 'providers/Appearance.provider';
 import { ProfileScreen } from 'screens/Settings/Profile';
 import { WalletScreen } from 'screens/Settings/Wallet';
@@ -34,6 +33,8 @@ import { PrivacyPolicyScreen } from 'screens/Settings/PrivacyPolicy';
 import { TermsScreen } from 'screens/Settings/Terms';
 import { SupportScreen } from 'screens/Settings/Support';
 import { BottomTabButton } from 'components/molecules/BottomTabButton';
+import { useCatToken } from 'hooks/auth/useCatToken';
+import { useNativeStackWithHeaderConfig } from './config/useNativeStackWithHeaderConfig';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -128,6 +129,8 @@ return (
 )};
 
 const NativeStackRoot: React.FC = () => {
+  const {config} = useNativeStackWithHeaderConfig();
+  const {catToken} = useCatToken();
   const [showSplashScreen, setShowSplashScreen] = React.useState<boolean>(true);
 	let screens = null;
 
@@ -150,13 +153,21 @@ const NativeStackRoot: React.FC = () => {
           }}
         />
       );
+    } else if (false){ // replace with catToken
+      screens = (
+          <NativeStack.Screen
+            component={WelcomeBackScreen}
+            name={Screens.WelcomeBackScreen}
+            options={{ headerShown: false }}
+          />
+      )
     } else if (false) { // for onboarding screen
       screens = (
         <NativeStack.Screen component={OnboardingScreen}
           name={Screens.Onboarding}
           options={{ headerShown: false }}/>
       );
-    } else if (true) { //for auth screens
+    } else if (false) { //for auth screens / replace with !catToken
       screens = (
         <>
           <NativeStack.Screen
@@ -172,12 +183,12 @@ const NativeStackRoot: React.FC = () => {
           <NativeStack.Screen
             component={CreatePinScreen}
             name={Screens.CreatePinScreen}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={VerifyScreen}
             name={Screens.VerifyScreen}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={CongratulationsScreen}
@@ -187,7 +198,7 @@ const NativeStackRoot: React.FC = () => {
           <NativeStack.Screen
             component={ConfirmPinScreen}
             name={Screens.ConfirmPin}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={EnterOtpScreen}
@@ -197,23 +208,15 @@ const NativeStackRoot: React.FC = () => {
           <NativeStack.Screen
             component={ForgotPasswordScreen}
             name={Screens.ForgotPassword}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={ResetPasswordScreen}
             name={Screens.ResetPassword}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
         </>
       );
-    } else if (false){ // for welcome screen
-      screens = (
-          <NativeStack.Screen
-            component={WelcomeBackScreen}
-            name={Screens.WelcomeBackScreen}
-            options={{ headerShown: false }}
-          />
-      )
     }else { // main app screens
       screens = (
         <>
@@ -225,47 +228,47 @@ const NativeStackRoot: React.FC = () => {
           <NativeStack.Screen
             component={ProfileScreen}
             name={Screens.Profile}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={WalletScreen}
             name={Screens.Wallet}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={ReferralsScreen}
             name={Screens.Referrals}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={ChangePasswordScreen}
             name={Screens.ChangePassword}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={ChangePinScreen}
             name={Screens.ChangePin}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={TwoFaScreen}
             name={Screens.TwoFa}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={PrivacyPolicyScreen}
             name={Screens.PrivacyPolicy}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={TermsScreen}
             name={Screens.Terms}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
           <NativeStack.Screen
             component={SupportScreen}
             name={Screens.Support}
-            options={{ ...naviteStackWithHeaderConfig }}
+            options={{ ...config }}
           />
         </>
       );

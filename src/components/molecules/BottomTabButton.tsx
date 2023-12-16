@@ -14,7 +14,7 @@ type Props = {
 }
 export const BottomTabButton: FC<Props> = ({label, icon, isFocused, routeName}) => {
   const { isDarkMode } = useAppearanceContext();
-  const goTo = useNavigateTo();
+  const { goTo } = useNavigateTo();
   return (
     <TouchableOpacity onPress={() => goTo(routeName)} className='items-center space-y-4'>
       {icon}

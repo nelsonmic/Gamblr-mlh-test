@@ -1,15 +1,64 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import { Link } from "@react-navigation/native";
 import clsx from "clsx";
-import { EyeClosed, Lock, Scan } from "components/Icons";
+import { Scan } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { Avatar } from "components/molecules/Avatar";
-import { FormInput } from "components/molecules/FormInputs";
+import { PasswordInput } from "components/molecules/FormInputs";
+import { StorageKeys } from "constants/enums";
+import { SignInFormType, signInFormSchema } from "handlers/Validators";
+import { useSignIn } from "hooks/auth/useSignIn";
+import { useEncryptedStorage } from "hooks/useEncryptedStorage";
+import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useEffect } from "react";
+import { Controller, useForm } from "react-hook-form";
 
 export const WelcomeBackScreen = () => {
       const { isDarkMode } = useAppearanceContext();
+      const {signIn, isPending} = useSignIn();
+      const {device} = useGetDeviceInfo()
+      const { getEncryptItemFromStorage } = useEncryptedStorage();
+
+      const {control, 
+            formState:{errors},
+            handleSubmit,
+            setValue
+      } = useForm<SignInFormType>({
+            defaultValues: {
+                  email: "",
+                  password: "",
+            },
+            mode: "all",
+            resolver: yupResolver(signInFormSchema)
+      })
+
+      const onSubmit = (payload: SignInFormType) => {
+            signIn({
+                  email: payload.email,
+                  password: payload.password,
+                  device: {
+                        device_id: device.device_id,
+                        device_name: device.device_name,
+                        os: device.os,
+                        version: device.version,
+                        platform: device.platform
+                  }
+            })
+      }
+
+      useEffect(()=> {
+            (async () =>{
+                  try{
+                        let value = await getEncryptItemFromStorage(StorageKeys.WelcomeUser)
+                        setValue("email", value)
+                  }catch(error){
+
+                  }
+            })()
+      }, [])
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -31,12 +80,20 @@ export const WelcomeBackScreen = () => {
                                           />
                                     </View>
                                     <View className="mt-12">
-                                          <FormInput
-                                                leftIcon={<Lock height={18} width={18} />}
-                                                rightIcon={<EyeClosed height={18} width={18} />}
-                                                placeholder="Password"
-                                                placeholderTextColor={"#515C6C"}
-                                                secureTextEntry
+                                          <Controller 
+                                                control={control}
+                                                name="password"
+                                                render={({field: {onBlur, onChange, value}}) => (
+                                                      <PasswordInput 
+                                                            placeholder="Password"
+                                                            onBlur={onBlur}
+                                                            value={value}
+                                                            onChangeText={(text) => onChange(text)}
+                                                            isError={Boolean(errors.password)}
+                                                            error={errors.password?.message}
+                                                            returnKeyType="done"
+                                                      />
+                                                )}
                                           />
                                           <Link to={{ screen: "Forgot Password"}}>
                                                 <Text className={clsx("font-interMedium text-xs", {
@@ -52,7 +109,11 @@ export const WelcomeBackScreen = () => {
                                     })}>Use biometrics</Text>
                               </View>
                         </View>
-                        <Button size="lg">Login</Button>
+                        <Button 
+                              size="lg"
+                              isLoading={isPending}
+                              onPress={handleSubmit(onSubmit)}
+                        >Login</Button>
                   </View>
 		</Layout>
 	);

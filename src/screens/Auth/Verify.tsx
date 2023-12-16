@@ -13,7 +13,7 @@ import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "
 interface ProfileScreenProps {
   route: any;
 }
-//TODO: When the user is navigated to this screen from the sign in screen you need to also pass the user email 
+
 export const VerifyScreen: React.FC<ProfileScreenProps> = ({ route }) => {
       const { isDarkMode } = useAppearanceContext();
       const {isPending, verifyUserEmail} = useVerifyUserEmail()

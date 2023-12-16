@@ -28,7 +28,6 @@ export const router = (
 		// @ts-expect-error doesn't like the typing of RootStackParamList
 		getStateForAction(state, action, options) {
 			switch (action.type) {
-				// TODO
 				default:
 					return stackRouter.getStateForAction(state, action, options);
 			}
