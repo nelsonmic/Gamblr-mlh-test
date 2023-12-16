@@ -97,7 +97,7 @@ export type ResendVerificationOtpPayload  = Pick<VerifyUserEmailPayload, "email"
       type: string;
 }
 
-export type SignInUserPayload = {
+export type SignInUserWithEmailPayload = {
     email : string;
     password: string;
     device : {
@@ -107,6 +107,10 @@ export type SignInUserPayload = {
         platform: string;
         os: string
       }
+}
+
+export type SignInUserWithUsernamePayload = Omit<SignInUserWithEmailPayload, "email"> & {
+      username: string;
 }
 
 interface SignInUser{

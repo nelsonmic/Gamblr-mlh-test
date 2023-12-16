@@ -3,7 +3,7 @@ import { Button, Text, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { Link } from '@react-navigation/native';
 import { FormInput, PasswordInput } from "components/molecules/FormInputs";
-import { EyeClosed, Lock, Profile } from "components/Icons";
+import { Profile } from "components/Icons";
 import clsx from "clsx";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { useRef } from "react";
@@ -13,6 +13,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { focusInput } from "handlers/helpers/focusOnInputField";
 import { useSignIn } from "hooks/auth/useSignIn";
 import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
+import { isValidEmail } from "handlers/helpers/isValidEmail";
 
 export const SignInScreen = () => {
       const { isDarkMode } = useAppearanceContext();
@@ -26,24 +27,38 @@ export const SignInScreen = () => {
       } = useForm<SignInFormType>({
             defaultValues: {
                   email: "",
-                  password: ""
+                  password: "",
             },
             mode: "all",
             resolver: yupResolver(signInFormSchema)
       })
 
       const onSubmit = (payload: SignInFormType) => {
-            signIn({
-                  email: payload.email,
-                  password: payload.password,
-                  device: {
-                        device_id: device.device_id,
-                        device_name: device.device_name,
-                        os: device.os,
-                        version: device.version,
-                        platform: device.platform
-                  }
-            })
+            if(isValidEmail(payload.email)){
+                  signIn({
+                        email: payload.email,
+                        password: payload.password,
+                        device: {
+                              device_id: device.device_id,
+                              device_name: device.device_name,
+                              os: device.os,
+                              version: device.version,
+                              platform: device.platform
+                        }
+                  })
+            }else{
+                  signIn({
+                        username: payload.email,
+                        password: payload.password,
+                        device: {
+                              device_id: device.device_id,
+                              device_name: device.device_name,
+                              os: device.os,
+                              version: device.version,
+                              platform: device.platform
+                        }
+                  })          
+            }
       }
 
 	return (

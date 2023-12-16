@@ -9,6 +9,7 @@ export type FormInputProps = RNTextInputProps & {
       leftIcon?: ReactNode,
       rightIcon?: ReactNode,
       styleContainer?: string,
+      autocapitalize? : 'none' | 'sentences' | 'words' | 'characters' | undefined,
       styleInput?: string,
       value?: string | number; 
       onChangeText?: (text: string | number) => void;
@@ -29,6 +30,7 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
       styleContainer,
       styleInput,
       value,
+      autoCapitalize,
       onChangeText,
       onBlur,
       onFocus,
@@ -112,6 +114,7 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
                               <TextInput 
                                     {...props}
                                     ref={inputRef}
+                                    autoCapitalize={autoCapitalize}
                                     className={clsx(
                                           ' font-interRegular h-full w-full px-2',
                                           {

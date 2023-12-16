@@ -10,7 +10,7 @@ export const ConfirmPinScreen = () => {
 		pinLength: 4,
 		showBiometrics: false
 	});
-	const goTo = useNavigateTo()
+	const { goTo } = useNavigateTo()
 
 	return (
 		<Layout

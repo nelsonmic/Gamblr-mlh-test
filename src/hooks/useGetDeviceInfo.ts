@@ -1,8 +1,8 @@
-import { SignInUserPayload } from "types/structs";
+import { SignInUserWithEmailPayload } from "types/structs";
 import DeviceInfo from "react-native-device-info";
 import { useState } from "react";
 
-export const useGetDeviceInfo = (): Pick<SignInUserPayload, "device"> => {
+export const useGetDeviceInfo = (): Pick<SignInUserWithEmailPayload, "device"> => {
   const [deviceName, setDeviceName] = useState("")
 
 const getDeviceName = async () => {

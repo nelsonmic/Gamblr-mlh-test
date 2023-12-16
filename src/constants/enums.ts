@@ -13,3 +13,7 @@ export enum ToastNotificationTitles {
   SomethingWentWrong = "Something went wrong!",
   RequestSuccess = "Request Successful"
 }
+
+export enum ErrorMessages {
+  VerifyAccount = "User account not verified!",
+}

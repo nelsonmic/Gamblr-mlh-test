@@ -4,11 +4,10 @@ import { debug } from "handlers/helpers/debugger";
 import { handleApiError } from "handlers/helpers/handleApiError";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { useToast } from "react-native-toast-notifications";
-import { SignInUserPayload, SignInUserResponse } from "types/structs";
+import { SignInUserWithEmailPayload, SignInUserResponse, SignInUserWithUsernamePayload } from "types/structs";
 import { useCatToken } from "./useCatToken";
-import { StorageKeys } from "constants/enums";
+import { ErrorMessages, StorageKeys, ToastNotificationTitles } from "constants/enums";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
-import EncryptedStorage from "react-native-encrypted-storage";
 import { Screens } from "navigations/Screens";
 
 export const useSignIn = () => {
@@ -16,11 +15,11 @@ export const useSignIn = () => {
       const {goTo} = useNavigateTo();
       const { setCatToken } = useCatToken();
       const {setEncryptItemToStorage} = useEncryptedStorage()
-      const methods = useMutation<SignInUserResponse, any, SignInUserPayload>({ 
+      const methods = useMutation<SignInUserResponse, any, SignInUserWithEmailPayload | SignInUserWithUsernamePayload>({ 
             mutationFn: (props) => signIn(props) 
       });
-
-      const _signIn = (payload: SignInUserPayload) => {
+      //TODO: Store user to redux slice
+      const _signIn = (payload: SignInUserWithEmailPayload | SignInUserWithUsernamePayload) => {
             return methods.mutateAsync(payload)
             .then(async (res) => {
                   const {cat, user} = res.data.data
@@ -34,7 +33,13 @@ export const useSignIn = () => {
                   }
             })
             .catch((err) => {
+                  const errorMessage = err.response ? err.response.data.error : ToastNotificationTitles.SomethingWentWrong
                   handleApiError(err, toast.show);
+                  setTimeout(()=>{
+                        if(errorMessage === ErrorMessages.VerifyAccount) goTo(Screens.VerifyScreen, {
+                              email: (payload as SignInUserWithEmailPayload).email
+                        });
+                  }, 4000)
             })
       }
 

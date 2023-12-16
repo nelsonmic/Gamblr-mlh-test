@@ -152,6 +152,7 @@ export const SignUpScreen = () => {
                                                                               handleFirstNameLastName()
                                                                         }}
                                                                         placeholder="Full name"
+                                                                        autocapitalize='words'
                                                                         isError={Boolean(errors.fullname || errors.firstname || errors.lastname)}
                                                                         error={errors.fullname?.message || errors.firstname?.message || errors.lastname?.message}
                                                                         returnKeyType="next"
