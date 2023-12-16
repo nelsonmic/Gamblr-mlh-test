@@ -4,10 +4,16 @@ export enum EnvModes {
 }
 
 export enum StorageKeys {
-  CatToken = "cat_token"
+  CatToken = "cat_token",
+  WelcomeUser = "welcome_user",
+  something = "something"
 }
 
 export enum ToastNotificationTitles {
   SomethingWentWrong = "Something went wrong!",
   RequestSuccess = "Request Successful"
+}
+
+export enum ErrorMessages {
+  VerifyAccount = "User account not verified!",
 }

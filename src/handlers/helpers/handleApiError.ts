@@ -10,8 +10,11 @@ export const handleApiError = (
   showToast: (message: string, options?: ToastOptions ) => void,
   options?: ToastOptions,
 ) => {
-  showToast(
-    capitalizeFirstLetter(error?.response ? error.response?.data.message : error.message), 
-    {...options, type: "danger", data: error?.response ? error.response?.data.error : ToastNotificationTitles.SomethingWentWrong}
-  );
+  const message = error.response ? error.response.data.message : error.message
+  const errorMessage = error.response ? error.response.data.error : ToastNotificationTitles.SomethingWentWrong
+  showToast( capitalizeFirstLetter(message), 
+    { ...options, 
+      type: "danger", 
+      data: errorMessage 
+    });
 };

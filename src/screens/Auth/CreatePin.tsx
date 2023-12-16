@@ -6,10 +6,10 @@ import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
 
 export const CreatePinScreen = () => {
-      const goTo = useNavigateTo()
+      const {goTo} = useNavigateTo()
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
             pinLength: 4,
-            showBiometrics: true
+            showBiometrics: false
       })
 	return (
 		<Layout
@@ -22,7 +22,7 @@ export const CreatePinScreen = () => {
                                     title= "Create Pin"
                                     description="Create a Pin for your transaction authorizations "
                               />
-                              <View>
+                              <View className="mt-8">
                                     <PinInput />
                               </View>
                         </View>

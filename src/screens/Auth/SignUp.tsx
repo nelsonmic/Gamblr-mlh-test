@@ -7,10 +7,10 @@ import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
 import { Checkbox } from "components/molecules/Checkbox";
 import { FormInput, PasswordInput } from "components/molecules/FormInputs";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { RefObject, useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ActivityIndicator, KeyboardAvoidingView, ScrollView } from "react-native";
 import { useForm, Controller } from "react-hook-form";
-import { SignUpFormType, signUpFormSchema } from "handlers/validators";
+import { SignUpFormType, signUpFormSchema } from "handlers/Validators";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useSignUp } from "hooks/auth/useSignUp";
 import { splitWords } from "handlers/helpers/splitWords";
@@ -19,6 +19,7 @@ import { debounce } from "lodash";
 import { useToast } from "react-native-toast-notifications";
 import { handleApiError } from "handlers/helpers/handleApiError";
 import { ToastNotificationTitles } from "constants/enums";
+import { focusInput } from "handlers/helpers/focusOnInputField";
 
 export const SignUpScreen = () => {
       const { isDarkMode, colors } = useAppearanceContext();
@@ -33,14 +34,6 @@ export const SignUpScreen = () => {
       const phoneInputRef = useRef(null);
       const usernameInputRef = useRef(null);
       const passwordInputRef = useRef(null);
-
-      type FormInputsRef = {
-            handleInputFocus: () => void;
-      };
-
-      const focusInput = (ref: RefObject<FormInputsRef | null>) => {
-            ref?.current?.handleInputFocus();
-      };
 
       const { control, 
             formState:{errors}, 
@@ -159,6 +152,7 @@ export const SignUpScreen = () => {
                                                                               handleFirstNameLastName()
                                                                         }}
                                                                         placeholder="Full name"
+                                                                        autocapitalize='words'
                                                                         isError={Boolean(errors.fullname || errors.firstname || errors.lastname)}
                                                                         error={errors.fullname?.message || errors.firstname?.message || errors.lastname?.message}
                                                                         returnKeyType="next"

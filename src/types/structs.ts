@@ -9,8 +9,8 @@ type BlankResponse<T> = {
 export type ApiResponse<K> = AxiosResponse<BlankResponse<K>>;
 
 export type FailedApiResponse = Omit<BlankResponse<any>, 'data'> & {
-      code: number,
-      error: string,
+      code: number;
+      error: string;
       message?: string
       response: any
 }
@@ -94,5 +94,54 @@ interface VerifyUserEmail {
 export type VerifyUserEmailResponse = ApiResponse<VerifyUserEmail>
 
 export type ResendVerificationOtpPayload  = Pick<VerifyUserEmailPayload, "email">&{
-      type: string,
+      type: string;
 }
+
+export type SignInUserWithEmailPayload = {
+    email : string;
+    password: string;
+    device : {
+        device_name: string;
+        device_id: string;
+        version: string;
+        platform: string;
+        os: string
+      }
+}
+
+export type SignInUserWithUsernamePayload = Omit<SignInUserWithEmailPayload, "email"> & {
+      username: string;
+}
+
+interface SignInUser{
+ cat: string;
+  user: {
+    first_name: string;
+    last_name: string;
+    username: string;
+    is_active: boolean;
+    has_pin: boolean;
+    devices: [];
+    activity_log: [];
+    createdAt: string;
+    updatedAt: string;
+    id: string;
+    meta: {
+      gender: null;
+      dob: null;
+      location: string;
+      bio: null;
+      socials: [];
+    };
+    email: {
+      address: string;
+      is_verified: boolean;
+    };
+    phone: {
+      number: string;
+      is_verified: boolean;
+    };
+  };
+}
+
+export type SignInUserResponse = ApiResponse<SignInUser>;

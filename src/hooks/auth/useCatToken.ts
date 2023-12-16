@@ -12,14 +12,14 @@ export const useCatToken = (): useCatToken => {
 
 	useEffect(() => {
 		(async () => {
-			const catToken = await EncryptedStorage.getItem(StorageKeys.catToken);
+			const catToken = await EncryptedStorage.getItem(StorageKeys.CatToken);
 			if (!catToken) return;
 			setToken(catToken);
 		})();
 	}, []);
 
 	const setCatToken = useCallback((token: string) => {
-		EncryptedStorage.setItem(StorageKeys.catToken, String(token));
+		EncryptedStorage.setItem(StorageKeys.CatToken, String(token));
 	}, []);
 
 	return { catToken: token, setCatToken };
