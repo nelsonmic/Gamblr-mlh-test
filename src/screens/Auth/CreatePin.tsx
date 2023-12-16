@@ -9,7 +9,8 @@ export const CreatePinScreen = () => {
       const {goTo} = useNavigateTo()
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
             pinLength: 4,
-            showBiometrics: false
+            showBiometrics: false,
+            secureEntry: true
       })
 	return (
 		<Layout

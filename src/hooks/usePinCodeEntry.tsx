@@ -16,6 +16,7 @@ type addOnProps = {
 type PinCodeEntryConfig = {
   showBiometrics?: boolean;
   pinLength: number;
+  secureEntry?: boolean;
 }
 
 type PinCodeKeyProp = {
@@ -30,11 +31,12 @@ type PinInputProp = {
 
 export const usePinCodeEntry = ({
   showBiometrics = false,
-  pinLength = 4
+  pinLength = 4,
+  secureEntry = false,
 }: PinCodeEntryConfig) => {
 
   const { isDarkMode } = useAppearanceContext();
-  const [code, setCode] = useState<number[]>([]);
+  const [code, setCode] = useState<Array<number | "*">>([]);
   const _keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, { name: "biometrics", icon: <Scan /> }, 0, { name: "del", icon: <CancelPinCode /> }];
   
   const _PinInput:FC<PinInputProp> = ({
@@ -134,7 +136,7 @@ export const usePinCodeEntry = ({
       hapticFeedback();
       if (typeof value === "number") {
             if(code.length === pinLength) return
-            setCode((prev) => [...prev, value])
+            setCode((prev) => [...prev, secureEntry? "*" : value])
       } else if (value.name === "del") {
         setCode((prev) => prev.slice(0, prev.length - 1))
       }

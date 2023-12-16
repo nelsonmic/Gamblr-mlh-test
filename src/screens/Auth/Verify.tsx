@@ -13,7 +13,6 @@ import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "
 interface ProfileScreenProps {
   route: any;
 }
-
 export const VerifyScreen: React.FC<ProfileScreenProps> = ({ route }) => {
       const { isDarkMode } = useAppearanceContext();
       const {isPending, verifyUserEmail} = useVerifyUserEmail()

@@ -153,7 +153,7 @@ const NativeStackRoot: React.FC = () => {
           }}
         />
       );
-    } else if (false){ // replace with catToken
+    } else if (false){ //for welcome screen / replace with catToken
       screens = (
           <NativeStack.Screen
             component={WelcomeBackScreen}
@@ -167,7 +167,7 @@ const NativeStackRoot: React.FC = () => {
           name={Screens.Onboarding}
           options={{ headerShown: false }}/>
       );
-    } else if (false) { //for auth screens / replace with !catToken
+    } else if (true) { //for auth screens / replace with !catToken
       screens = (
         <>
           <NativeStack.Screen
