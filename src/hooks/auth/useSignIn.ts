@@ -27,7 +27,7 @@ export const useSignIn = () => {
                   setCatToken(cat)
                   setEncryptItemToStorage(StorageKeys.WelcomeUser, user.email.address)
                   if(user.has_pin){
-                        goTo(Screens.Home)
+                        goTo(Screens.BottomTabs)
                   }else{
                         goTo(Screens.CreatePinScreen)
                   }
