@@ -34,7 +34,7 @@ function SplashScreen(): React.ReactElement | null {
     logoOpacity.value = withDelay(delayDuration * 2, withTiming(0, { duration: 1000 }));
     logoScale.value = withDelay(delayDuration * 2, withTiming(0, { duration: 1500 }));
 
-    // FullLogo animations
+    //full logo animation
     fullLogoOpacity.value = withSequence(
       withDelay(delayDuration, withTiming(1, { duration: 1500 }))
     );
@@ -43,7 +43,6 @@ function SplashScreen(): React.ReactElement | null {
       withDelay(delayDuration, withTiming(1, { duration: 1500 }))
     );
 
-    // Set a timeout for the total duration of the animations
     timeoutId = setTimeout(onAnimationEnd, 3000);
   };
 
@@ -56,16 +55,23 @@ function SplashScreen(): React.ReactElement | null {
     }
   }
   useEffect(() => {
-    runAnimation(() => {
-      switchScreens();
-    });
+    let isMounted = true;
+
+    const runAnimationWithCallback = () => {
+      if (isMounted) runAnimation(switchScreens);
+    };
+
+    runAnimationWithCallback();
 
     return () => {
-      if (timeoutId !== null) {
+      isMounted = false;
+
+      if (timeoutId !== undefined) {
         clearTimeout(timeoutId);
       }
     };
   }, [catToken]);
+
 
   return (
     <View className={clsx("relative flex-1 items-center justify-center bg-white-100", {
