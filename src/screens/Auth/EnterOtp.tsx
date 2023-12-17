@@ -22,11 +22,14 @@ export const EnterOtpScreen = () => {
                                     title= "Enter OTP"
                                     description="We sent you a 6-digit OTP to your email. Enter the code below to proceed."
                               />
-                              <View className="mt-2">
+                              <View className="mt-8">
                                     <PinInput />
                               </View>
                         </View>
-                        <Button size="lg" onPress={() => goTo(Screens.ResetPassword)}>Reset</Button>
+                        <View>
+                              <PinKeypad />
+                              <Button size="lg" onPress={() => goTo(Screens.ResetPassword)}>Reset</Button>
+                        </View>
                   </View>
 		</Layout>
 	);

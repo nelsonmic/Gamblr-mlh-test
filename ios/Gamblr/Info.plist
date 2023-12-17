@@ -71,5 +71,7 @@
 		<string>Inter-SemiBold.ttf</string>
 		<string>Inter-Thin.ttf</string>
 	</array>
+	<key>NSFaceIDUsageDescription</key>
+	<string>$(App_Name) Requires FaceID access to allows you quick and secure access.</string>
 </dict>
 </plist>

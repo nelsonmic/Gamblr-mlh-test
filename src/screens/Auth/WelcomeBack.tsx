@@ -10,22 +10,26 @@ import { PasswordInput } from "components/molecules/FormInputs";
 import { StorageKeys } from "constants/enums";
 import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { useSignIn } from "hooks/auth/useSignIn";
+import { useBiometrics } from "hooks/useBiometrics";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
 import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { TouchableOpacity } from "react-native";
 
 export const WelcomeBackScreen = () => {
       const { isDarkMode } = useAppearanceContext();
       const {signIn, isPending} = useSignIn();
       const {device} = useGetDeviceInfo()
       const { getEncryptItemFromStorage } = useEncryptedStorage();
+      const { handleBiometryAuth } = useBiometrics()
 
       const {control, 
             formState:{errors},
             handleSubmit,
-            setValue
+            setValue,
+            getValues
       } = useForm<SignInFormType>({
             defaultValues: {
                   email: "",
@@ -49,6 +53,20 @@ export const WelcomeBackScreen = () => {
             })
       }
 
+      const onSubmitBiometrics = () => {
+            handleBiometryAuth(signIn({
+                  email: getValues()["email"],
+                  password: getValues()["password"],
+                  device: {
+                        device_id: device.device_id,
+                        device_name: device.device_name,
+                        os: device.os,
+                        version: device.version,
+                        platform: device.platform
+                  }
+            }))
+      }
+
       useEffect(()=> {
             (async () =>{
                   try{
@@ -58,7 +76,7 @@ export const WelcomeBackScreen = () => {
 
                   }
             })()
-      }, [])
+      }, [getEncryptItemFromStorage, setValue])
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -102,12 +120,15 @@ export const WelcomeBackScreen = () => {
                                           </Link>
                                     </View>
                               </View>
-                              <View className="items-center ">
+                              <TouchableOpacity 
+                                    className="items-center"
+                                    onPress={onSubmitBiometrics}
+                              >
                                     <Scan width={55} height={55}/>
                                     <Text className={clsx("text-center text-gray-200 font-interRegular mt-2", {
                                           "text-white-100" : isDarkMode
                                     })}>Use biometrics</Text>
-                              </View>
+                              </TouchableOpacity>
                         </View>
                         <Button 
                               size="lg"
