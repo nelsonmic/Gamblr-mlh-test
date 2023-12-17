@@ -4,12 +4,19 @@ import { FullLogo, Logo } from 'components/Icons';
 import Animated, { useAnimatedStyle, useSharedValue, withDelay, withSequence, withTiming } from 'react-native-reanimated';
 import { useAppearanceContext } from 'providers/Appearance.provider';
 import clsx from 'clsx';
+import { useCatToken } from 'hooks/auth/useCatToken';
+import { useEncryptedStorage } from 'hooks/useEncryptedStorage';
+import { useNavigateTo } from 'hooks/useNavigateTo';
+import { Screens } from 'navigations/Screens';
 
 function SplashScreen(): React.ReactElement | null {
+  const {catToken} = useCatToken();
+  const { goTo } = useNavigateTo();
+  const {clearAllEncryptedStorageItems} = useEncryptedStorage()
   const { isDarkMode } = useAppearanceContext();
   const logoOpacity = useSharedValue(1);
   const logoScale = useSharedValue(1);
-   const fullLogoOpacity = useSharedValue(0);
+  const fullLogoOpacity = useSharedValue(0);
   const fullLogoScale = useSharedValue(0);
   const logoStyle = useAnimatedStyle(() => ({
     opacity: logoOpacity.value,
@@ -37,7 +44,22 @@ function SplashScreen(): React.ReactElement | null {
       );
   };
 
-  runAnimation();
+  const switchScreens = () =>{
+    if(catToken){
+      goTo(Screens.WelcomeBackScreen)
+    }else if(!catToken){
+      goTo(Screens.SignInScreen)
+    }
+  }
+
+  useEffect(()=>{
+    runAnimation()
+    clearAllEncryptedStorageItems();
+    setTimeout(()=>{
+      switchScreens()
+    }, 3500)
+  }, [])
+
   return (
     <View className={clsx("relative flex-1 items-center justify-center bg-white-100", {
       "bg-black-100" : isDarkMode

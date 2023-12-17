@@ -12,7 +12,7 @@ export const EndPoints = {
    getUserProfile: `${config.BASE_URL}/user/profile`,
    updateUserInfo: `${config.BASE_URL}/user/profile/update`,
    createUserPin: `${config.BASE_URL}/user/pin/create`,
-   verifyUserPin: `${config.BASE_URL}/user/pin/verify`,
+   confirmUserPin: `${config.BASE_URL}/user/pin/verify`,
    updatePin: `${config.BASE_URL}/user/pin/update`,
    updatePassword: `${config.BASE_URL}/user/password/update`,
 }

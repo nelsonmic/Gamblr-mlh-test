@@ -1,12 +1,12 @@
 import { AxiosResponse } from "axios";
 
-type BlankResponse<T> = {
+export type BlankResponse<T> = {
       status: boolean;
       message?: string;
       data: T;   
 }
 export type ApiResponse<K> = AxiosResponse<BlankResponse<K>>;
-export type FailedApiResponse = Omit<BlankResponse<any>, 'data'> & {
+export type FailedApiResponse = Pick<BlankResponse<any>, 'status'> & {
       code: number;
       error: string;
       message?: string
@@ -106,7 +106,5 @@ export type CreatePinPayload = {
       pin: string
 }
 
-type CreatePin = Omit<User, "activity_log">
-
-export type CreatePinResponse = ApiResponse<CreatePin>;
+export type CreatePinResponse = ApiResponse<User>;
 

@@ -36,7 +36,8 @@ export const usePinCodeEntry = ({
 }: PinCodeEntryConfig) => {
 
   const { isDarkMode } = useAppearanceContext();
-  const [code, setCode] = useState<Array<number | "*">>([]);
+  const [code, setCode] = useState<Array<number>>([]);
+  const [secureEntryCode, setSecureEntryCode] = useState<Array<"*">>([]);
   const _keys = [1, 2, 3, 4, 5, 6, 7, 8, 9, { name: "biometrics", icon: <Scan /> }, 0, { name: "del", icon: <CancelPinCode /> }];
   
   const _PinInput:FC<PinInputProp> = ({
@@ -91,7 +92,7 @@ export const usePinCodeEntry = ({
               >
                   <Text className={clsx("font-interMedium text-white-100 text-lg text-center", {
                     "text-black-100" : !isDarkMode
-                  })}>{code[index]}</Text>
+                  })}>{secureEntry? secureEntryCode[index] : code[index]}</Text>
                   { index === code.length ? (
                         <Animated.View
                           style={animatedStyle} 
@@ -136,9 +137,11 @@ export const usePinCodeEntry = ({
       hapticFeedback();
       if (typeof value === "number") {
             if(code.length === pinLength) return
-            setCode((prev) => [...prev, secureEntry? "*" : value])
+            setCode((prev) => [...prev, value])
+            setSecureEntryCode((prev) => [...prev, "*"])
       } else if (value.name === "del") {
         setCode((prev) => prev.slice(0, prev.length - 1))
+        setSecureEntryCode((prev) => prev.slice(0, prev.length - 1))
       }
     }
 

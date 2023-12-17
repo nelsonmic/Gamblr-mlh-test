@@ -16,4 +16,5 @@ export enum ToastNotificationTitles {
 
 export enum ErrorMessages {
   VerifyAccount = "User account not verified!",
+  PinExists = "Pin already set!"
 }

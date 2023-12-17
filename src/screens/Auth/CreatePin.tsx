@@ -6,12 +6,18 @@ import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
 
 export const CreatePinScreen = () => {
-      const {goTo} = useNavigateTo()
+      const { goTo } = useNavigateTo();
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
             pinLength: 4,
             showBiometrics: false,
             secureEntry: true
       })
+
+      const handleSubmit = () => {
+            if(value.length === 4) goTo(Screens.ConfirmPin, {
+                  pin: value
+            })
+      }
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-4"
@@ -29,7 +35,10 @@ export const CreatePinScreen = () => {
                         </View>
                         <View>
                               <PinKeypad />
-                              <Button size="lg" onPress={() => goTo(Screens.ConfirmPin)}>Create Pin</Button>
+                              <Button 
+                                    size="lg" 
+                                    onPress={handleSubmit}
+                              >Create Pin</Button>
                         </View>
                   </View>
 		</Layout>

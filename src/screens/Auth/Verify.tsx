@@ -7,13 +7,13 @@ import { useVerifyUserEmail } from "hooks/auth/useVerifyUserEmail";
 import useCountDown from "hooks/useCountdown";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 interface ProfileScreenProps {
   route: any;
 }
-export const VerifyScreen: React.FC<ProfileScreenProps> = ({ route }) => {
+export const VerifyScreen: FC<ProfileScreenProps> = ({ route }) => {
       const { isDarkMode } = useAppearanceContext();
       const {isPending, verifyUserEmail} = useVerifyUserEmail()
       const {resendVerificationOtp, isError, isSuccess} = useResendVerificationOtp()
