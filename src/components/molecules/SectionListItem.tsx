@@ -5,6 +5,7 @@ import { PressableProps } from "components/atoms/Pressable"
 import { StorageKeys } from "constants/enums"
 import { useEncryptedStorage } from "hooks/useEncryptedStorage"
 import { useAppearanceContext } from "providers/Appearance.provider"
+import { useBiometricsContext } from "providers/Biometrics.provider"
 import { FC, ReactElement, useEffect, useState } from "react"
 import { Switch } from "react-native"
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
@@ -107,6 +108,10 @@ type ItemProps = {
 
 const Item: FC<ItemProps> = ({ data }) => {
       const { isDarkMode, colors } = useAppearanceContext()
+      const {isBiometricsEnabled, toggleBiometrics, isBiometricsAvailable} = useBiometricsContext();
+      const handleBiometricsToggle = () => {
+            if(isBiometricsAvailable) toggleBiometrics()
+      }
       return (
             <Pressable className="flex-row items-center justify-between px-2 py-4" onPress={data.onPress}>
                   <View className="space-x-6 flex-row items-center">
@@ -120,7 +125,8 @@ const Item: FC<ItemProps> = ({ data }) => {
                               trackColor={{false: colors.lightGray, true: colors.lightGray}}
                               thumbColor={isDarkMode ?  colors.darkGray : colors.darkGray}
                               ios_backgroundColor= {colors.lightGray}
-                              value={isDarkMode}
+                              value={isBiometricsEnabled}
+                              onChange={handleBiometricsToggle}
                               style={{ transform:[{ scaleX: .5 }, { scaleY: .5 }] }}
                         />
                   ) : null}

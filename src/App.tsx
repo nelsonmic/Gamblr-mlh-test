@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
@@ -10,8 +10,8 @@ import { Provider } from 'react-redux';
 import store from 'store';
 import { ToastProvider } from 'react-native-toast-notifications'
 import { CustomToastType, Toast } from 'components/molecules/Toast';
-import { Text } from 'components/atoms';
 import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from 'components/Icons';
+import { BiometricsProvider } from 'providers/Biometrics.provider';
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -48,9 +48,11 @@ function App(): JSX.Element {
                     info: (toast) => <CustomToastType options={toast} borderColor='#0853C2' leftIcon={<ToastInfo {...iconSizes} />}/>
                   }}
                 >
+                <BiometricsProvider>
                   <NavigationContainer>
                       <NavigationRoot />
                   </NavigationContainer>
+                </BiometricsProvider>
                 </ToastProvider>
               </AppearanceProvider>
             </QueryClientProvider>
