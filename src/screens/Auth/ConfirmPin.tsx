@@ -1,16 +1,31 @@
 import { Layout } from "components/Layouts";
 import { Button, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { useNavigateTo } from "hooks/useNavigateTo";
+import { useConfirmPin } from "hooks/auth/useConfirmPin";
+import { useCreatePin } from "hooks/auth/useCreatePin";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
-import { Screens } from "navigations/Screens";
+import { FC } from "react";
+import { useToast } from "react-native-toast-notifications";
 
-export const ConfirmPinScreen = () => {
+interface ConfirmScreenProps{
+	route: any;
+}
+export const ConfirmPinScreen: FC<ConfirmScreenProps> = ({ route }) => {
 	const {value, PinInput, PinKeypad} = usePinCodeEntry({
 		pinLength: 4,
-		showBiometrics: false
+		showBiometrics: false,
+		secureEntry: true
 	});
-	const { goTo } = useNavigateTo()
+	const { createPin, isPending } = useCreatePin()
+	const toast = useToast();
+
+	const handleSubmit = () => {
+		if(value === route.params.pin){ 
+			createPin({pin : value})
+		}else{
+			toast.show("Make sure you entered the same pin from the previous step", {type: "info", data: "Pin don't match"})
+		}
+	}
 
 	return (
 		<Layout
@@ -23,13 +38,17 @@ export const ConfirmPinScreen = () => {
                                     title= "Confirm Pin"
                                     description="Enter the 4-digit PIN again"
                               />
-					<View>
+					<View className="mt-8">
                                     <PinInput />
                               </View>
                         </View>
 				<View>
 					<PinKeypad />
-                        	<Button size="lg" onPress={() => goTo(Screens.SignInScreen)}>Confirm</Button>
+                        	<Button 
+						size="lg" 
+						onPress={handleSubmit}
+						isLoading={isPending}
+					>Confirm</Button>
 				</View>
                   </View>
 		</Layout>

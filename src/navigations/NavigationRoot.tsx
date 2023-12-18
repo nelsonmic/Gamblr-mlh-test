@@ -22,7 +22,6 @@ import { ForgotPasswordScreen } from 'screens/Auth/ForgotPassword';
 import { ResetPasswordScreen } from 'screens/Auth/ResetPassword';
 import { SettingsScreen } from 'screens/Settings';
 import { CongratulationsScreen } from 'screens/Auth/Congratulations';
-import { naviteStackWithHeaderConfig } from './config/NativeStackWithHeaderConfig';
 import { useAppearanceContext } from 'providers/Appearance.provider';
 import { ProfileScreen } from 'screens/Settings/Profile';
 import { WalletScreen } from 'screens/Settings/Wallet';
@@ -34,6 +33,7 @@ import { PrivacyPolicyScreen } from 'screens/Settings/PrivacyPolicy';
 import { TermsScreen } from 'screens/Settings/Terms';
 import { SupportScreen } from 'screens/Settings/Support';
 import { BottomTabButton } from 'components/molecules/BottomTabButton';
+import { useNativeStackWithHeaderConfig } from './config/useNativeStackWithHeaderConfig';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -128,149 +128,121 @@ return (
 )};
 
 const NativeStackRoot: React.FC = () => {
-  const [showSplashScreen, setShowSplashScreen] = React.useState<boolean>(true);
-	let screens = null;
-
-  React.useEffect(() => {
-    const time = setTimeout(() => {
-      setShowSplashScreen(false);
-    }, 3500);
-    return () => {
-      clearTimeout(time);
-    };
-  }, []);
-
-    if (showSplashScreen) { // for splash screen
-      screens = (
-        <NativeStack.Screen
-          component={SplashScreen}
-          name={Screens.SplashScreen}
-          options={{
-            headerShown: false,
-          }}
-        />
-      );
-    } else if (false) { // for onboarding screen
-      screens = (
-        <NativeStack.Screen component={OnboardingScreen}
-          name={Screens.Onboarding}
-          options={{ headerShown: false }}/>
-      );
-    } else if (true) { //for auth screens
-      screens = (
-        <>
-          <NativeStack.Screen
-            component={SignInScreen}
-            name={Screens.SignInScreen}
-            options={{ headerShown: false }}
-          />
-          <NativeStack.Screen
-            component={SignUpScreen}
-            name={Screens.SignUpScreen}
-            options={{ headerShown: false }}
-          />
-          <NativeStack.Screen
-            component={CreatePinScreen}
-            name={Screens.CreatePinScreen}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={VerifyScreen}
-            name={Screens.VerifyScreen}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={CongratulationsScreen}
-            name={Screens.Congratulations}
-            options={{ headerShown: false }}
-          />
-          <NativeStack.Screen
-            component={ConfirmPinScreen}
-            name={Screens.ConfirmPin}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={EnterOtpScreen}
-            name={Screens.EnterOtp}
-            options={{ headerShown: false }}
-          />
-          <NativeStack.Screen
-            component={ForgotPasswordScreen}
-            name={Screens.ForgotPassword}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={ResetPasswordScreen}
-            name={Screens.ResetPassword}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-        </>
-      );
-    } else if (false){ // for welcome screen
-      screens = (
-          <NativeStack.Screen
-            component={WelcomeBackScreen}
-            name={Screens.WelcomeBackScreen}
-            options={{ headerShown: false }}
-          />
-      )
-    }else { // main app screens
-      screens = (
-        <>
-          <NativeStack.Screen
-            component={BottomTabsRoot}
-            name={Screens.BottomTabs}
-            options={{ headerShown: false }}
-          />
-          <NativeStack.Screen
-            component={ProfileScreen}
-            name={Screens.Profile}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={WalletScreen}
-            name={Screens.Wallet}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={ReferralsScreen}
-            name={Screens.Referrals}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={ChangePasswordScreen}
-            name={Screens.ChangePassword}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={ChangePinScreen}
-            name={Screens.ChangePin}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={TwoFaScreen}
-            name={Screens.TwoFa}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={PrivacyPolicyScreen}
-            name={Screens.PrivacyPolicy}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={TermsScreen}
-            name={Screens.Terms}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-          <NativeStack.Screen
-            component={SupportScreen}
-            name={Screens.Support}
-            options={{ ...naviteStackWithHeaderConfig }}
-          />
-        </>
-      );
-    }
-	return <NativeStack.Navigator>{screens}</NativeStack.Navigator>;
+  const {config} = useNativeStackWithHeaderConfig();
+	return(
+    <NativeStack.Navigator>
+            <NativeStack.Screen
+              component={SplashScreen}
+              name={Screens.SplashScreen}
+              options={{
+                headerShown: false,
+              }}
+            />
+            <NativeStack.Screen
+              component={WelcomeBackScreen}
+              name={Screens.WelcomeBackScreen}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen component={OnboardingScreen}
+            name={Screens.Onboarding}
+            options={{ headerShown: false }}/>
+            <NativeStack.Screen
+              component={SignInScreen}
+              name={Screens.SignInScreen}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen
+              component={SignUpScreen}
+              name={Screens.SignUpScreen}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen
+              component={CreatePinScreen}
+              name={Screens.CreatePinScreen}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={VerifyScreen}
+              name={Screens.VerifyScreen}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={CongratulationsScreen}
+              name={Screens.Congratulations}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen
+              component={ConfirmPinScreen}
+              name={Screens.ConfirmPin}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={EnterOtpScreen}
+              name={Screens.EnterOtp}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen
+              component={ForgotPasswordScreen}
+              name={Screens.ForgotPassword}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={ResetPasswordScreen}
+              name={Screens.ResetPassword}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={BottomTabsRoot}
+              name={Screens.BottomTabs}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen
+              component={ProfileScreen}
+              name={Screens.Profile}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={WalletScreen}
+              name={Screens.Wallet}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={ReferralsScreen}
+              name={Screens.Referrals}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={ChangePasswordScreen}
+              name={Screens.ChangePassword}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={ChangePinScreen}
+              name={Screens.ChangePin}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={TwoFaScreen}
+              name={Screens.TwoFa}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={PrivacyPolicyScreen}
+              name={Screens.PrivacyPolicy}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={TermsScreen}
+              name={Screens.Terms}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={SupportScreen}
+              name={Screens.Support}
+              options={{ ...config }}
+            />
+    </NativeStack.Navigator>
+  );
 };
 
 // full app router + modal bottom sheets

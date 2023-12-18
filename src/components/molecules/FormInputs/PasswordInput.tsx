@@ -7,7 +7,7 @@ import { TouchableOpacity } from "react-native";
 
 type PasswordInputProps = FormInputProps & {
   hideToggle?: boolean;
-  passwordRef: Ref<FormInputRef>;
+  passwordRef?: Ref<FormInputRef>;
 };
 
 export const PasswordInput: FC<PasswordInputProps> = ({ hideToggle = false, passwordRef, ...props }) => {

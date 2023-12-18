@@ -1,23 +1,21 @@
 import { AxiosResponse } from "axios";
 
-type BlankResponse<T> = {
+export type BlankResponse<T> = {
       status: boolean;
       message?: string;
       data: T;   
 }
-
 export type ApiResponse<K> = AxiosResponse<BlankResponse<K>>;
-
-export type FailedApiResponse = Omit<BlankResponse<any>, 'data'> & {
+export type FailedApiResponse = Pick<BlankResponse<any>, 'status'> & {
       code: number;
       error: string;
       message?: string
       response: any
 }
-
 export type PlainApiResponse = AxiosResponse<Omit<BlankResponse<any>, "data">>
 
-export interface User {
+
+interface User {
       first_name: string;
       last_name: string;
       username: string;
@@ -41,14 +39,16 @@ export interface User {
       }[];
       };
       email: {
-      address: string;
-      is_verified: boolean;
+            address: string;
+            is_verified: boolean;
       };
       phone: {
-      number: string;
-      is_verified: boolean;
+            number: string;
+            is_verified: boolean;
       };
 }
+
+
 export interface SignUpUser {
   first_name: string;
   last_name: string;
@@ -69,33 +69,17 @@ export type CheckUsername = {
 }
 export type CheckUsernameResponse = ApiResponse<CheckUsername>
 
+
 export type VerifyUserEmailPayload = {
       email: string;
       otp: string;
 }
-interface VerifyUserEmail {
-  first_name: string;
-  last_name: string;
-  username: string;
-  is_active: boolean;
-  createdAt: string;
-  updatedAt: string;
-  id: string;
-  email: {
-    address: string;
-    is_verified: boolean;
-  };
-  phone: {
-    number: string;
-    is_verified: boolean;
-  };
-}
-
+type VerifyUserEmail = Omit<Omit<Omit<User, "meta">, "has_pin">, "devices">
 export type VerifyUserEmailResponse = ApiResponse<VerifyUserEmail>
-
 export type ResendVerificationOtpPayload  = Pick<VerifyUserEmailPayload, "email">&{
       type: string;
 }
+
 
 export type SignInUserWithEmailPayload = {
     email : string;
@@ -108,40 +92,19 @@ export type SignInUserWithEmailPayload = {
         os: string
       }
 }
-
 export type SignInUserWithUsernamePayload = Omit<SignInUserWithEmailPayload, "email"> & {
       username: string;
 }
-
-interface SignInUser{
+type SignInUser = {
  cat: string;
-  user: {
-    first_name: string;
-    last_name: string;
-    username: string;
-    is_active: boolean;
-    has_pin: boolean;
-    devices: [];
-    activity_log: [];
-    createdAt: string;
-    updatedAt: string;
-    id: string;
-    meta: {
-      gender: null;
-      dob: null;
-      location: string;
-      bio: null;
-      socials: [];
-    };
-    email: {
-      address: string;
-      is_verified: boolean;
-    };
-    phone: {
-      number: string;
-      is_verified: boolean;
-    };
-  };
+ user: User
+}
+export type SignInUserResponse = ApiResponse<SignInUser>;
+
+
+export type CreatePinPayload = {
+      pin: string
 }
 
-export type SignInUserResponse = ApiResponse<SignInUser>;
+export type CreatePinResponse = ApiResponse<User>;
+

@@ -7,14 +7,13 @@ import { useVerifyUserEmail } from "hooks/auth/useVerifyUserEmail";
 import useCountDown from "hooks/useCountdown";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 interface ProfileScreenProps {
   route: any;
 }
-//TODO: When the user is navigated to this screen from the sign in screen you need to also pass the user email 
-export const VerifyScreen: React.FC<ProfileScreenProps> = ({ route }) => {
+export const VerifyScreen: FC<ProfileScreenProps> = ({ route }) => {
       const { isDarkMode } = useAppearanceContext();
       const {isPending, verifyUserEmail} = useVerifyUserEmail()
       const {resendVerificationOtp, isError, isSuccess} = useResendVerificationOtp()

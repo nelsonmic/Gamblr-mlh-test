@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { View } from 'components/atoms';
 import { FullLogo, Logo } from 'components/Icons';
 import Animated, { useAnimatedStyle, useSharedValue, withDelay, withSequence, withTiming } from 'react-native-reanimated';
 import { useAppearanceContext } from 'providers/Appearance.provider';
 import clsx from 'clsx';
+import { useCatToken } from 'hooks/auth/useCatToken';
+import { useNavigateTo } from 'hooks/useNavigateTo';
+import { Screens } from 'navigations/Screens';
 
 function SplashScreen(): React.ReactElement | null {
+  const {catToken} = useCatToken();
+  const { goTo } = useNavigateTo();
   const { isDarkMode } = useAppearanceContext();
   const logoOpacity = useSharedValue(1);
   const logoScale = useSharedValue(1);
-   const fullLogoOpacity = useSharedValue(0);
+  const fullLogoOpacity = useSharedValue(0);
   const fullLogoScale = useSharedValue(0);
   const logoStyle = useAnimatedStyle(() => ({
     opacity: logoOpacity.value,
@@ -20,24 +25,54 @@ function SplashScreen(): React.ReactElement | null {
     transform: [{scale: fullLogoScale.value}]
   }))
 
-  const runAnimation = () => {
-      const delayDuration = 500;
+ let timeoutId: any;
 
-      // Logo animations
-      logoOpacity.value = withDelay(delayDuration* 2, withTiming(0, { duration: 1000 }));
-      logoScale.value = withDelay(delayDuration* 2, withTiming(0, { duration: 1500 }));
+  const runAnimation = (onAnimationEnd: () => void) => {
+    const delayDuration = 500;
 
-      // FullLogo animations
-      fullLogoOpacity.value = withSequence(
-        withDelay(delayDuration, withTiming(1, { duration: 1500 }))
-      );
+    // Logo animations
+    logoOpacity.value = withDelay(delayDuration * 2, withTiming(0, { duration: 1000 }));
+    logoScale.value = withDelay(delayDuration * 2, withTiming(0, { duration: 1500 }));
 
-      fullLogoScale.value = withSequence(
-        withDelay(delayDuration, withTiming(1, { duration: 1500 }))
-      );
+    //full logo animation
+    fullLogoOpacity.value = withSequence(
+      withDelay(delayDuration, withTiming(1, { duration: 1500 }))
+    );
+
+    fullLogoScale.value = withSequence(
+      withDelay(delayDuration, withTiming(1, { duration: 1500 }))
+    );
+
+    timeoutId = setTimeout(onAnimationEnd, 3000);
   };
 
-  runAnimation();
+
+  const switchScreens = () =>{
+    if(catToken){
+      goTo(Screens.WelcomeBackScreen)
+    }else if(!catToken){
+      goTo(Screens.SignInScreen)
+    }
+  }
+  useEffect(() => {
+    let isMounted = true;
+
+    const runAnimationWithCallback = () => {
+      if (isMounted) runAnimation(switchScreens);
+    };
+
+    runAnimationWithCallback();
+
+    return () => {
+      isMounted = false;
+
+      if (timeoutId !== undefined) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [catToken]);
+
+
   return (
     <View className={clsx("relative flex-1 items-center justify-center bg-white-100", {
       "bg-black-100" : isDarkMode

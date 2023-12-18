@@ -2,8 +2,10 @@ import clsx from "clsx"
 import { Caret } from "components/Icons"
 import { Pressable, Text, View } from "components/atoms"
 import { PressableProps } from "components/atoms/Pressable"
+import { StorageKeys } from "constants/enums"
+import { useEncryptedStorage } from "hooks/useEncryptedStorage"
 import { useAppearanceContext } from "providers/Appearance.provider"
-import { FC, ReactElement, useState } from "react"
+import { FC, ReactElement, useEffect, useState } from "react"
 import { Switch } from "react-native"
 import Animated, { useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated"
 
@@ -15,8 +17,14 @@ type Props = PressableProps & {
       data: DataType
 }
 export const SectionListItem: FC<Props> = ({data, ...rest}) => {
-      const { isDarkMode, toggleColorScheme, colors } = useAppearanceContext();
+      const { isDarkMode, setIsDarkMode, toggleColorScheme, colors } = useAppearanceContext();
+      const { setEncryptItemToStorage } = useEncryptedStorage();
       const [openItem, setOpenItem] = useState<string | null>(null);
+
+      const handleSetColorScheme = () => {
+            toggleColorScheme()
+            setIsDarkMode((prev) => !prev)
+      }
 
       const size = useSharedValue(0)
       const rotate = useSharedValue("180deg")
@@ -35,6 +43,10 @@ export const SectionListItem: FC<Props> = ({data, ...rest}) => {
             rotate.value = withTiming(openItem === data.title ? "180deg" : "270deg", { duration: 500 });
             setOpenItem(openItem === data.title ? null : data.title);
       };
+
+      useEffect(() => {
+            setEncryptItemToStorage(StorageKeys.IsDarkMode, isDarkMode)
+      }, [isDarkMode])
 
       return (
             <View>
@@ -64,7 +76,7 @@ export const SectionListItem: FC<Props> = ({data, ...rest}) => {
                                           trackColor={{false: colors.lightGray, true: colors.lightGray}}
                                           thumbColor={isDarkMode ?  colors.darkGray : colors.darkGray}
                                           ios_backgroundColor= {colors.lightGray}
-                                          onChange={toggleColorScheme}
+                                          onChange={handleSetColorScheme}
                                           value={isDarkMode}
                                           style={{ transform:[{ scaleX: .7 }, { scaleY: .7 }] }}
                                     />

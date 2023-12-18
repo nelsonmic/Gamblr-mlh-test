@@ -7,7 +7,7 @@ import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 
 export const ForgotPasswordScreen = () => {
-      const goTo = useNavigateTo()
+      const {goTo} = useNavigateTo()
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-4"

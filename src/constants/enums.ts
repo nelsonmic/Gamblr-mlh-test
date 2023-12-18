@@ -6,7 +6,7 @@ export enum EnvModes {
 export enum StorageKeys {
   CatToken = "cat_token",
   WelcomeUser = "welcome_user",
-  something = "something"
+  IsDarkMode = "is_darkmode"
 }
 
 export enum ToastNotificationTitles {
@@ -16,4 +16,5 @@ export enum ToastNotificationTitles {
 
 export enum ErrorMessages {
   VerifyAccount = "User account not verified!",
+  PinExists = "Pin already set!"
 }

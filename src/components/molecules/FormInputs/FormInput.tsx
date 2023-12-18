@@ -30,7 +30,7 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
       styleContainer,
       styleInput,
       value,
-      autoCapitalize,
+      autoCapitalize = "none",
       onChangeText,
       onBlur,
       onFocus,

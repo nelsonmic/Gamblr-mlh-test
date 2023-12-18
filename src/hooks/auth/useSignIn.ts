@@ -23,13 +23,13 @@ export const useSignIn = () => {
             return methods.mutateAsync(payload)
             .then(async (res) => {
                   const {cat, user} = res.data.data
-                  debug("info", user)
+                  debug("info", `User signed in successfully ${user.email.address}`)
                   setCatToken(cat)
                   setEncryptItemToStorage(StorageKeys.WelcomeUser, user.email.address)
                   if(user.has_pin){
-                        goTo(Screens.CreatePinScreen)
+                        goTo(Screens.BottomTabs)
                   }else{
-                        goTo(Screens.Home)
+                        goTo(Screens.CreatePinScreen)
                   }
             })
             .catch((err) => {
