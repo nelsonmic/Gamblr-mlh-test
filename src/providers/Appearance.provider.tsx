@@ -15,6 +15,11 @@ type AppearanceContextType = {
     darkGray: string
   }
 }
+
+type AppearanceProviderProps = {
+  children: ReactNode;
+}
+
 const AppearanceContext = createContext<AppearanceContextType>({
   isDarkMode: true, 
   toggleColorScheme: () => {},
@@ -28,9 +33,6 @@ const AppearanceContext = createContext<AppearanceContextType>({
   }
 });
 
-type AppearanceProviderProps = {
-  children: ReactNode;
-}
 const colors = {
   light: "#ffffff",
   dark: "#131313",

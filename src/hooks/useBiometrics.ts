@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import FingerprintScanner from 'react-native-fingerprint-scanner';
-import { useToast } from "react-native-toast-notifications";
 
 //TODO: add error message title to enum for here and logout in settings
 export const useBiometrics = () => {
-      const toast = useToast();
       const [biometryType, setBiometryType] = useState<string | null | undefined>(null)
 
       useEffect(()=>{

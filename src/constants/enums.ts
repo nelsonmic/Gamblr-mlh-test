@@ -6,7 +6,8 @@ export enum EnvModes {
 export enum StorageKeys {
   CatToken = "cat_token",
   WelcomeUser = "welcome_user",
-  IsDarkMode = "is_darkmode"
+  IsDarkMode = "is_darkmode",
+  IsBiometricsEnabled = "is_biometrics_enabled"
 }
 
 export enum ToastNotificationTitles {

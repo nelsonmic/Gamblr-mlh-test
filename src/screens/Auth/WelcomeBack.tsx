@@ -14,16 +14,17 @@ import { useBiometrics } from "hooks/useBiometrics";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
 import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useBiometricsContext } from "providers/Biometrics.provider";
 import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TouchableOpacity } from "react-native";
 
 export const WelcomeBackScreen = () => {
       const { isDarkMode } = useAppearanceContext();
+      const {handleBiometryAuth, isBiometricsEnabled} = useBiometricsContext();
       const {signIn, isPending} = useSignIn();
       const {device} = useGetDeviceInfo()
       const { getEncryptItemFromStorage } = useEncryptedStorage();
-      const { handleBiometryAuth } = useBiometrics()
 
       const {control, 
             formState:{errors},
@@ -120,15 +121,19 @@ export const WelcomeBackScreen = () => {
                                           </Link>
                                     </View>
                               </View>
-                              <TouchableOpacity 
-                                    className="items-center"
-                                    onPress={onSubmitBiometrics}
-                              >
-                                    <Scan width={55} height={55}/>
-                                    <Text className={clsx("text-center text-gray-200 font-interRegular mt-2", {
-                                          "text-white-100" : isDarkMode
-                                    })}>Use biometrics</Text>
-                              </TouchableOpacity>
+                              {
+                                    isBiometricsEnabled ? (
+                                          <TouchableOpacity 
+                                                className="items-center"
+                                                onPress={onSubmitBiometrics}
+                                          >
+                                                <Scan width={55} height={55}/>
+                                                <Text className={clsx("text-center text-gray-200 font-interRegular mt-2", {
+                                                      "text-white-100" : isDarkMode
+                                                })}>Use biometrics</Text>
+                                          </TouchableOpacity>
+                                    ): null
+                              }
                         </View>
                         <Button 
                               size="lg"
