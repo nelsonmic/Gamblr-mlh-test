@@ -10,7 +10,6 @@ import { PasswordInput } from "components/molecules/FormInputs";
 import { StorageKeys } from "constants/enums";
 import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { useSignIn } from "hooks/auth/useSignIn";
-import { useBiometrics } from "hooks/useBiometrics";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
 import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
 import { useAppearanceContext } from "providers/Appearance.provider";
