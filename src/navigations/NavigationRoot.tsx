@@ -28,12 +28,19 @@ import { WalletScreen } from 'screens/Settings/Wallet';
 import { ReferralsScreen } from 'screens/Settings/Referrals';
 import { ChangePinScreen } from 'screens/Settings/ChangePin';
 import { ChangePasswordScreen } from 'screens/Settings/ChangePassword';
-import { TwoFaScreen } from 'screens/Settings/TwoFa';
+import { TwoFaScreen } from 'screens/Settings/twoFa/TwoFa';
 import { PrivacyPolicyScreen } from 'screens/Settings/PrivacyPolicy';
 import { TermsScreen } from 'screens/Settings/Terms';
 import { SupportScreen } from 'screens/Settings/Support';
 import { BottomTabButton } from 'components/molecules/BottomTabButton';
 import { useNativeStackWithHeaderConfig } from './config/useNativeStackWithHeaderConfig';
+import { SuccessScreen } from 'screens/SuccessScreen';
+import { NewPinScreen } from 'screens/Settings/ChangePin/NewPin';
+import { ConfirmNewPinScreen } from 'screens/Settings/ChangePin/ConfirmNewPin';
+import { NewPasswordScreen } from 'screens/Settings/ChangePassword/NewPassword';
+import { ConfirmNewPasswordScreen } from 'screens/Settings/ChangePassword/ConfirmNewPassword';
+import { TwoFaHomeScreen } from 'screens/Settings/twoFa';
+import { TwoFaOtpScreen } from 'screens/Settings/twoFa/Otp';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -241,6 +248,41 @@ const NativeStackRoot: React.FC = () => {
               name={Screens.Support}
               options={{ ...config }}
             />
+            <NativeStack.Screen
+              component={NewPinScreen}
+              name={Screens.NewPin}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={ConfirmNewPinScreen}
+              name={Screens.ConfirmNewPin}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={SuccessScreen}
+              name={Screens.SuccessScreen}
+              options={{ headerShown: false }}
+            />
+            <NativeStack.Screen
+              component={NewPasswordScreen}
+              name={Screens.NewPassword}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={ConfirmNewPasswordScreen}
+              name={Screens.ConfirmNewPassword}
+              options={{ ...config }}
+            />
+            <NativeStack.Screen
+              component={TwoFaHomeScreen}
+              name={Screens.TwoFaHomeScreen}
+              options={{ ...config }}
+            />   
+            <NativeStack.Screen
+              component={TwoFaOtpScreen}
+              name={Screens.TwoFaOtp}
+              options={{ ...config }}
+            />           
     </NativeStack.Navigator>
   );
 };

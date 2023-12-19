@@ -25,5 +25,12 @@ export enum Screens {
   TwoFa = "TwoFa",
   PrivacyPolicy = "Privacy Policy",
   Terms = "Terms",
-  Support = "Support"
+  Support = "Support",
+  NewPin = "New Pin",
+  ConfirmNewPin = "Confirm New Pin",
+  NewPassword = "New Password",
+  ConfirmNewPassword = "Confirm New Password",
+  SuccessScreen = "Success",
+  TwoFaHomeScreen = "TwoFa Home Screen",
+  TwoFaOtp = "TwoFa Otp"
 }

@@ -110,7 +110,7 @@ export const SettingsScreen = () => {
 			edges={["left", "right", "top", "bottom"]}
 		>
 			<View className="flex-1 justify-between space-y-4">
-				<PageHeader />
+				<PageHeader title="Settings" />
 				<ScrollView
 				      showsVerticalScrollIndicator={false}
                               showsHorizontalScrollIndicator={false}
