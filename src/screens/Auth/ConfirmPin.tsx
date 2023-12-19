@@ -1,7 +1,6 @@
 import { Layout } from "components/Layouts";
 import { Button, View } from "components/atoms";
 import { AuthScreenHeader } from "components/molecules/AuthScreensHeader";
-import { useConfirmPin } from "hooks/auth/useConfirmPin";
 import { useCreatePin } from "hooks/auth/useCreatePin";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { FC } from "react";

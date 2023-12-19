@@ -32,4 +32,11 @@ export interface RootStackParamList {
   [Screens.PrivacyPolicy]: undefined;
   [Screens.Terms]: undefined;
   [Screens.Support]: undefined;
+  [Screens.NewPin]: undefined;
+  [Screens.ConfirmNewPin]: undefined;
+  [Screens.NewPassword]: undefined;
+  [Screens.ConfirmNewPassword]: undefined;
+  [Screens.SuccessScreen]: undefined;
+  [Screens.TwoFaHomeScreen]: undefined;
+  [Screens.TwoFaOtp]: undefined;
 }

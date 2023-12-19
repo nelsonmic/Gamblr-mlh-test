@@ -45,8 +45,12 @@ module.exports = {
           600: "#E9E9E9"
         },
         red:{
-          100: "#FF3922",
-          'tint': "#AC222208"
+          100: "#B94545",
+          'tint': "#AC22221A"
+        },
+        green:{
+          100: "#3E863E", 
+          'tint': "#0096181A"
         },
         darkMode: {
           'input-bg': "#29292A"
