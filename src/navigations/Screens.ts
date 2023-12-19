@@ -32,5 +32,6 @@ export enum Screens {
   ConfirmNewPassword = "Confirm New Password",
   SuccessScreen = "Success",
   TwoFaHomeScreen = "TwoFa Home Screen",
-  TwoFaOtp = "TwoFa Otp"
+  TwoFaOtp = "TwoFa Otp",
+  ChooseTwoFaSheet = "Choose TwoFa"
 }

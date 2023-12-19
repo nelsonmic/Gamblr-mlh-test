@@ -4,8 +4,8 @@ import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import clsx from "clsx";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { Congratulations } from "components/Icons";
-import { FC } from "react";
+import { Congratulations, ShieldSuccess } from "components/Icons";
+import { FC, ReactElement } from "react";
 
 interface SuccessScreenProps{
       route: {
@@ -13,7 +13,7 @@ interface SuccessScreenProps{
                   data: {
                         title: string,
                         description: string,
-                        reroute: Screens
+                        reroute: Screens,
                   }
             }
       }
@@ -30,7 +30,9 @@ export const SuccessScreen: FC<SuccessScreenProps> = ({ route }) => {
 		>
                   <View className="flex-1 justify-between space-y-4">
                         <View className="flex-1 items-center justify-center">
-                              <Congratulations width={100} height={100}/>
+                              {data.title === "Two Factor Authentication Enabled" ? <ShieldSuccess width={80} height={80} />: (
+                                    <Congratulations width={100} height={100}/>
+                              )}
                               <View className="mt-4">
                                     <Text className={clsx("text-black-100 font-[700] text-2xl text-center font-cabinetGrotesk", {
                                           "text-white-100" : isDarkMode

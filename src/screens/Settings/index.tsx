@@ -59,7 +59,7 @@ export const SettingsScreen = () => {
 				{
 					title: "Two-Factor Authentication",
 					rightElement: "",
-					onPress: () => goTo(Screens.TwoFa),
+					onPress: () => goTo(Screens.TwoFaHomeScreen),
 					leftElement: <TwoFa {...sizes} />
 				},
 				{

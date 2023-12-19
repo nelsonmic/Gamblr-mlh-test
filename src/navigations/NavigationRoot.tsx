@@ -41,6 +41,7 @@ import { NewPasswordScreen } from 'screens/Settings/ChangePassword/NewPassword';
 import { ConfirmNewPasswordScreen } from 'screens/Settings/ChangePassword/ConfirmNewPassword';
 import { TwoFaHomeScreen } from 'screens/Settings/twoFa';
 import { TwoFaOtpScreen } from 'screens/Settings/twoFa/Otp';
+import { ChooseTwoFaSheet } from 'screens/Settings/twoFa/ChooseTwoFa.sheet';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -294,7 +295,7 @@ const NavigationRoot: React.FC = () => (
 			component={NativeStackRoot}
 			name={Screens.NativeStackRoot}
 		/>
-		{/* <RootStack.Screen component={NetworkSheet} name={Screens.NetworkSheet} /> */}
+		<RootStack.Screen component={ChooseTwoFaSheet} name={Screens.ChooseTwoFaSheet} />
 	</RootStack.Navigator>
 );
 

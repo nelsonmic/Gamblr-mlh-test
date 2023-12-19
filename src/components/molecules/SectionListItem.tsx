@@ -40,7 +40,7 @@ export const SectionListItem: FC<Props> = ({data, ...rest}) => {
       }))
 
       const runAnimation = () => {
-            size.value = withTiming(openItem === data.title ? 0 : 60 * data.data.length, { duration: 700 });
+            size.value = withTiming(openItem === data.title ? 0 : 62 * data.data.length, { duration: 700 });
             rotate.value = withTiming(openItem === data.title ? "180deg" : "270deg", { duration: 500 });
             setOpenItem(openItem === data.title ? null : data.title);
       };
