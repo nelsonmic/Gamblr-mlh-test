@@ -207,7 +207,7 @@ const NativeStackRoot: React.FC = () => {
             <NativeStack.Screen
               component={ProfileScreen}
               name={Screens.Profile}
-              options={{ ...config }}
+              options={{ ...config, headerTitle: Screens.Profile }}
             />
             <NativeStack.Screen
               component={WalletScreen}

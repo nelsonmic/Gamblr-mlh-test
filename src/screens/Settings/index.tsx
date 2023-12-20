@@ -65,7 +65,7 @@ export const SettingsScreen = () => {
 				{
 					title: "Enable Biometrics",
 					rightElement: <></>,
-					onPress: () => goTo(Screens.Profile),
+					onPress: () => {},
 					leftElement: <Scan {...sizes} />
 				}
 			], 

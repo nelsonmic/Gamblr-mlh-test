@@ -2,6 +2,7 @@ import clsx from "clsx";
 import { Email2Fa, Phone2Fa } from "components/Icons";
 import { Pressable, Text, View } from "components/atoms";
 import { BottomSheet } from "components/molecules/BottomSheet/BottomSheet"
+import { BOX_SHADOW } from "../../../constants";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
@@ -128,21 +129,15 @@ const handleSelect = () => {
 
   return (
     <Animated.View
-      style={[
-        {
-          elevation: 4,
-          shadowColor: "#131313",
-          shadowOffset: { width: 0, height: 1 },
-          shadowOpacity: 0.1,
-          shadowRadius: 6,
-        },
+    className={clsx("bg-white-100 px-6 py-4 rounded-2xl mb-6 border border-white-100", {
+          "border-black-100": isSelected,
+        })}
+      style={[BOX_SHADOW,
         animatedStyle,
       ]}
     >
       <Pressable
-        className={clsx("px-6 py-4 border border-white-100 bg-white-100 flex-row items-center space-x-4 mb-6 rounded-2xl", {
-          "border-black-100": isSelected,
-        })}
+        className={clsx("flex-row items-center space-x-4")}
         onPress={handleSelect}
       >
         {icon}

@@ -88,6 +88,7 @@ export const WelcomeBackScreen = () => {
                                     <View className="items-center">
                                           <Avatar 
                                                 size="lg"
+                                                name=""
                                                 labelPosition="bottom"
                                                 imgSrc={require("../../assets/images/onboarding-1.jpg")}
                                           />
