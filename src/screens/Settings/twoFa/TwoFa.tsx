@@ -1,17 +1,22 @@
 import clsx from "clsx";
-import { ShieldSuccess } from "components/Icons";
+import { ShieldSuccess, ShieldWarning } from "components/Icons";
 import { Layout } from "components/Layouts";
 import { Button, Text, View } from "components/atoms";
 import { Label } from "components/molecules/Label";
 import { PageHeader } from "components/organisms/PageHeader";
 import { useNavigateTo } from "hooks/useNavigateTo";
-import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { useState } from "react";
 
 export const TwoFaScreen = () => {
       const {goTo} = useNavigateTo()
       const {isDarkMode } = useAppearanceContext();
+	const [isDisabled, setIsDisabled] = useState<boolean>(false);
+
+	const toggleDisabled = () => {
+		setIsDisabled(!isDisabled)
+	}
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-4"
@@ -29,23 +34,27 @@ export const TwoFaScreen = () => {
 							})}>Security Status:</Text>
 							<View 
 								className={clsx("mt-4 bg-white-100 items-center py-6 rounded-2xl", {
-									"bg-black-100 border border-gray-200" : isDarkMode
+									"bg-black-100" : isDarkMode
 								})}
-								style={{
-									elevation: 4,
-									shadowColor: 'black',
-									shadowOffset: { width: 0, height: 1 },
-									shadowOpacity: .1,
-									shadowRadius: 4,
-								}}
 							>
-								<ShieldSuccess width={60} height={60}/>
+								{
+									isDisabled? (
+										<ShieldWarning width={60} height={60}/>
+									): (
+										<ShieldSuccess width={60} height={60}/>
+									)
+								}
 
 								<Text className={clsx("mt-4 mb-6 text-sm font-interRegular text-black-100 text-center", {
 									"text-white-100" : isDarkMode
 								})}>Two-factor Authentication is:</Text>
-
-								<Label text="Enabled" styleBg="bg-green-tint" styleText="text-green-100"/>
+								{
+									isDisabled? (
+										<Label text="Disabled" styleBg="bg-red-tint" styleText="text-red-100"/>	
+									): (
+										<Label text="Enabled" styleBg="bg-green-tint" styleText="text-green-100"/>
+									)
+								}
 
 								<Text className={clsx("mt-6 text-sm font-interRegular text-black-100 text-center", {
 									"text-white-100" : isDarkMode
@@ -60,13 +69,19 @@ export const TwoFaScreen = () => {
                         </View>
                         <View className="flex-row space-x-2">
 					<Button 
-						className={"flex-1 bg-red-tint rounded-xl"}
+						className={clsx("flex-1 bg-red-tint rounded-xl",{
+							"bg-green-tint" : isDisabled
+						})}
+						onPress={toggleDisabled}
 					>
-						<Text className="text-red-500 text-sm">Disable</Text>
+						<Text className={clsx("text-red-500 text-sm", {
+							"text-green-100" : isDisabled
+						})}>{isDisabled? "Enable" : "Disable"}</Text>
 					</Button>
                               <Button 
 						size="md"
 						className="flex-1 rounded-xl"
+						onPress={() => goTo(Screens.TwoFaOtp)}
 						
 					>Switch to SMS</Button>
                         </View>

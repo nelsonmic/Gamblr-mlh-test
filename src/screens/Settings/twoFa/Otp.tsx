@@ -6,8 +6,13 @@ import { useNavigateTo } from "hooks/useNavigateTo";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
+import { FC } from "react";
 
-export const TwoFaOtpScreen = () => {
+type Props = {
+      route: any
+}
+export const TwoFaOtpScreen: FC<Props> = ({ route }) => {
+      const { data } = route.params;
       const {goTo} = useNavigateTo()
       const {isDarkMode } = useAppearanceContext();
       const {value, PinInput, PinKeypad} = usePinCodeEntry({
@@ -30,7 +35,7 @@ export const TwoFaOtpScreen = () => {
                                     })}>We sent a verification code to your registered email
                                            <Text className={clsx("text-sm font-interBold text-black-100", {
                                                 "text-white-100": isDarkMode
-                                           })}> thenelsonmichael@gmail.com.</Text> Enter the code below to proceed.
+                                           })}> {data.contact}.</Text> Enter the code below to proceed.
                                     </Text>
                               </View>
                               <View className="mt-8">
@@ -43,7 +48,7 @@ export const TwoFaOtpScreen = () => {
                                     data: {
                                           title: "Two Factor Authentication Enabled",
                                           description: "Congratulations! You have successfully activated Two-Factor Authentication (2FA) for your Gamblr account. Your account is now fortified with an extra layer of security. Enjoy your gaming experience with enhanced protection.",
-                                          reroute: Screens.Settings
+                                          reroute: Screens.Settings,
                                     }
                               })}>Next</Button>
                         </View>

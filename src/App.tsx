@@ -12,6 +12,7 @@ import { ToastProvider } from 'react-native-toast-notifications'
 import { CustomToastType, Toast } from 'components/molecules/Toast';
 import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from 'components/Icons';
 import { BiometricsProvider } from 'providers/Biometrics.provider';
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -50,7 +51,9 @@ function App(): JSX.Element {
                 >
                 <BiometricsProvider>
                   <NavigationContainer>
+                    <BottomSheetModalProvider>
                       <NavigationRoot />
+                    </BottomSheetModalProvider>
                   </NavigationContainer>
                 </BiometricsProvider>
                 </ToastProvider>

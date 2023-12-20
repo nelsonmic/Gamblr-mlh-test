@@ -15,7 +15,7 @@ export const TwoFaHomeScreen = () => {
 		>
 			<View className="flex-1 justify-between space-y-4">
 				<View className="flex-1">
-					<PageHeader title="Two-factor Authentication" description="Strengthen account security" />
+					<PageHeader title="Two-factor Authentication" description="Strengthen your accounts security" />
                               <View className="flex-1 mt-8 items-center justify-center">
                                     <View className="items-center space-y-4">
                                           <Image
@@ -35,7 +35,7 @@ export const TwoFaHomeScreen = () => {
 				</View>
                         <Button 
                               size="lg" 
-                              onPress={() => goTo(Screens.TwoFaOtp)}
+                              onPress={() => goTo(Screens.ChooseTwoFaSheet)}
                         >Next</Button>
 			</View>
 		</Layout>

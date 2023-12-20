@@ -39,4 +39,5 @@ export interface RootStackParamList {
   [Screens.SuccessScreen]: undefined;
   [Screens.TwoFaHomeScreen]: undefined;
   [Screens.TwoFaOtp]: undefined;
+  [Screens.ChooseTwoFaSheet]: undefined;
 }
