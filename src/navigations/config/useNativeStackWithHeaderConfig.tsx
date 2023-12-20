@@ -13,6 +13,14 @@ export const useNativeStackWithHeaderConfig = () => {
 			title: "",
 			headerStyle:{
 				backgroundColor: isDarkMode? colors.dark : colors.light
+			},
+			headerTitleStyle: {
+				color: isDarkMode? colors.light : colors.dark,
+				fontSize: 12,
+
+			},
+			headerLeftStyle: {
+				marginTop: 12
 			}
 		}
 	}

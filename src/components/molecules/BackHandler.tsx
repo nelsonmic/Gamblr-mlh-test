@@ -29,6 +29,7 @@ export const BackHandler: FC<Props> = ({ ...rest }) => {
 				paddingLeft: inset.left + 25,
 				paddingTop: Platform.OS === "android" ? inset.top + 10 : 0
 			}}
+			className="mt-2"
 		>
 			<Pressable onPress={returnToPreviousScreen} className="w-[40] h-[30] -ml-[12] mb-6">
                         <View className={clsx("border-gray-500 rounded-lg bg-white-100 p-4 items-center justify-center", {

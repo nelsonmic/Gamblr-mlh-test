@@ -9,11 +9,11 @@ interface AvatarProps{
       size: "sm" | "lg"
       labelPosition: "right" | "bottom"
       imgSrc:  ImageSourcePropType
-      name?: string
+      name: string
       tag?: string
 }
 
-export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "right", name="Arinze Akoji", tag="__jackjack"}) => {
+export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "right", name, tag="__jackjack"}) => {
       const { isDarkMode } = useAppearanceContext();
       const [showFallback, setShowFallback] = useState<boolean>(false);
 
@@ -23,7 +23,7 @@ export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "ri
                         "flex-row space-x-2": labelPosition === "right",
                   }
             )}>
-                  <View className={clsx("items-center justify-center p-2 rounded-full bg-[#E9E9E960]",
+                  <View className={clsx("items-center justify-center p-2 rounded-full bg-gray-600",
                         {
                               "w-[70] h-[70]" : size === "sm",
                               "h-[100] w-[100]" : size === "lg"
@@ -46,19 +46,21 @@ export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "ri
                   </View>
                   <View>
                         {
-                              labelPosition !== "bottom" ? (
-                                    <Text className={clsx("text-center font-interMedium text-sm text-black-100",
+                              labelPosition !== "bottom" || name !== "" ? (
+                                    <Text className={clsx("text-center font-cabinetGroteskMedium text-sm text-black-100",
                                           {
-                                                "font-interBold" : labelPosition === "right",
-                                                "text-white-100" : isDarkMode
+                                                "font-cabinetGroteskBold" : labelPosition === "right" || labelPosition === "bottom",
+                                                "text-white-100" : isDarkMode,
+                                                "text-xl" : labelPosition === "bottom"
                                           }
                                     )}>{name}</Text>
                               ) : null
                         }
-                              <Text className={clsx("text-center font-interSemiBold",
+                              <Text className={clsx("text-center text-sm font-interSemiBold",
                                     {
                                           "text-gray-400" : labelPosition === "right",
-                                          "text-white-100" : isDarkMode
+                                          "text-white-100" : isDarkMode,
+                                          "text-gray-200" : name !== ""
                                     }
                               )}>
                                     @{tag}

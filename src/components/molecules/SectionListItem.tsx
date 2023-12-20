@@ -84,7 +84,7 @@ export const SectionListItem: FC<Props> = ({data, ...rest}) => {
                               )
                         }
                   </Pressable>
-                  <Animated.View className="mb-4"
+                  <Animated.View className="mb-4 pt-2"
                         style={animatedStyle}
                   >
                         {
