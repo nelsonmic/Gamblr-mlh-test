@@ -9,16 +9,18 @@ import { useCatToken } from "./useCatToken";
 import { ErrorMessages, StorageKeys, ToastNotificationTitles } from "constants/enums";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
 import { Screens } from "navigations/Screens";
+import { useDispatch } from "react-redux";
+import { setUser } from "slices/userSlice";
 
 export const useSignIn = () => {
       const toast = useToast();
       const {goTo} = useNavigateTo();
       const { setCatToken } = useCatToken();
       const {setEncryptItemToStorage} = useEncryptedStorage()
+      const dispatch = useDispatch();
       const methods = useMutation<SignInUserResponse, any, SignInUserWithEmailPayload | SignInUserWithUsernamePayload>({ 
             mutationFn: (props) => signIn(props) 
       });
-      //TODO: Store user to redux slice
       const _signIn = (payload: SignInUserWithEmailPayload | SignInUserWithUsernamePayload) => {
             return methods.mutateAsync(payload)
             .then(async (res) => {
@@ -26,6 +28,7 @@ export const useSignIn = () => {
                   debug("info", `User signed in successfully ${user.email.address}`)
                   setCatToken(cat)
                   setEncryptItemToStorage(StorageKeys.WelcomeUser, user.email.address)
+                  dispatch(setUser(user))
                   if(user.has_pin){
                         goTo(Screens.BottomTabs)
                   }else{

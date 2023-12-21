@@ -4,6 +4,8 @@ import Animated, { FadeInDown } from "react-native-reanimated"
 import { Discord, Facebook, Instagram, X } from "components/Icons"
 import clsx from "clsx"
 import { useAppearanceContext } from "providers/Appearance.provider"
+import { useSelector } from "react-redux"
+import { User } from "types/structs"
 
 const sizes ={
       width: 40,
@@ -11,16 +13,17 @@ const sizes ={
 }
 
 export const Bio = () => {
+	const user = useSelector((state: {user:{user: User }}) => state.user.user);
       const { isDarkMode } = useAppearanceContext();
       const _socials = [<X {...sizes} />, <Discord {...sizes} />, <Instagram {...sizes} />, <Facebook {...sizes} />]
       const _bioDetails = [
             {
                   title: "Location",
-                  value: "Nigeria"
+                  value: user.meta.location
             },
             {
                   title: "Gender",
-                  value: "Male"
+                  value: user.meta.gender || "Male"
             }
       ]
       return (
@@ -62,7 +65,7 @@ export const Bio = () => {
                         <Text className={clsx("text-black-100 text-sm font-interRegular", {
                               "text-white-100" : isDarkMode
                         })}>
-                              Passionate gamer and betting enthusiast. Always ready for the next gaming challenge.
+                              {user.meta.bio}
                         </Text>
                   </View>
                   <View 

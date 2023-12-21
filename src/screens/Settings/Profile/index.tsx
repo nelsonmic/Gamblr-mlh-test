@@ -7,6 +7,8 @@ import { Badges } from "./Badges";
 import { Bio } from "./Bio";
 import { Favorite } from "./Favorite";
 import { useCallback, useState } from "react";
+import { useSelector } from "react-redux";
+import { User } from "types/structs";
 
 type TabItemProps = {
 	index: number;
@@ -24,6 +26,7 @@ const profileTabs = ["Badges", "Bio", "Favorites"]
 
 
 export const ProfileScreen = () => {
+	const user = useSelector((state: {user:{user: User }}) => state.user.user);
 	const [activeIndex, setActiveIndex] = useState(1);
 
 	const handleTabPress = useCallback((index: number) => {
@@ -35,7 +38,13 @@ export const ProfileScreen = () => {
 			edges={["left", "right", "bottom"]}
             >
 			<View className="flex-1 mt-4">
-				<Avatar size="lg" labelPosition="bottom" name="Nelson Michael" imgSrc={require("../../../assets/images/onboarding-2.jpg")}/>
+				<Avatar 
+					size="lg" 
+					labelPosition="bottom" 
+					name={`${user.first_name} ${user.last_name}`} 
+					imgSrc={require("../../../assets/images/onboarding-2.jpg")}
+					tag={user.username}
+				/>
 				<View className={clsx("mt-6 flex-1")}>
 					<TabsMenu
 						activeIndex={activeIndex}

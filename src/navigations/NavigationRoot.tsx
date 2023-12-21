@@ -237,12 +237,12 @@ const NativeStackRoot: React.FC = () => {
             <NativeStack.Screen
               component={PrivacyPolicyScreen}
               name={Screens.PrivacyPolicy}
-              options={{ ...config }}
+              options={{ ...config, headerTitle: Screens.PrivacyPolicy }}
             />
             <NativeStack.Screen
               component={TermsScreen}
               name={Screens.Terms}
-              options={{ ...config }}
+              options={{ ...config, headerTitle: Screens.Terms }}
             />
             <NativeStack.Screen
               component={SupportScreen}

@@ -15,7 +15,7 @@ export type FailedApiResponse = Pick<BlankResponse<any>, 'status'> & {
 export type PlainApiResponse = AxiosResponse<Omit<BlankResponse<any>, "data">>
 
 
-interface User {
+export interface User {
       first_name: string;
       last_name: string;
       username: string;

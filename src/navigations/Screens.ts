@@ -24,7 +24,7 @@ export enum Screens {
   ChangePin = "Change Pin",
   TwoFa = "TwoFa",
   PrivacyPolicy = "Privacy Policy",
-  Terms = "Terms",
+  Terms = "Terms and Conditions",
   Support = "Support",
   NewPin = "New Pin",
   ConfirmNewPin = "Confirm New Pin",
