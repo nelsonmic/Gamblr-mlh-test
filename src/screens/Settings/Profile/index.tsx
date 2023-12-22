@@ -32,6 +32,7 @@ export const ProfileScreen = () => {
 	const handleTabPress = useCallback((index: number) => {
 		setActiveIndex(index);
 	}, []);
+	
 	return (
             <Layout
 			className="h-full space-y-2 px-4 pt-4"

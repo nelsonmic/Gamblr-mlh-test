@@ -6,7 +6,7 @@ import { FormInput, PasswordInput } from "components/molecules/FormInputs";
 import { Profile } from "components/Icons";
 import clsx from "clsx";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -15,12 +15,13 @@ import { useSignIn } from "hooks/auth/useSignIn";
 
 export const SignInScreen = () => {
       const { isDarkMode } = useAppearanceContext();
-      const {signIn, isPending} = useSignIn() 
+      const {signIn, isPending, isSuccess, isError} = useSignIn() 
       const passwordInputRef = useRef(null);
 
       const {control, 
             formState:{errors},
             handleSubmit,
+            reset
       } = useForm<SignInFormType>({
             defaultValues: {
                   email: "",
@@ -31,6 +32,10 @@ export const SignInScreen = () => {
       })
 
       const onSubmit = (payload: SignInFormType) => signIn(payload)
+
+      useEffect(() => {
+            reset();
+      }, [isSuccess, isError])
 
 	return (
 		<Layout

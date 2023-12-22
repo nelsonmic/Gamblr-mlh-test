@@ -37,9 +37,9 @@ export const useSignIn = () => {
             };
 
             if (isValidEmail(payload.email || "")) {
-            _payload.email = payload.email;
+                  _payload.email = payload.email;
             } else {
-            _payload.username = payload.email;
+                  _payload.username = payload.email;
             }
 
             return methods.mutateAsync(_payload)

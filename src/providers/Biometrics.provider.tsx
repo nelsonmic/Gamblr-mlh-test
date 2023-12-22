@@ -11,7 +11,7 @@ type BiometricsContextType = {
       isBiometricsEnabled: boolean;
       toggleBiometrics: () => void;
       isBiometricsAvailable: boolean;
-      handleBiometryAuth: (onBiometryAuthComplete: any) => void;
+      handleBiometryAuth: (onBiometryAuthComplete: () => void) => void;
 }
 
 const BiometricsContext = createContext<BiometricsContextType>({
