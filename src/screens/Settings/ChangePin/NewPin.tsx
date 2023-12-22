@@ -4,12 +4,25 @@ import { PageHeader } from "components/organisms/PageHeader"
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
-
-export const NewPinScreen = () => {
+import { FC } from "react";
+type Props = {
+      route: any
+}
+export const NewPinScreen: FC<Props> = ({ route }) => {
 	const {value, PinInput, PinKeypad} = usePinCodeEntry({
 		pinLength: 4,
+            secureEntry: true
 	});
 	const {goTo} = useNavigateTo();
+
+      const handleSubmit = () => {
+            if(value.length === 4) goTo(Screens.ConfirmNewPin, {
+                  data: {
+                        old_pin: route.params.data.old_pin,
+                        new_pin: value
+                  }
+            })
+      }
       return (
             <Layout
 			className="h-full space-y-2 px-4 pt-4"
@@ -26,7 +39,7 @@ export const NewPinScreen = () => {
                               <PinKeypad />
                               <Button 
                                     size="lg" 
-                                    onPress={() => goTo(Screens.ConfirmNewPin)}
+                                    onPress={handleSubmit}
                               >Update Pin</Button>
                         </View>
                   </View>

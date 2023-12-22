@@ -93,9 +93,7 @@ export type SignInUserPayload = {
         os: string
       }
 }
-// export type SignInUserWithUsernamePayload = Omit<SignInUserWithEmailPayload, "email"> & {
-//       username: string;
-// }
+
 type SignInUser = {
  cat: string;
  user: User
@@ -108,4 +106,11 @@ export type CreatePinPayload = {
 }
 
 export type CreatePinResponse = ApiResponse<User>;
+
+export type UpdatePinPayload = {
+      old_pin: string;
+      new_pin: string
+}
+
+export type UpdatePinResponse = ApiResponse<null>;
 
