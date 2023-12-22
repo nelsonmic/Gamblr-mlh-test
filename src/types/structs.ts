@@ -15,7 +15,7 @@ export type FailedApiResponse = Pick<BlankResponse<any>, 'status'> & {
 export type PlainApiResponse = AxiosResponse<Omit<BlankResponse<any>, "data">>
 
 
-interface User {
+export interface User {
       first_name: string;
       last_name: string;
       username: string;
@@ -81,9 +81,10 @@ export type ResendVerificationOtpPayload  = Pick<VerifyUserEmailPayload, "email"
 }
 
 
-export type SignInUserWithEmailPayload = {
-    email : string;
+export type SignInUserPayload = {
+    email?: string;
     password: string;
+    username?: string;
     device : {
         device_name: string;
         device_id: string;
@@ -92,9 +93,9 @@ export type SignInUserWithEmailPayload = {
         os: string
       }
 }
-export type SignInUserWithUsernamePayload = Omit<SignInUserWithEmailPayload, "email"> & {
-      username: string;
-}
+// export type SignInUserWithUsernamePayload = Omit<SignInUserWithEmailPayload, "email"> & {
+//       username: string;
+// }
 type SignInUser = {
  cat: string;
  user: User

@@ -13,7 +13,7 @@ interface AvatarProps{
       tag?: string
 }
 
-export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "right", name, tag="__jackjack"}) => {
+export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "right", name, tag}) => {
       const { isDarkMode } = useAppearanceContext();
       const [showFallback, setShowFallback] = useState<boolean>(false);
 

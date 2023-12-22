@@ -39,7 +39,8 @@ export const SignUpScreen = () => {
             formState:{errors}, 
             handleSubmit,
             setValue,
-            getValues 
+            getValues,
+            reset 
       } = useForm<SignUpFormType>({
 		defaultValues: {
                   fullname: "",
@@ -57,7 +58,7 @@ export const SignUpScreen = () => {
 	});
 
       const {username } = getValues();
-      const {signUp, isPending} = useSignUp();
+      const {signUp, isPending, isSuccess: isSignUpSuccess} = useSignUp();
       const {refetch, isLoading, isRefetching, isError, error, data, isSuccess} = useCheckUsername(username, getValues()["username"].length >= 3);
       const debouncedRefetch = useCallback(debounce(refetch, 500),[refetch]);
 
@@ -115,7 +116,8 @@ export const SignUpScreen = () => {
 
       useEffect(() => {
             handleFirstNameLastName();
-      }, [getValues()['fullname']]);
+            if(isSignUpSuccess) reset();
+      }, [getValues()['fullname'], isSignUpSuccess]);
 
 	return (
 		<Layout

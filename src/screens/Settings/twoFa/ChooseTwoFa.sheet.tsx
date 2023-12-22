@@ -5,13 +5,16 @@ import { BottomSheet } from "components/molecules/BottomSheet/BottomSheet"
 import { BOX_SHADOW } from "../../../constants";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
-import { useAppearanceContext } from "providers/Appearance.provider";
 import { FC, ReactElement, useState } from "react";
 import { KeyboardAvoidingView, Platform } from "react-native"
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useSelector } from "react-redux";
+import { User } from "types/structs";
+import { intlPhoneNumberFormat } from "handlers/helpers/intlPhoneNumberFormat";
 
 export const ChooseTwoFaSheet = () => {
+  	  const user = useSelector((state: {user:{user: User }}) => state.user.user);
       const sizes = {
             width: 50,
             height: 50
@@ -21,14 +24,14 @@ export const ChooseTwoFaSheet = () => {
                   icon: <Phone2Fa {...sizes}/>,
                   title: "SMS",
                   description: "Receive an OTP verification code to authorize login access to your account via SMS at:",
-                  contact: "+234 9126377451",
+                  contact: intlPhoneNumberFormat(user.phone.number),
                   reroute: Screens.TwoFaOtp
             },
             {
                   icon: <Email2Fa {...sizes}/>,
                   title: "Email",
                   description: "Receive an OTP verification code to authorize login access to your account via Email at:",
-                  contact: "thenelsonmichael@gmail.com",
+                  contact: user.email.address,
                   reroute: Screens.TwoFaOtp
             }
       ]
@@ -144,7 +147,7 @@ const handleSelect = () => {
         <View className="flex-1">
           <Text className={clsx("font-interBold text-black-100 text-sm mb-[4]")}>{title}</Text>
           <Text className="text-xs font-interRegular">
-            {description}
+            {description}{" "}
             <Text className="font-interBold text-xs">{contact}</Text>
           </Text>
         </View>

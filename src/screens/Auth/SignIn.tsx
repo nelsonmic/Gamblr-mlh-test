@@ -6,24 +6,22 @@ import { FormInput, PasswordInput } from "components/molecules/FormInputs";
 import { Profile } from "components/Icons";
 import clsx from "clsx";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { focusInput } from "handlers/helpers/focusOnInputField";
 import { useSignIn } from "hooks/auth/useSignIn";
-import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
-import { isValidEmail } from "handlers/helpers/isValidEmail";
 
 export const SignInScreen = () => {
       const { isDarkMode } = useAppearanceContext();
-      const {signIn, isPending} = useSignIn() 
-      const {device} = useGetDeviceInfo()
+      const {signIn, isPending, isSuccess, isError} = useSignIn() 
       const passwordInputRef = useRef(null);
 
       const {control, 
             formState:{errors},
             handleSubmit,
+            reset
       } = useForm<SignInFormType>({
             defaultValues: {
                   email: "",
@@ -33,33 +31,11 @@ export const SignInScreen = () => {
             resolver: yupResolver(signInFormSchema)
       })
 
-      const onSubmit = (payload: SignInFormType) => {
-            if(isValidEmail(payload.email)){
-                  signIn({
-                        email: payload.email,
-                        password: payload.password,
-                        device: {
-                              device_id: device.device_id,
-                              device_name: device.device_name,
-                              os: device.os,
-                              version: device.version,
-                              platform: device.platform
-                        }
-                  })
-            }else{
-                  signIn({
-                        username: payload.email,
-                        password: payload.password,
-                        device: {
-                              device_id: device.device_id,
-                              device_name: device.device_name,
-                              os: device.os,
-                              version: device.version,
-                              platform: device.platform
-                        }
-                  })          
-            }
-      }
+      const onSubmit = (payload: SignInFormType) => signIn(payload)
+
+      useEffect(() => {
+            reset();
+      }, [isSuccess, isError])
 
 	return (
 		<Layout

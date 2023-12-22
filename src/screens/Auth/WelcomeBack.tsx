@@ -11,25 +11,24 @@ import { StorageKeys } from "constants/enums";
 import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { useSignIn } from "hooks/auth/useSignIn";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
-import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { useBiometricsContext } from "providers/Biometrics.provider";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TouchableOpacity } from "react-native";
+import { SignInUserPayload } from "types/structs";
 
 export const WelcomeBackScreen = () => {
+      const [user, setUser] = useState<SignInUserPayload | null>(null);
       const { isDarkMode } = useAppearanceContext();
       const {handleBiometryAuth, isBiometricsEnabled} = useBiometricsContext();
       const {signIn, isPending} = useSignIn();
-      const {device} = useGetDeviceInfo()
       const { getEncryptItemFromStorage } = useEncryptedStorage();
 
       const {control, 
             formState:{errors},
             handleSubmit,
-            setValue,
-            getValues
+            setValue
       } = useForm<SignInFormType>({
             defaultValues: {
                   email: "",
@@ -39,44 +38,24 @@ export const WelcomeBackScreen = () => {
             resolver: yupResolver(signInFormSchema)
       })
 
-      const onSubmit = (payload: SignInFormType) => {
-            signIn({
-                  email: payload.email,
-                  password: payload.password,
-                  device: {
-                        device_id: device.device_id,
-                        device_name: device.device_name,
-                        os: device.os,
-                        version: device.version,
-                        platform: device.platform
-                  }
-            })
-      }
+      const onSubmit = (payload: SignInFormType) => signIn(payload)
 
       const onSubmitBiometrics = () => {
-            handleBiometryAuth(signIn({
-                  email: getValues()["email"],
-                  password: getValues()["password"],
-                  device: {
-                        device_id: device.device_id,
-                        device_name: device.device_name,
-                        os: device.os,
-                        version: device.version,
-                        platform: device.platform
-                  }
-            }))
+            const email = user?.email;
+            const password = user?.password || "";
+            handleBiometryAuth(signIn({email, password}))
       }
 
       useEffect(()=> {
             (async () =>{
                   try{
                         let value = await getEncryptItemFromStorage(StorageKeys.WelcomeUser)
-                        setValue("email", value)
+                        setUser(value);
+                        setValue("email", value.email)
                   }catch(error){
-
                   }
             })()
-      }, [getEncryptItemFromStorage, setValue])
+      }, [getEncryptItemFromStorage, setValue, setUser])
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -89,6 +68,7 @@ export const WelcomeBackScreen = () => {
                                           <Avatar 
                                                 size="lg"
                                                 name=""
+                                                tag={user?.username}
                                                 labelPosition="bottom"
                                                 imgSrc={require("../../assets/images/onboarding-1.jpg")}
                                           />

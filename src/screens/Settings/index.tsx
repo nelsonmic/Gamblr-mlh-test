@@ -94,7 +94,10 @@ export const SettingsScreen = () => {
 			], 
 			title: "Other"
 		},
-		{data: [], title: "Dark Mode"}
+		{
+			data: [], 
+			title: "Dark Mode"
+		}
 	]
 
 	const handleLogout = () => {

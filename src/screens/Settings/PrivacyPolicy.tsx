@@ -1,14 +1,18 @@
+import clsx from "clsx";
 import { Layout } from "components/Layouts";
-import { Text } from "components/atoms";
+import { Text, View } from "components/atoms";
+import { Banner } from "components/molecules/Banner";
 
 export const PrivacyPolicyScreen = () => {
 
 	return (
-		<Layout
-			className="flex-col h-full space-y-2 px-2"
-			edges={["left", "right", "top"]}
-		>
-			<Text>PrivacyPolicy</Text>
+            <Layout
+			className="h-full space-y-2 px-4 pt-4"
+			edges={["left", "right", "bottom"]}
+            >
+			<View className={clsx("flex-1")}>
+				<Banner text="Your Privacy Matters" />
+			</View>
 		</Layout>
 	);
 };

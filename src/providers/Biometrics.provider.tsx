@@ -11,7 +11,7 @@ type BiometricsContextType = {
       isBiometricsEnabled: boolean;
       toggleBiometrics: () => void;
       isBiometricsAvailable: boolean;
-      handleBiometryAuth: (onBiometryAuthComplete: any) => void;
+      handleBiometryAuth: (onBiometryAuthComplete: () => void) => void;
 }
 
 const BiometricsContext = createContext<BiometricsContextType>({
@@ -40,6 +40,7 @@ export const BiometricsProvider = ({children}: BiometricsProviderProps) => {
                   }
             })()
       }, [getEncryptItemFromStorage])
+
       useEffect(()=>{
             setEncryptItemToStorage(StorageKeys.IsBiometricsEnabled, isBiometricsEnabled)
             
@@ -56,7 +57,7 @@ export const BiometricsProvider = ({children}: BiometricsProviderProps) => {
             setIsBiometricsEnabled(!isBiometricsEnabled);
       }
 
-      const handleBiometryAuth = (onBiometryAuthComplete: any) => {
+      const handleBiometryAuth = async (onBiometryAuthComplete: () => void) => {
             if(isBiometricsAvailable){
                   FingerprintScanner.authenticate({
                         description: message
