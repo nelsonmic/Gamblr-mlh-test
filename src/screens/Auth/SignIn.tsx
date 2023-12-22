@@ -12,13 +12,10 @@ import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { focusInput } from "handlers/helpers/focusOnInputField";
 import { useSignIn } from "hooks/auth/useSignIn";
-import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
-import { isValidEmail } from "handlers/helpers/isValidEmail";
 
 export const SignInScreen = () => {
       const { isDarkMode } = useAppearanceContext();
       const {signIn, isPending} = useSignIn() 
-      const {device} = useGetDeviceInfo()
       const passwordInputRef = useRef(null);
 
       const {control, 
@@ -33,33 +30,7 @@ export const SignInScreen = () => {
             resolver: yupResolver(signInFormSchema)
       })
 
-      const onSubmit = (payload: SignInFormType) => {
-            if(isValidEmail(payload.email)){
-                  signIn({
-                        email: payload.email,
-                        password: payload.password,
-                        device: {
-                              device_id: device.device_id,
-                              device_name: device.device_name,
-                              os: device.os,
-                              version: device.version,
-                              platform: device.platform
-                        }
-                  })
-            }else{
-                  signIn({
-                        username: payload.email,
-                        password: payload.password,
-                        device: {
-                              device_id: device.device_id,
-                              device_name: device.device_name,
-                              os: device.os,
-                              version: device.version,
-                              platform: device.platform
-                        }
-                  })          
-            }
-      }
+      const onSubmit = (payload: SignInFormType) => signIn(payload)
 
 	return (
 		<Layout
