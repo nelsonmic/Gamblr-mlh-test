@@ -1,5 +1,6 @@
 import clsx from "clsx";
 import { Text } from "components/atoms";
+import { hapticFeedback } from "handlers/helpers/shared";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { useAppearanceContext } from "providers/Appearance.provider";
@@ -15,8 +16,13 @@ type Props = {
 export const BottomTabButton: FC<Props> = ({label, icon, isFocused, routeName}) => {
   const { isDarkMode } = useAppearanceContext();
   const { goTo } = useNavigateTo();
+
+  const handleNavigate = () => {
+    hapticFeedback()
+    goTo(routeName)
+  }
   return (
-    <TouchableOpacity onPress={() => goTo(routeName)} className='items-center space-y-4'>
+    <TouchableOpacity onPress={handleNavigate} className='items-center space-y-4'>
       {icon}
       <Text
             className={clsx('font-interSemiBold text-center text-xs leading-3 text-gray-100', {

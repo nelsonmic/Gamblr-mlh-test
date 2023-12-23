@@ -21,8 +21,14 @@ interface SuccessScreenProps{
 
 export const SuccessScreen: FC<SuccessScreenProps> = ({ route }) => {
       const { isDarkMode } = useAppearanceContext();
-      const {goTo} = useNavigateTo()
+      const { reset} = useNavigateTo()
       const {data} = route.params
+      const handleReroute = () => {
+            reset({
+                  index: 0,
+                  routes: [{name: data.reroute}]
+            })
+      }
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -42,7 +48,7 @@ export const SuccessScreen: FC<SuccessScreenProps> = ({ route }) => {
                                     })}>{data.description}</Text>
                               </View>
                         </View>
-                        <Button size="lg" onPress={()=> goTo(data.reroute)}>Done</Button>
+                        <Button size="lg" onPress={handleReroute}>Done</Button>
                   </View>
 		</Layout>
 	);

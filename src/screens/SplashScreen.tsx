@@ -10,7 +10,7 @@ import { Screens } from 'navigations/Screens';
 
 function SplashScreen(): React.ReactElement | null {
   const {catToken} = useCatToken();
-  const { goTo } = useNavigateTo();
+  const { reset } = useNavigateTo();
   const { isDarkMode } = useAppearanceContext();
   const logoOpacity = useSharedValue(1);
   const logoScale = useSharedValue(1);
@@ -49,9 +49,15 @@ function SplashScreen(): React.ReactElement | null {
 
   const switchScreens = () =>{
     if(catToken){
-      goTo(Screens.WelcomeBackScreen)
+      reset({
+        index: 0,
+        routes: [{name: Screens.WelcomeBackScreen}]
+      })
     }else if(!catToken){
-      goTo(Screens.SignInScreen)
+      reset({
+        index: 0,
+        routes: [{name: Screens.SignInScreen}]
+      })
     }
   }
   useEffect(() => {

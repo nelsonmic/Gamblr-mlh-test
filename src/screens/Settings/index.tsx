@@ -12,7 +12,7 @@ import { useToast } from "react-native-toast-notifications";
 
 export const SettingsScreen = () => {
 	const toast = useToast();
-	const { goTo } = useNavigateTo()
+	const { goTo, reset } = useNavigateTo()
 	const { removeEncryptedItemFromStorage } = useEncryptedStorage();
 	const sizes = {
 		width : 24,
@@ -104,9 +104,13 @@ export const SettingsScreen = () => {
 		removeEncryptedItemFromStorage(StorageKeys.CatToken)
 		toast.show("Logging you out of your account.", {type: "info", data: "Until next time!"})
 		setTimeout(()=> {
-			goTo(Screens.SignInScreen)
+			reset({
+				index: 0,
+				routes: [{name: Screens.SignInScreen}]
+			})
 		}, 4000)
 	}
+
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-14"
