@@ -1,15 +1,32 @@
 import { Layout } from "components/Layouts"
-import { Button, View } from "components/atoms"
+import { Button, Text, View } from "components/atoms"
 import { PageHeader } from "components/organisms/PageHeader"
+import { useUpdatePin } from "hooks/settings/useUpdatePin";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { Screens } from "navigations/Screens";
+import { FC, useState } from "react";
 
-export const ConfirmNewPinScreen = () => {
+type Props = {
+      route : any
+}
+
+export const ConfirmNewPinScreen: FC<Props> = ({ route }) => {
+      const { new_pin, old_pin } = route.params.data;
+      const {updatePin, isPending} = useUpdatePin();
+      const [error, setError] = useState<boolean>(false);
 	const {value, PinInput, PinKeypad} = usePinCodeEntry({
 		pinLength: 4,
+            secureEntry: true
 	});
-	const {goTo} = useNavigateTo();
+      const handleSubmit = () => {
+            if(new_pin !== value){
+                  setError(true);
+            }else{
+                  setError(false);
+                  updatePin({new_pin, old_pin})
+            }
+      }
       return (
             <Layout
 			className="h-full space-y-2 px-4 pt-4"
@@ -20,19 +37,17 @@ export const ConfirmNewPinScreen = () => {
 					<PageHeader title="Confirm PIN" description="Enter your new PIN again" />
                               <View className="mt-8">
                                     <PinInput />
+                                    {
+                                          error? <Text className="text-red-500 mt-1 text-xs mt-2">Pins do not match</Text>: null
+                                    }
                               </View>
 				</View>
                         <View>
                               <PinKeypad />
                               <Button 
-                                    size="lg" 
-                                    onPress={() => goTo(Screens.SuccessScreen, {
-                                          data: {
-                                                title: "Pin updated successfully!",
-                                                description: "You've successfully updated your Gamblr transaction PIN. If you didn't make this change, please contact support immediately. Stay secure and game on!",
-                                                reroute: Screens.Settings
-                                          }
-                                    })}
+                                    size="lg"
+                                    onPress={handleSubmit} 
+                                    isLoading={isPending}
                               >Update Pin</Button>
                         </View>
                   </View>

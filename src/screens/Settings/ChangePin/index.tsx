@@ -8,8 +8,17 @@ import { Screens } from "navigations/Screens";
 export const ChangePinScreen = () => {
 	const {value, PinInput, PinKeypad} = usePinCodeEntry({
 		pinLength: 4,
+		secureEntry: true
 	});
 	const {goTo} = useNavigateTo();
+
+	const handleSubmit = () => {
+		if(value.length === 4) goTo(Screens.NewPin, {
+			data: {
+				old_pin: value
+			}
+		})
+	}
 
 	return (
 		<Layout
@@ -27,7 +36,7 @@ export const ChangePinScreen = () => {
                               <PinKeypad />
                               <Button 
                                     size="lg" 
-                                    onPress={() => goTo(Screens.NewPin)}
+                                    onPress={handleSubmit}
                               >Update Pin</Button>
                         </View>	
 
