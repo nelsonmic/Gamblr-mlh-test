@@ -17,7 +17,7 @@ import { useGetDeviceInfo } from "hooks/useGetDeviceInfo";
 export const useSignIn = () => {
       const toast = useToast();
       const {device} = useGetDeviceInfo()
-      const {goTo} = useNavigateTo();
+      const {goTo, reset} = useNavigateTo();
       const { setCatToken } = useCatToken();
       const {setEncryptItemToStorage} = useEncryptedStorage()
       const dispatch = useDispatch();
@@ -50,7 +50,10 @@ export const useSignIn = () => {
                   setEncryptItemToStorage(StorageKeys.WelcomeUser, {...payload, username: user.username})
                   dispatch(setUser(user))
                   if(user.has_pin){
-                        goTo(Screens.BottomTabs)
+                        reset({
+                              index: 0,
+                              routes: [{ name: Screens.BottomTabs }]
+                        })
                   }else{
                         goTo(Screens.CreatePinScreen)
                   }

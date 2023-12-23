@@ -8,7 +8,13 @@ import { GreenCheck } from "components/Icons";
 
 export const CongratulationsScreen = () => {
       const { isDarkMode } = useAppearanceContext();
-      const {goTo} = useNavigateTo()
+      const { reset } = useNavigateTo()
+      const handleReroute = () => {
+            reset({
+                  index: 0,
+                  routes: [{name: Screens.SignInScreen}]
+            })
+      }
 	return (
 		<Layout
 			className="h-full space-y-2 px-4 pt-8"
@@ -26,7 +32,7 @@ export const CongratulationsScreen = () => {
                                     })}>Your account has been created successfully.</Text>
                               </View>
                         </View>
-                        <Button size="lg" onPress={()=> goTo(Screens.SignInScreen)}>Continue</Button>
+                        <Button size="lg" onPress={handleReroute}>Continue</Button>
                   </View>
 		</Layout>
 	);

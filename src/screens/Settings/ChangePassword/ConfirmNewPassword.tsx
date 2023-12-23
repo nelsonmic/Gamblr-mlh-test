@@ -7,7 +7,23 @@ import { Screens } from "navigations/Screens";
 
 export const ConfirmNewPasswordScreen = () => {
 
-	const {goTo} = useNavigateTo();
+	const { reset } = useNavigateTo();
+
+      const handleNavigate = () => {
+            reset({
+                  index: 0,
+                  routes: [{
+                        name: Screens.SuccessScreen, 
+                        params: {
+                              data:{
+                                    title: "Password updated successfully!",
+                                    description: "You've successfully updated your password. If you didn't make this change, please contact support immediately. Stay secure and game on!",
+                                    reroute: Screens.Settings
+                              }
+                        } 
+                  }]
+            })
+      }
       return (
             <Layout
 			className="h-full space-y-2 px-4 pt-4"
@@ -25,13 +41,7 @@ export const ConfirmNewPasswordScreen = () => {
                         <View>
                               <Button 
                                     size="lg" 
-                                    onPress={() => goTo(Screens.SuccessScreen, {
-                                          data:{
-                                                title: "Password updated successfully!",
-                                                description: "You've successfully updated your password. If you didn't make this change, please contact support immediately. Stay secure and game on!",
-                                                reroute: Screens.Settings
-                                          }
-                                    })}
+                                    onPress={handleNavigate}
                               >Update Password</Button>
                         </View>
                   </View>

@@ -40,7 +40,7 @@ export const NewPinScreen: FC<Props> = ({ route }) => {
                               <Button 
                                     size="lg" 
                                     onPress={handleSubmit}
-                              >Update Pin</Button>
+                              >Next</Button>
                         </View>
                   </View>
 

@@ -37,7 +37,7 @@ export const ChangePinScreen = () => {
                               <Button 
                                     size="lg" 
                                     onPress={handleSubmit}
-                              >Update Pin</Button>
+                              >Next</Button>
                         </View>	
 
 			</View>
