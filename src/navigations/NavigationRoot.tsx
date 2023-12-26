@@ -60,9 +60,6 @@ return (
         paddingBottom: Platform.OS === "android" ? 16 : 8,
         backgroundColor: isDarkMode? colors.dark : colors.light
       },
-      // tabBarItemStyle: {
-      //   marginBottom: Platform.OS === "android" ? 0 : 16,
-      // },
     }}
   >
     <BottomTabStack.Screen
@@ -73,8 +70,9 @@ return (
         tabBarIcon: ({ focused }) => 
         ( 
           <BottomTabButton 
-            icon={<Home width={22} height={22} />} 
-            label="Home" isFocused={focused} 
+            icon={<Home width={22} height={22} isFocused={focused} />} 
+            label="Home" 
+            isFocused={focused} 
             routeName={Screens.Home} 
           />
         ),
@@ -89,7 +87,7 @@ return (
         tabBarIcon: ({ focused }) => 
         (
           <BottomTabButton 
-            icon={<Market height={24} width={24} />} 
+            icon={<Market height={24} width={24} isFocused={focused}  />} 
             label="Wager" 
             isFocused={focused} 
             routeName={Screens.Wager} 
@@ -106,7 +104,7 @@ return (
         tabBarIcon: ({ focused }) => 
         (
           <BottomTabButton 
-            icon={<Chat height={22} width={22} />} 
+            icon={<Chat height={22} width={22} isFocused={focused} />} 
             label="Lobby" 
             isFocused={focused} 
             routeName={Screens.Lobby} 
@@ -123,7 +121,7 @@ return (
         tabBarIcon: ({ focused }) => 
         (
           <BottomTabButton 
-            icon={<Settings height={22} width={22} />} 
+            icon={<Settings height={22} width={22} isFocused={focused} />} 
             label="Settings" 
             isFocused={focused} 
             routeName={Screens.Settings} 
