@@ -11,7 +11,7 @@ type BiometricsContextType = {
       isBiometricsEnabled: boolean;
       toggleBiometrics: () => void;
       isBiometricsAvailable: boolean;
-      handleBiometryAuth: (onBiometryAuthComplete: any) => void;
+      handleBiometryAuth: (onSuccess: any) => void;
 }
 
 const BiometricsContext = createContext<BiometricsContextType>({
@@ -35,15 +35,11 @@ export const BiometricsProvider = ({children}: BiometricsProviderProps) => {
                   try{
                         const storedIsBiometricsEnabled = await getEncryptItemFromStorage(StorageKeys.IsBiometricsEnabled)
                         setIsBiometricsEnabled(storedIsBiometricsEnabled !== null ? JSON.parse(storedIsBiometricsEnabled): false )
-                  }catch(error){
-                        setIsBiometricsEnabled(false);
-                  }
+                  }catch(error){}
             })()
       }, [getEncryptItemFromStorage])
 
       useEffect(()=>{
-            setEncryptItemToStorage(StorageKeys.IsBiometricsEnabled, isBiometricsEnabled)
-            
             FingerprintScanner.isSensorAvailable()
             .then((type) => {
                   setBiometryType(type)
@@ -51,19 +47,23 @@ export const BiometricsProvider = ({children}: BiometricsProviderProps) => {
             }).catch(() =>{
                   setIsBiometricsAvailable(false)
             })
-      }, [isBiometricsEnabled])
+      }, [])
 
       const toggleBiometrics = () => {
-            setIsBiometricsEnabled(!isBiometricsEnabled);
+            setIsBiometricsEnabled((prevIsBiometricsEnabled) => {
+                  const newValue = !prevIsBiometricsEnabled
+                  setEncryptItemToStorage(StorageKeys.IsBiometricsEnabled, newValue)
+                  return newValue;
+            });
       }
 
-      const handleBiometryAuth = async (onBiometryAuthComplete: () => void) => {
+      const handleBiometryAuth = async (onSuccess: () => void) => {
             if(isBiometricsAvailable){
                   FingerprintScanner.authenticate({
                         description: message
                   })
                   .then(() => {
-                        onBiometryAuthComplete();
+                        onSuccess();
                   })
                   .catch(() => {})
             }

@@ -43,7 +43,9 @@ export const WelcomeBackScreen = () => {
       const onSubmitBiometrics = () => {
             const email = user?.email;
             const password = user?.password || "";
-            handleBiometryAuth(signIn({email, password}))
+            handleBiometryAuth(() => {
+                  signIn({email, password})
+            })
       }
 
       useEffect(()=> {
