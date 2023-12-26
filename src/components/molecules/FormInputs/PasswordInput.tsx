@@ -29,7 +29,7 @@ export const PasswordInput: FC<PasswordInputProps> = ({ hideToggle = false, pass
       rightIcon={
         hideToggle ? null : (
           <TouchableOpacity
-            className="relative"
+            className="relative h-full items-center justify-center px-4"
             onPress={() => setSecureEntry(!secureEntry)}
           >
             <Animated.View style={eyeClosedOpacity} className="absolute">
