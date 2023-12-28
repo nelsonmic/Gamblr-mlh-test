@@ -8,6 +8,7 @@ import useCountDown from "hooks/useCountdown";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { FC, useEffect } from "react";
+import { KeyboardAvoidingView } from "react-native";
 import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
 
 interface ProfileScreenProps {
@@ -95,38 +96,45 @@ export const VerifyScreen: FC<ProfileScreenProps> = ({ route }) => {
 			className="h-full space-y-2 px-4 pt-2"
 			edges={["left", "right", "bottom"]}
 		>
-                  <View className="flex-1 justify-between space-y-4">
-                        <View className="flex-1">
-                              <AuthScreenHeader 
-                                    title= "Verify your account"
-                                    description="We sent a 6-digit OTP to your email. Enter the code below"
-                              />
-                              <View className="mt-8 space-y-4">
-                                    <PinInput />
-                                    <View className="flex-row space-x-[4] ml-2 w-[120]">
-                                          <Pressable onPress={onResend}>
-                                                <Animated.Text 
-                                                      className={clsx("font-interMedium text-xs text-black-100")}
-                                                      style={animatedStyle}
-                                                >
-                                                      Resend
-                                                </Animated.Text>
-                                          </Pressable>
-                                          <Text className="text-red-100 font-interMedium text-xs">
-                                                {ended? null : `${hms[1]}:${hms[2]}`}
-                                          </Text>
+                  <KeyboardAvoidingView
+                        behavior="height"
+                        style={{
+                              flex: 1
+                        }}
+                  >
+                        <View className="flex-1 justify-between space-y-4">
+                              <View className="flex-1">
+                                    <AuthScreenHeader 
+                                          title= "Verify your account"
+                                          description="We sent a 6-digit OTP to your email. Enter the code below"
+                                    />
+                                    <View className="mt-8 space-y-4">
+                                          <PinInput />
+                                          <View className="flex-row space-x-[4] ml-2 w-[120]">
+                                                <Pressable onPress={onResend}>
+                                                      <Animated.Text 
+                                                            className={clsx("font-interMedium text-xs text-black-100")}
+                                                            style={animatedStyle}
+                                                      >
+                                                            Resend
+                                                      </Animated.Text>
+                                                </Pressable>
+                                                <Text className="text-red-100 font-interMedium text-xs">
+                                                      {ended? null : `${hms[1]}:${hms[2]}`}
+                                                </Text>
+                                          </View>
                                     </View>
                               </View>
+                              <View>
+                                    <PinKeypad />
+                                    <Button 
+                                          size="lg" 
+                                          onPress={onSubmit} 
+                                          isLoading={isPending}
+                                    >Verify</Button>
+                              </View>
                         </View>
-                        <View>
-                              <PinKeypad />
-                              <Button 
-                                    size="lg" 
-                                    onPress={onSubmit} 
-                                    isLoading={isPending}
-                              >Verify</Button>
-                        </View>
-                  </View>
+                  </KeyboardAvoidingView>
 		</Layout>
 	);
 };

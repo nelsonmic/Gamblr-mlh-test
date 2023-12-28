@@ -99,7 +99,7 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
             <View className='mb-8'>
                   <View 
                         className={clsx(
-                              'border space-x-3 bg-white-200 flex-row items-center justify-between h-16 py-2 px-4 rounded-2xl',
+                              'relative border space-x-3 bg-white-200 flex-row items-center justify-between h-16 py-2 px-4 rounded-2xl',
                               styleContainer,
                               {
                                     "bg-darkMode-input-bg border-darkMode-input-bg" : isDarkMode,
