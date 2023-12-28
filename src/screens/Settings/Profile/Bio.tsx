@@ -65,6 +65,8 @@ export const Bio = () => {
                         <Text className={clsx("text-black-100 text-sm font-interRegular", {
                               "text-white-100" : isDarkMode
                         })}>
+                              Passionate gamer and betting enthusiast. Always ready for the next gaming challenge
+CODM: Digesteeve  || PUBG: Digesteesve
                               {user.meta.bio}
                         </Text>
                   </View>

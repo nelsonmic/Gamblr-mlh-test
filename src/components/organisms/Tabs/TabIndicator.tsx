@@ -35,7 +35,7 @@ export const TabIndicator = ({
 		<Animated.View
 			entering={FadeInDown.duration(animationDuration)}
 			layout={Layout}
-                  className={clsx("bg-black-100 rounded-xl")}
+                  className={clsx("bg-darkMode-input-bg rounded-xl")}
 			style={[
 				stylez
 			]}

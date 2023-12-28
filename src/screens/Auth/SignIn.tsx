@@ -12,6 +12,7 @@ import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { focusInput } from "handlers/helpers/focusOnInputField";
 import { useSignIn } from "hooks/auth/useSignIn";
+import { KeyboardAvoidingView } from "react-native";
 
 export const SignInScreen = () => {
       const { isDarkMode } = useAppearanceContext();
@@ -42,7 +43,9 @@ export const SignInScreen = () => {
 			className="h-full space-y-2 px-4 pt-14"
 			edges={["left", "right", "top", "bottom"]}
 		>
-                  <View className="flex-1 justify-between space-y-4">
+                  <KeyboardAvoidingView
+                        behavior="padding" 
+                        className="flex-1 justify-between space-y-4">
                         <View className="flex-1 space-y-14">
                               <AuthScreenHeader 
                                     title= "Sign In"
@@ -91,7 +94,7 @@ export const SignInScreen = () => {
                                     </Link>
                               </View>
                         </View>
-                        <View className="space-y-2 items-center">
+                        <View className="space-y-2 items-center mb-2">
                               <Button 
                                     size="lg" 
                                     className="w-full"
@@ -104,7 +107,7 @@ export const SignInScreen = () => {
                                     })}>Don't have an account? Sign Up</Text>
                               </Link>
                         </View>
-                  </View>
+                  </KeyboardAvoidingView>
 		</Layout>
 	);
 };

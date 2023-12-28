@@ -68,7 +68,7 @@ export const useAppearanceContext = () => {
   const context = useContext(AppearanceContext);
 
   if (!context) {
-    throw new Error("useAuthContext must be used within an AuthProvider.");
+    throw new Error("useAppearanceContext must be used within an AppearanceProvider.");
   }
 
   return context;

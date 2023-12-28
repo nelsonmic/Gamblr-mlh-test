@@ -41,9 +41,11 @@ export const WelcomeBackScreen = () => {
       const onSubmit = (payload: SignInFormType) => signIn(payload)
 
       const onSubmitBiometrics = () => {
-            const email = user?.email;
+            const email = user?.email || "";
             const password = user?.password || "";
-            handleBiometryAuth(signIn({email, password}))
+            handleBiometryAuth(() => {
+                  signIn({email, password})
+            })
       }
 
       useEffect(()=> {
