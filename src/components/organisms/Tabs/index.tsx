@@ -51,7 +51,7 @@ export const TabsMenu = memo(
 			<Animated.View
 				{...rest}
                         className={clsx("flex-row justify-between space-x-2 items-center justify-center rounded-xl w-full h-16 p-[4]", {
-                              "bg-darkMode-input-bg" : isDarkMode,
+                              "bg-black-100" : isDarkMode,
                               "border border-gray-100": !isDarkMode
                         })}
 			>
