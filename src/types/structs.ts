@@ -114,3 +114,10 @@ export type UpdatePinPayload = {
 
 export type UpdatePinResponse = ApiResponse<null>;
 
+export type UpdatePasswordPayload = {
+      old_password: string;
+      new_password: string;
+}
+
+export type UpdatePasswordResponse = ApiResponse<null>;
+

@@ -47,7 +47,11 @@ export const useSignIn = () => {
                   const {cat, user} = res.data.data
                   debug("info", `User signed in successfully ${user.email.address}`)
                   setCatToken(cat)
-                  setEncryptItemToStorage(StorageKeys.WelcomeUser, {...payload, username: user.username})
+                  setEncryptItemToStorage(StorageKeys.WelcomeUser, {
+                        email: payload.email,
+                        password: payload.password,
+                        username: user.username
+                  })
                   dispatch(setUser(user))
                   if(user.has_pin){
                         reset({

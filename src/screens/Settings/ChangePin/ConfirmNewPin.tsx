@@ -2,9 +2,7 @@ import { Layout } from "components/Layouts"
 import { Button, Text, View } from "components/atoms"
 import { PageHeader } from "components/organisms/PageHeader"
 import { useUpdatePin } from "hooks/settings/useUpdatePin";
-import { useNavigateTo } from "hooks/useNavigateTo";
 import { usePinCodeEntry } from "hooks/usePinCodeEntry";
-import { Screens } from "navigations/Screens";
 import { FC, useState } from "react";
 
 type Props = {
