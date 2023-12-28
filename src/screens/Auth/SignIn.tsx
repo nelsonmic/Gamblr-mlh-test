@@ -63,7 +63,7 @@ export const SignInScreen = () => {
                                                       onBlur={onBlur}
                                                       value={value}
                                                       onChangeText={(text) => onChange(text)}
-                                                      isError={Boolean(errors.email)}
+                                                      isError={!!(errors.email)}
                                                       error={errors.email?.message}
                                                       returnKeyType="next"
                                                       onSubmitEditing={()=> focusInput(passwordInputRef)}
@@ -80,7 +80,7 @@ export const SignInScreen = () => {
                                                       onBlur={onBlur}
                                                       value={value}
                                                       onChangeText={(text) => onChange(text)}
-                                                      isError={Boolean(errors.password)}
+                                                      isError={!!(errors.password)}
                                                       error={errors.password?.message}
                                                       returnKeyType="done"
                                                 />
