@@ -13,6 +13,7 @@ import { CustomToastType, Toast } from 'components/molecules/Toast';
 import { ToastError, ToastInfo, ToastSuccess, ToastWarning } from 'components/Icons';
 import { BiometricsProvider } from 'providers/Biometrics.provider';
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
+import GlobalModal from 'components/molecules/Modals/Modal';
 
 	const queryClient = new QueryClient({
 		defaultOptions: {
@@ -51,6 +52,7 @@ function App(): JSX.Element {
                 >
                 <BiometricsProvider>
                   <NavigationContainer>
+                    <GlobalModal />
                     <BottomSheetModalProvider>
                       <NavigationRoot />
                     </BottomSheetModalProvider>
