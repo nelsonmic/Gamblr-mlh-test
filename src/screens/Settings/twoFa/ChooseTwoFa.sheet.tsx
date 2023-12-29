@@ -6,7 +6,6 @@ import { BOX_SHADOW } from "../../../constants";
 import { useNavigateTo } from "hooks/useNavigateTo";
 import { Screens } from "navigations/Screens";
 import { FC, ReactElement, useState } from "react";
-import { KeyboardAvoidingView, Platform } from "react-native"
 import Animated, { useAnimatedStyle, useSharedValue, withTiming, Easing } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useSelector } from "react-redux";
@@ -35,50 +34,42 @@ export const ChooseTwoFaSheet = () => {
                   reroute: Screens.TwoFaOtp
             }
       ]
-      const [selected, setSelected] = useState<string>("")
+      const [selected, setSelected] = useState<string>("");
       const inset = useSafeAreaInsets();
       return (
-            <KeyboardAvoidingView
-			behavior={Platform.OS === "ios" ? "padding" : "height"}
-			keyboardVerticalOffset={10}
-			style={{
-				flex: 1
-			}}
-		>
-			<BottomSheet
-				bottom
-				className="bg-white-100"
-				style={{
-					marginTop: inset.top,
-					paddingBottom: inset.bottom
-				}}
-			>
-				<BottomSheet.Handle />
-                        <BottomSheet.Header className="items-start">
-					<Text className="mb-6 ml-2 text-black-100 text-2xl font-cabinetGroteskBold leading-tight">
-						Receive code via
-					</Text>
-				</BottomSheet.Header>
-                        <BottomSheet.Content className="w-full">
-                              <View className="space-y-4">
-                                    {
-                                          data.map((item, indx)=>{
-                                                return (
-                                                      <OtpOption 
-                                                            key={indx} 
-                                                            data={item} 
-                                                            isSelected={!!(item.title === selected)}
-                                                            onSelect={()=>{
-                                                                setSelected(item.title)  
-                                                            }}
-                                                      />
-                                                )
-                                          })
-                                    }
-                              </View>
-                        </BottomSheet.Content>
-                  </BottomSheet>
-            </KeyboardAvoidingView>
+            <BottomSheet
+              bottom
+              className="bg-white-100"
+              style={{
+                marginTop: inset.top,
+                paddingBottom: inset.bottom
+              }}
+            >
+              <BottomSheet.Handle />
+                <BottomSheet.Header className="items-start">
+                <Text className="mb-6 ml-2 text-black-100 text-2xl font-cabinetGroteskBold leading-tight">
+                  Receive code via
+                </Text>
+              </BottomSheet.Header>
+                <BottomSheet.Content className="w-full">
+                  <View className="space-y-4">
+                                          {
+                                                data.map((item, indx)=>{
+                                                      return (
+                                                            <OtpOption 
+                                                                  key={indx} 
+                                                                  data={item} 
+                                                                  isSelected={!!(item.title === selected)}
+                                                                  onSelect={()=>{
+                                                                      setSelected(item.title)  
+                                                                  }}
+                                                            />
+                                                      )
+                                                })
+                                          }
+                  </View>
+                </BottomSheet.Content>
+            </BottomSheet>
       )
 }
 
