@@ -268,7 +268,7 @@ export const SignUpScreen = () => {
                                                 <View className="space-y-2 items-center pb-4">
                                                       <Button 
                                                             size="lg" 
-                                                            className="w-full mt-4 mb-2" 
+                                                            className="w-full mt-4 mb-4" 
                                                             onPress={handleSubmit(onSubmit)}
                                                             isLoading={isPending}
                                                       >Sign Up</Button>

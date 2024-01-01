@@ -135,6 +135,7 @@ return (
 
 const NativeStackRoot: React.FC = () => {
   const {config} = useNativeStackWithHeaderConfig();
+
 	return(
     <NativeStack.Navigator>
             <NativeStack.Screen

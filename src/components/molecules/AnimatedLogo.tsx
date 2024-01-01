@@ -1,16 +1,12 @@
 import { DarkLogo, Logo } from "components/Icons";
 import { useAppearanceContext } from "providers/Appearance.provider";
 import { FC, useEffect } from "react";
-import Animated, { Easing, FadeIn, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
+import Animated, { Easing, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
 import { SvgProps } from "react-native-svg";
 
 
 export const AnimatedLogo: FC<SvgProps> = ({...props}) => {
-  return (
-      <Animated.View entering={FadeIn} className="absolute items-center justify-center h-screen w-full">
-            <PickIcon {...props} />
-      </Animated.View>
-  );
+  return <PickIcon {...props} />
 };
 
 const duration = 2000;

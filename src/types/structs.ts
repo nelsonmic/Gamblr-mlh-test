@@ -121,3 +121,5 @@ export type UpdatePasswordPayload = {
 
 export type UpdatePasswordResponse = ApiResponse<null>;
 
+export type GetUserProfileResponse = ApiResponse<User>
+
