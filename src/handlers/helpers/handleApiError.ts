@@ -11,10 +11,10 @@ export const handleApiError = (
   options?: ToastOptions,
 ) => {
   const message = error.response ? error.response.data.message : error.message
-  const errorMessage = error.response ? error.response.data.error : ToastNotificationTitles.SomethingWentWrong
+  const errorTitle = error.response ? error.response.data.error : ToastNotificationTitles.SomethingWentWrong
   showToast( capitalizeFirstLetter(message), 
     { ...options, 
       type: "danger", 
-      data: errorMessage 
+      data: errorTitle 
     });
 };

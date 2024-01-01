@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { DeviceEventEmitter, Modal, StyleSheet } from 'react-native';
+import { DeviceEventEmitter, Modal } from 'react-native';
 import Animated, { Easing, interpolate, Layout, LayoutAnimation, LayoutAnimationFunction, LayoutAnimationsValues, runOnJS, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { CHILD_ANIM_DURATION, ChildWrapper, LAYOUT_ANIM_DURATION, MODAL_ANIM_DURATION } from './ChildWrapper';
 import { BOX_SHADOW } from '../../../../constants';
@@ -14,7 +14,7 @@ export type GlobalModalProps = {
   modalKey?: string,
   hideClose?: boolean,
   disableLayoutChangeAnimation?: boolean,
-  Component: React.FC
+  Component: React.FC,
 };
 
 export const showGlobalModal = (prop: GlobalModalProps) => {
@@ -29,7 +29,6 @@ const layoutAnimation = new Layout().delay(CHILD_ANIM_DURATION)
   .duration(LAYOUT_ANIM_DURATION)
   .build()
 
-// Using duration of 1ms to disable the animation(sort of)
 const disabledLayoutAnimation = new Layout().duration(-1).build()
 
 const noDelayLayoutAnimation = new Layout().duration(LAYOUT_ANIM_DURATION).build()
@@ -41,13 +40,14 @@ enum LayoutChangeAnimationType {
 }
 
 const GlobalModal = () => {
+      const [allowBg, setAllowBg] = useState<boolean>(false)
       const { isDarkMode } = useAppearanceContext();
       const opacityValue = useSharedValue(0)
       const backdropOpacityStyle = useAnimatedStyle(() => {
-      return { opacity: interpolate(opacityValue.value, [0, 1], [0, 0.5]) }
+            return { opacity: interpolate(opacityValue.value, [0, 1], [0, 0.5]) }
       })
       const containerOpacityStyle = useAnimatedStyle(() => {
-      return { opacity: opacityValue.value }
+            return { opacity: opacityValue.value }
       })
 
 
@@ -61,25 +61,25 @@ const GlobalModal = () => {
             const showSub = DeviceEventEmitter.addListener(
                   SHOW_GLOBAL_MODAL,
                   (prop: GlobalModalProps) => {
-                  setModalProps((oldProps) => {
-                  isFirstModalRef.current = oldProps.length === 0
-                  layoutAnimationType.value = LayoutChangeAnimationType.DEFAULT
-                  setIsVisible(true)
-                  return [
-                        ...oldProps.filter((it) => !it.skipQueue),
-                        { ...prop, modalKey: prop.modalKey ?? Date.now().toString() },
-                  ]
-                  });
+                        setModalProps((oldProps) => {
+                              isFirstModalRef.current = oldProps.length === 0
+                              layoutAnimationType.value = LayoutChangeAnimationType.DEFAULT
+                              setIsVisible(true)
+                              return [
+                                    ...oldProps.filter((it) => !it.skipQueue),
+                                    { ...prop, modalKey: prop.modalKey ?? Date.now().toString() },
+                              ]
+                        });
                   }
             );
             const hideSub = DeviceEventEmitter.addListener(HIDE_GLOBAL_MODAL, (key: string) => {
-                  setModalProps((oldProps) => {
-                  layoutAnimationType.value = LayoutChangeAnimationType.DEFAULT
-                  if (oldProps.length === 1) {
-                  setIsVisible(false)
-                  return oldProps
-                  }
-                  return oldProps.filter((it) => it.modalKey !== key)
+                        setModalProps((oldProps) => {
+                        layoutAnimationType.value = LayoutChangeAnimationType.DEFAULT
+                        if (oldProps.length === 1) {
+                              setIsVisible(false)
+                              return oldProps
+                        }
+                        return oldProps.filter((it) => it.modalKey !== key)
                   })
             })
             return () => {
@@ -152,13 +152,16 @@ const GlobalModal = () => {
                         className={"flex-1 justify-center items-center"}
                   >
                   <Animated.View
-                        style={BOX_SHADOW}
+                        style={!(!isDarkMode && allowBg) && BOX_SHADOW}
                         layout={CustomLayoutAnimation}
-                        className={clsx("bg-darkMode-input-bg overflow-hidden rounded-2xl", {
-                              "bg-white-100": !isDarkMode
+                        className={clsx("overflow-hidden rounded-2xl bg-white-100", {
+                              "bg-transparent": !isDarkMode && allowBg,
+                              "bg-darkMode-input-bg" : isDarkMode && !allowBg,
+                              "bg-black-100": isDarkMode && allowBg
                         })}
                   >
-                        {modalProps.map((it, index) => (
+                        {modalProps.map((it, index) => {
+                              return (
                               <ChildWrapper
                                     key={it.modalKey}
                                     ignoreDelay={isFirstModalRef.current}
@@ -166,10 +169,12 @@ const GlobalModal = () => {
                                     hideClose={it.hideClose}
                                     onClosePress={closeModal}
                                     onEnterAnimationFinished={() => layoutAnimationType.value = it.disableLayoutChangeAnimation ? LayoutChangeAnimationType.DISABLED : LayoutChangeAnimationType.NO_DELAY}
+                                    setAllowBg={setAllowBg}
                               >
                                     <it.Component />
                               </ChildWrapper>
-                        ))}
+                        )
+                        })}
                   </Animated.View>
                   </Animated.View>
             </Modal>

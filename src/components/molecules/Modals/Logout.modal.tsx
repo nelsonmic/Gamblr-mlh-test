@@ -26,7 +26,7 @@ const LogoutModal = () => {
 		}, 4000)
 	}
   return (
-      <View className="px-4">
+      <View className="px-8">
             <View>
                   <Text 
                         className={clsx("text-black-100 font-interMedium leading-5 tracking-tight text-lg text-center", {

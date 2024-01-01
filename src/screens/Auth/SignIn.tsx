@@ -97,7 +97,7 @@ export const SignInScreen = () => {
                         <View className="space-y-2 items-center mb-2">
                               <Button 
                                     size="lg" 
-                                    className="w-full"
+                                    className="w-full mb-4"
                                     onPress={handleSubmit(onSubmit)}
                                     isLoading={isPending}
                               >Sign In</Button>
