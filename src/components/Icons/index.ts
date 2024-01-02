@@ -11,6 +11,7 @@ export { default as Phone2Fa } from './Phone2Fa';
 export { default as Privacy } from './Privacy';
 export { default as Scan } from './Scan';
 export { default as Settings } from './Settings';
+export { default as Arrow } from './Arrow';
 export { default as AtSign } from './AtSign';
 export { default as ChangePin } from './ChangePin';
 export { default as Chat } from './Chat';
