@@ -11,6 +11,7 @@ export type ButtonProps = PressableProps &
 		isLoading?: boolean;
 		size?: "sm" | "md" | "lg" | "xl";
 		variant?: "contained" | "outlined" | "text";
+		rightIcon?: React.ReactElement
 	};
 
 const Button = forwardRef<PressableProps, ButtonProps>(
@@ -22,6 +23,7 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 			isLoading,
 			size = "md",
 			variant = "contained",
+			rightIcon,
 			...rest
 		},
 		ref
@@ -105,6 +107,7 @@ const Button = forwardRef<PressableProps, ButtonProps>(
 						color={isDarkMode? colors.dark : colors.light}
 					/>
 				): null}
+				{rightIcon && rightIcon}
 			</Pressable>
 		);
 	}
