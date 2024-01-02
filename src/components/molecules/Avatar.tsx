@@ -23,9 +23,9 @@ export const Avatar: FC<AvatarProps> = ({imgSrc, size ="sm", labelPosition = "ri
                         "flex-row space-x-2": labelPosition === "right",
                   }
             )}>
-                  <View className={clsx("items-center justify-center p-2 rounded-full bg-gray-600",
+                  <View className={clsx("items-center justify-center p-[6] rounded-full bg-gray-600",
                         {
-                              "w-[70] h-[70]" : size === "sm",
+                              "w-[62] h-[62]" : size === "sm",
                               "h-[100] w-[100]" : size === "lg"
                         }
                   )}>

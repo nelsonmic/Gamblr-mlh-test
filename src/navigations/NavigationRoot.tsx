@@ -105,7 +105,7 @@ return (
         (
           <BottomTabButton 
             icon={<Chat height={22} width={22} isFocused={focused} />} 
-            label="Lobby" 
+            label="Chatroom" 
             isFocused={focused} 
             routeName={Screens.Lobby} 
           />
@@ -211,7 +211,7 @@ const NativeStackRoot: React.FC = () => {
             <NativeStack.Screen
               component={WalletScreen}
               name={Screens.Wallet}
-              options={{ ...config }}
+              options={{ ...config, headerLeft: () => null }}
             />
             <NativeStack.Screen
               component={ReferralsScreen}
