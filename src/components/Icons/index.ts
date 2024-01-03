@@ -26,6 +26,7 @@ export { default as Home } from './Home';
 export { default as Instagram } from './Instagram';
 export { default as Lock } from './Lock';
 export { default as Market } from './Market';
+export { default as Notification } from './Notification';
 export { default as Profile } from './Profile';
 export { default as Referral } from './Referral';
 export { default as SettingsProfile } from './SettingsProfile';
