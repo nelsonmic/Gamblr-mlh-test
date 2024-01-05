@@ -22,7 +22,7 @@ export const BottomTabButton: FC<Props> = ({label, icon, isFocused, routeName}) 
     goTo(routeName)
   }
   return (
-    <TouchableOpacity onPress={handleNavigate} className='items-center space-y-2 mb-6'>
+    <TouchableOpacity onPress={handleNavigate} className='items-center space-y-2 mt-4 mb-8'>
       {icon}
       <Text
             className={clsx('font-interSemiBold text-center text-xs leading-3 text-gray-100', {

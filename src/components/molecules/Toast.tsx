@@ -94,6 +94,3 @@ const switchTypes = (type: TypeProp,
       };
   }
 };
-
-
-export default switchTypes;
