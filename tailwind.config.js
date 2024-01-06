@@ -27,6 +27,7 @@ module.exports = {
           100: "#ffffff",
           200: "#F1F5F9",
           300: "#F2F2F2",
+          400: "#F9F9F9",
           tint: "#F9F9F90D"
         },
         black:{
@@ -44,7 +45,8 @@ module.exports = {
           400: "#555555",
           500: "#EDEDED",
           600: "#E9E9E9",
-          700: "#AAAAAA"
+          700: "#AAAAAA",
+          800: "#E0E0E0"
         },
         red:{
           100: "#B94545",

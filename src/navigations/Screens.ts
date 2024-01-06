@@ -33,5 +33,7 @@ export enum Screens {
   SuccessScreen = "Success",
   TwoFaHomeScreen = "TwoFa Home Screen",
   TwoFaOtp = "TwoFa Otp",
-  ChooseTwoFaSheet = "Choose TwoFa"
+  ChooseTwoFaSheet = "Choose TwoFa",
+  OpenWagersScreen = "Open wagers",
+  CreateWagerScreen = "Create a wager"
 }

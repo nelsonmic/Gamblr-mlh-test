@@ -19,7 +19,7 @@ export const PageHeader: FC<Props> = ({ title, description, leftElement, rightEl
                         <View>
                               <Text className={clsx("text-3xl font-[700] leading-8 tracking-[0.26px] font-cabinetGroteskBold")}>{ title }</Text>
                               {description? (
-                                    <Text className={clsx("font-interRegular text-sm leading-4 mt-[2]"
+                                    <Text className={clsx("font-interRegular text-sm leading-5 mt-[4]"
                                     )}>{ description }</Text>
                               ): null}
                         </View>
