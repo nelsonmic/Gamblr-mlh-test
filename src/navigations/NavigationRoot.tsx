@@ -42,6 +42,10 @@ import { ConfirmNewPasswordScreen } from 'screens/Settings/ChangePassword/Confir
 import { TwoFaHomeScreen } from 'screens/Settings/twoFa';
 import { TwoFaOtpScreen } from 'screens/Settings/twoFa/Otp';
 import { ChooseTwoFaSheet } from 'screens/Settings/twoFa/ChooseTwoFa.sheet';
+import { OpenWagersScreen } from 'screens/Wager/OpenWager';
+import { CreateWagerScreen } from 'screens/Wager/CreateWager';
+import { WagerTypeSheet } from 'screens/Wager/CreateWager/WagerType.sheet';
+import { PickGameSheet } from 'screens/Wager/CreateWager/PickGame.sheet';
 
 const RootStack = createBottomSheetNavigator<RootStackParamList>();
 const BottomTabStack = createBottomTabNavigator<RootStackParamList>();
@@ -282,7 +286,17 @@ const NativeStackRoot: React.FC = () => {
               component={TwoFaOtpScreen}
               name={Screens.TwoFaOtp}
               options={{ ...config }}
-            />           
+            />   
+            <NativeStack.Screen
+              component={OpenWagersScreen}
+              name={Screens.OpenWagersScreen}
+              options={{ ...config, headerTitle: Screens.OpenWagersScreen }}
+            />
+            <NativeStack.Screen
+              component={CreateWagerScreen}
+              name={Screens.CreateWagerScreen}
+              options={{ ...config, headerTitle: Screens.CreateWagerScreen }}
+            />        
     </NativeStack.Navigator>
   );
 };
@@ -295,6 +309,8 @@ const NavigationRoot: React.FC = () => (
 			name={Screens.NativeStackRoot}
 		/>
 		<RootStack.Screen component={ChooseTwoFaSheet} name={Screens.ChooseTwoFaSheet} />
+    <RootStack.Screen component={WagerTypeSheet} name={Screens.WagerTypeSheet} /> 
+    <RootStack.Screen component={PickGameSheet} name={Screens.PickGameSheet} />
 	</RootStack.Navigator>
 );
 

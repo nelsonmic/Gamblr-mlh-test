@@ -39,34 +39,29 @@ export const ChooseTwoFaSheet = () => {
       return (
             <BottomSheet
               bottom
-              className="bg-white-100"
               style={{
                 marginTop: inset.top,
                 paddingBottom: inset.bottom
               }}
             >
               <BottomSheet.Handle />
-                <BottomSheet.Header className="items-start">
-                <Text className="mb-6 ml-2 text-black-100 text-2xl font-cabinetGroteskBold leading-tight">
-                  Receive code via
-                </Text>
-              </BottomSheet.Header>
+                <BottomSheet.Header title="Receive code via"/>
                 <BottomSheet.Content className="w-full">
                   <View className="space-y-4">
-                                          {
-                                                data.map((item, indx)=>{
-                                                      return (
-                                                            <OtpOption 
-                                                                  key={indx} 
-                                                                  data={item} 
-                                                                  isSelected={!!(item.title === selected)}
-                                                                  onSelect={()=>{
-                                                                      setSelected(item.title)  
-                                                                  }}
-                                                            />
-                                                      )
-                                                })
-                                          }
+                    {
+                      data.map((item, indx)=>{
+                        return (
+                          <OtpOption 
+                              key={indx} 
+                                data={item} 
+                                isSelected={!!(item.title === selected)}
+                                onSelect={()=>{
+                                setSelected(item.title)  
+                              }}
+                          />
+                        )
+                      })
+                    }
                   </View>
                 </BottomSheet.Content>
             </BottomSheet>
@@ -86,8 +81,8 @@ type OtpOptionProp = {
 }
 
 const OtpOption: FC<OtpOptionProp> = ({ data, isSelected, onSelect}) => {
-      const {icon, title, description, contact, reroute} = data;
-      const { goTo } = useNavigateTo();
+  const {icon, title, description, contact, reroute} = data;
+  const { goTo } = useNavigateTo();
 
   const color = useSharedValue("#ffffff");
 
@@ -105,19 +100,11 @@ const handleSelect = () => {
     runAnimation();
 
     setTimeout(() => {
-      if (title === "SMS") {
         goTo(reroute, {
           data: {
             contact: contact,
           },
         });
-      } else {
-        goTo(reroute, {
-          data: {
-            contact: contact,
-          },
-        });
-      }
     }, 1000);
   };
 
@@ -137,9 +124,9 @@ const handleSelect = () => {
         {icon}
         <View className="flex-1">
           <Text className={clsx("font-interBold text-black-100 text-sm mb-[4]")}>{title}</Text>
-          <Text className="text-xs font-interRegular">
+          <Text className="text-xs font-interRegular text-black-100">
             {description}{" "}
-            <Text className="font-interBold text-xs">{contact}</Text>
+            <Text className="font-interBold text-xs text-black-100">{contact}</Text>
           </Text>
         </View>
       </Pressable>

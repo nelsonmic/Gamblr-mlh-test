@@ -8,15 +8,18 @@ import Animated, { Easing, useAnimatedStyle, useSharedValue, withTiming } from '
 export type FormInputProps = RNTextInputProps & {
       leftIcon?: ReactNode,
       rightIcon?: ReactNode,
-      styleContainer?: string,
       autocapitalize? : 'none' | 'sentences' | 'words' | 'characters' | undefined,
       styleInput?: string,
+      styleContainer?: string,
+      styleLabel?: string,
       value?: string | number; 
       onChangeText?: (text: string | number) => void;
       onBlur?: () => void;
       onFocus?: () => void;
       isError?: boolean;
       error?: string;
+      label?: string;
+      isDefaultPlaceholderBehavior?: boolean;
 };
 
 export type FormInputRef = {
@@ -29,6 +32,7 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
       placeholder, 
       styleContainer,
       styleInput,
+      styleLabel,
       value,
       autoCapitalize = "none",
       onChangeText,
@@ -36,6 +40,8 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
       onFocus,
       isError,
       error,
+      label,
+      isDefaultPlaceholderBehavior = false,
       ...props
       }, 
       forwardedRef 
@@ -97,6 +103,13 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
 
       return (
             <View className='mb-8'>
+                  {
+                        label? (
+                              <Text 
+                                    className={clsx('mb-2 text-black-100 font-interRegular text-sm', styleLabel)}
+                              > { label }</Text>
+                        ): null
+                  }
                   <View 
                         className={clsx(
                               'relative border space-x-3 bg-white-200 flex-row items-center justify-between h-16 py-2 px-4 rounded-2xl',
@@ -115,6 +128,7 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
                                     {...props}
                                     ref={inputRef}
                                     autoCapitalize={autoCapitalize}
+                                    placeholder={isDefaultPlaceholderBehavior? placeholder : ""}
                                     className={clsx(
                                           ' font-interRegular h-full w-full px-2',
                                           {
@@ -134,10 +148,14 @@ export const FormInput = forwardRef<FormInputRef ,FormInputProps>(({
                                     }}
                                     onChangeText={onChangeText}
                               />
-                              <Animated.Text 
-                                    style={animatedStyle}
-                                    className={clsx('absolute font-interRegular text-xs ml-2 text-gray-300')
-                              }>{placeholder}</Animated.Text>
+                              {
+                                    !isDefaultPlaceholderBehavior? (
+                                          <Animated.Text 
+                                                style={animatedStyle}
+                                                className={clsx('absolute font-interRegular text-xs ml-2 text-gray-300')
+                                          }>{placeholder}</Animated.Text>
+                                    ) : null
+                              }
                         </TouchableOpacity>
                         {rightIcon}
                   </View>

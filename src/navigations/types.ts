@@ -40,4 +40,8 @@ export interface RootStackParamList {
   [Screens.TwoFaHomeScreen]: undefined;
   [Screens.TwoFaOtp]: undefined;
   [Screens.ChooseTwoFaSheet]: undefined;
+  [Screens.OpenWagersScreen]: undefined;
+  [Screens.CreateWagerScreen]: undefined;
+  [Screens.PickGameSheet]: undefined;
+  [Screens.WagerTypeSheet]: undefined
 }
