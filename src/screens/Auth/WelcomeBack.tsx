@@ -12,7 +12,7 @@ import { SignInFormType, signInFormSchema } from "handlers/Validators";
 import { useSignIn } from "hooks/auth/useSignIn";
 import { useEncryptedStorage } from "hooks/useEncryptedStorage";
 import { useAppearanceContext } from "providers/Appearance.provider";
-import { useBiometricsContext } from "providers/Biometrics.provider";
+// import { useBiometricsContext } from "providers/Biometrics.provider";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import { TouchableOpacity } from "react-native";
@@ -21,7 +21,7 @@ import { SignInUserPayload } from "types/structs";
 export const WelcomeBackScreen = () => {
       const [user, setUser] = useState<SignInUserPayload | null>(null);
       const { isDarkMode } = useAppearanceContext();
-      const {handleBiometryAuth, isBiometricsEnabled} = useBiometricsContext();
+      // const {handleBiometryAuth, isBiometricsEnabled} = useBiometricsContext();
       const {signIn, isPending} = useSignIn();
       const { getEncryptItemFromStorage } = useEncryptedStorage();
 
@@ -43,9 +43,9 @@ export const WelcomeBackScreen = () => {
       const onSubmitBiometrics = () => {
             const email = user?.email || "";
             const password = user?.password || "";
-            handleBiometryAuth(() => {
-                  signIn({email, password})
-            })
+            // handleBiometryAuth(() => {
+            //       signIn({email, password})
+            // })
       }
 
       useEffect(()=> {
@@ -103,7 +103,7 @@ export const WelcomeBackScreen = () => {
                                           </Link>
                                     </View>
                               </View>
-                              {
+                              {/* {
                                     isBiometricsEnabled ? (
                                           <TouchableOpacity 
                                                 className="items-center"
@@ -115,7 +115,7 @@ export const WelcomeBackScreen = () => {
                                                 })}>Use biometrics</Text>
                                           </TouchableOpacity>
                                     ): null
-                              }
+                              } */}
                         </View>
                         <Button 
                               size="lg"
