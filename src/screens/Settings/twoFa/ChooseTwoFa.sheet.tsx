@@ -39,18 +39,13 @@ export const ChooseTwoFaSheet = () => {
       return (
             <BottomSheet
               bottom
-              className="bg-white-100"
               style={{
                 marginTop: inset.top,
                 paddingBottom: inset.bottom
               }}
             >
               <BottomSheet.Handle />
-                <BottomSheet.Header className="items-start">
-                <Text className="mb-6 ml-2 text-black-100 text-2xl font-cabinetGroteskBold leading-tight">
-                  Receive code via
-                </Text>
-              </BottomSheet.Header>
+                <BottomSheet.Header title="Receive code via"/>
                 <BottomSheet.Content className="w-full">
                   <View className="space-y-4">
                     {

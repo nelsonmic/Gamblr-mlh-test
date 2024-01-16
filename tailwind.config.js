@@ -31,7 +31,9 @@ module.exports = {
           tint: "#F9F9F90D"
         },
         black:{
-          100: "#131313"
+          100: "#131313",
+          200: "#191919",
+          300: "#0000000D"
         },
         background:{
           light: "#ffffff",

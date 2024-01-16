@@ -17,21 +17,21 @@ import { User } from "types/structs";
 
 export const HomeScreen = () => {
 const user = useSelector((state: {user:{user: User }}) => state.user.user);
-// const {isLoading, isError, isSuccess} = useGetUserProfile();
+const {isLoading, isError, isSuccess} = useGetUserProfile();
 
-// useEffect(() => {
-//   if(isLoading) {
-//     showGlobalModal({
-//       modalKey: ModalKeys.appLoader,
-//       Component: () => <AnimatedLogo width={30} height={30} />,
-//       hideClose: true
-//     })
-//   }
+useEffect(() => {
+  if(isLoading) {
+    showGlobalModal({
+      modalKey: ModalKeys.appLoader,
+      Component: () => <AnimatedLogo width={30} height={30} />,
+      hideClose: true
+    })
+  }
 
-//   if(isError || isSuccess){
-//     hideGlobalModal(ModalKeys.appLoader)
-//   }
-// }, [isLoading, isError, isSuccess])
+  if(isError || isSuccess){
+    hideGlobalModal(ModalKeys.appLoader)
+  }
+}, [isLoading, isError, isSuccess])
 
 	return (
             <Layout

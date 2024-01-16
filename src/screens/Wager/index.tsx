@@ -83,8 +83,11 @@ const WagerOption: FC<WagerOptionProps> = ({ data }) => {
 					"bg-darkMode-input-bg": isDarkMode
 				})}
 			>
-				<View className="p-[10] bg-white-400 border border-gray-100 rounded-full">
-					{data.icon}
+				<View className={clsx("p-4 bg-white-400 border-gray-100 rounded-full", {
+					"bg-black-200" : isDarkMode,
+					"border": !isDarkMode
+				})}>
+					{ data.icon }
 				</View>
 				<View>
 					<Text className="font-interBold text-sm leading-5">{ data.title }</Text>

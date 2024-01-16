@@ -35,5 +35,7 @@ export enum Screens {
   TwoFaOtp = "TwoFa Otp",
   ChooseTwoFaSheet = "Choose TwoFa",
   OpenWagersScreen = "Open wagers",
-  CreateWagerScreen = "Create a wager"
+  CreateWagerScreen = "Create a wager",
+  WagerTypeSheet = "Wager type",
+  PickGameSheet = "Pick game"
 }
