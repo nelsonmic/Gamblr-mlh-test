@@ -20,7 +20,6 @@ Otherwise follow [this article](https://www.freecodecamp.org/news/node-version-m
 ## Run Application
 * Install dependencies - 
       Run `yarn` to install dependencies. Once that's done install ios pods by running `cd ios && pod install` from project root
-* Switch branch to `dev` or `main` as they contain the latest code
 * Start development server - Run `yarn start` from project root [ select `a` for android and `i` for iOS ]
 
 ## FOR ENV DATA
