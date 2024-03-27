@@ -23,7 +23,7 @@ const userSlice = createSlice({
     clearUser: (state) => {
       state.user = null
     }
-  },
+  }
 });
 
 export const { setUser, clearUser, updateUser } = userSlice.actions;
